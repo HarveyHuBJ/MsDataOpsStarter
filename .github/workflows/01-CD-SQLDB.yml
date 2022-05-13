@@ -1,0 +1,5 @@
+name: CD-SQLDB-MSBuild
+
+
+on:
+  workflow_dispatch:
