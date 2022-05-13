@@ -149,7 +149,6 @@
     <Build Include="Person\Tables\EmailAddress.sql" />
     <Build Include="HumanResources\Tables\Employee.sql" />
     <Build Include="Sales\Tables\SalesOrderHeader.sql" />
-    <Build Include="dbo\Tables\T_MyDemo1.sql" />
     <Build Include="HumanResources\Tables\EmployeeDepartmentHistory.sql" />
     <Build Include="HumanResources\Tables\EmployeePayHistory.sql" />
     <Build Include="Sales\Tables\SalesOrderHeaderSalesReason.sql" />
@@ -157,8 +156,6 @@
     <Build Include="Production\Tables\Illustration.sql" />
     <Build Include="HumanResources\Tables\JobCandidate.sql" />
     <Build Include="Production\Tables\Location.sql" />
-    <Build Include="dbo\Tables\TK_test.sql" />
-    <Build Include="dbo\Tables\TK_TEST2.sql" />
     <Build Include="Person\Tables\Password.sql" />
     <Build Include="Sales\Tables\SalesPersonQuotaHistory.sql" />
     <Build Include="Person\Tables\Person.sql" />
@@ -183,8 +180,6 @@
     <Build Include="Sales\Views\vStoreWithAddresses.sql" />
     <Build Include="Purchasing\Views\vVendorWithContacts.sql" />
     <Build Include="Purchasing\Views\vVendorWithAddresses.sql" />
-    <Build Include="dbo\Views\V_MyDemo1.sql" />
-    <Build Include="dbo\Views\V_Demo2.sql" />
     <Build Include="Storage\AW2016FullTextCatalog.sql" />
     <Build Include="FullTextIndexes.sql" />
     <Build Include="dbo\Functions\ufnGetAccountingStartDate.sql" />
