@@ -11,6 +11,7 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_WORKSPACE: AzureSqlDB\01AdvDb\
   SOLUTION_FILE_PATH: 01AdvDb.sqlproj
+  ARTIFACT_NAME: AdvWorks2016
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -40,9 +41,10 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
-    - uses: actions/upload-artifact@v3
+    - name: Upload DACPAC Artifact
+      uses: actions/upload-artifact@v3
       with:
-        name: Publish_artifact
+        name: ${{env.ARTIFACT_NAME}}
         path: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}/*.dacpac
 
       
