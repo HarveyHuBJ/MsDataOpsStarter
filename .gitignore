@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AzureSqlDB/01AdvDb/.vs/01AdvDb/v17
+/AzureSqlDB/01AdvDb/bin/Debug
+/AzureSqlDB/01AdvDb/obj/Debug
