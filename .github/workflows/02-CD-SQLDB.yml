@@ -23,18 +23,23 @@ permissions:
   contents: read
 
 jobs:
-  build-SQLDB-By-MSBuild:
+  Deploy-SQLDB:
     runs-on: windows-latest
 
     steps:
     - uses: actions/download-artifact@v3
       with:
-        name: ${{env.ARTIFACT_NAME}}
+        repo: HarveyHuBJ/MsDataOpsStarter
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ env.ARTIFACT_NAME }}
         path: path/to/artifact
         
     - name: Display structure of downloaded files
       run: dir
       working-directory: path/to/artifact
+
+
+
 
       
 
