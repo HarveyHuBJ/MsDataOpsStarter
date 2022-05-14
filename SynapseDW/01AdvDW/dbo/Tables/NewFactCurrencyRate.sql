@@ -5,5 +5,6 @@
     [EndOfDayRate] REAL         NULL,
     [CurrencyKey]  INT          NULL,
     [DateKey]      INT          NULL
-);
+)
+WITH (DISTRIBUTION=HASH([CurrencyID]), CLUSTERED COLUMNSTORE INDEX);
 

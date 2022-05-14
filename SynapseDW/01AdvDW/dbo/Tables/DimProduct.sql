@@ -35,8 +35,5 @@
     [StartDate]             DATETIME        NULL,
     [EndDate]               DATETIME        NULL,
     [Status]                NVARCHAR (7)    NULL,
-    CONSTRAINT [PK_DimProduct_ProductKey] PRIMARY KEY CLUSTERED ([ProductKey] ASC),
-    CONSTRAINT [FK_DimProduct_DimProductSubcategory] FOREIGN KEY ([ProductSubcategoryKey]) REFERENCES [dbo].[DimProductSubcategory] ([ProductSubcategoryKey]),
-    CONSTRAINT [AK_DimProduct_ProductAlternateKey_StartDate] UNIQUE NONCLUSTERED ([ProductAlternateKey] ASC, [StartDate] ASC)
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

@@ -28,12 +28,6 @@
     [Phone]                NVARCHAR (20)  NULL,
     [DateFirstPurchase]    DATE           NULL,
     [CommuteDistance]      NVARCHAR (15)  NULL,
-    CONSTRAINT [PK_DimCustomer_CustomerKey] PRIMARY KEY CLUSTERED ([CustomerKey] ASC),
-    CONSTRAINT [FK_DimCustomer_DimGeography] FOREIGN KEY ([GeographyKey]) REFERENCES [dbo].[DimGeography] ([GeographyKey])
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_DimCustomer_CustomerAlternateKey]
-    ON [dbo].[DimCustomer]([CustomerAlternateKey] ASC);
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);
 

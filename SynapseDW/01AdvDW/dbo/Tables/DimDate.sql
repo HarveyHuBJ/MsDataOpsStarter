@@ -18,11 +18,6 @@
     [FiscalQuarter]        TINYINT       NOT NULL,
     [FiscalYear]           SMALLINT      NOT NULL,
     [FiscalSemester]       TINYINT       NOT NULL,
-    CONSTRAINT [PK_DimDate_DateKey] PRIMARY KEY CLUSTERED ([DateKey] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [AK_DimDate_FullDateAlternateKey]
-    ON [dbo].[DimDate]([FullDateAlternateKey] ASC);
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);
 

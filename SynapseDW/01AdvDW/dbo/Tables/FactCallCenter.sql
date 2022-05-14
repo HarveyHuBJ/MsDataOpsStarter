@@ -13,8 +13,5 @@
     [AverageTimePerIssue] SMALLINT      NOT NULL,
     [ServiceGrade]        FLOAT (53)    NOT NULL,
     [Date]                DATETIME      NULL,
-    CONSTRAINT [PK_FactCallCenter_FactCallCenterID] PRIMARY KEY CLUSTERED ([FactCallCenterID] ASC),
-    CONSTRAINT [FK_FactCallCenter_DimDate] FOREIGN KEY ([DateKey]) REFERENCES [dbo].[DimDate] ([DateKey]),
-    CONSTRAINT [AK_FactCallCenter_DateKey_Shift] UNIQUE NONCLUSTERED ([DateKey] ASC, [Shift] ASC)
-);
-
+)
+WITH (DISTRIBUTION=HASH([WageType]), CLUSTERED COLUMNSTORE INDEX);

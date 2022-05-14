@@ -15,7 +15,5 @@
     [EndDate]                  DATETIME       NULL,
     [MinQty]                   INT            NULL,
     [MaxQty]                   INT            NULL,
-    CONSTRAINT [PK_DimPromotion_PromotionKey] PRIMARY KEY CLUSTERED ([PromotionKey] ASC),
-    CONSTRAINT [AK_DimPromotion_PromotionAlternateKey] UNIQUE NONCLUSTERED ([PromotionAlternateKey] ASC)
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

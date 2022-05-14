@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{32cffa1d-6bb2-433f-a9e9-0e0b68d88c03}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlDwDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -65,7 +65,6 @@
     <Folder Include="Database Triggers\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\DatabaseLog.sql" />
     <Build Include="dbo\Tables\AdventureWorksDWBuildVersion.sql" />
     <Build Include="dbo\Tables\DimAccount.sql" />
     <Build Include="dbo\Tables\DimCurrency.sql" />

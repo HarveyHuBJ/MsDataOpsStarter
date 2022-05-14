@@ -3,6 +3,5 @@
     [SalesReasonAlternateKey] INT           NOT NULL,
     [SalesReasonName]         NVARCHAR (50) NOT NULL,
     [SalesReasonReasonType]   NVARCHAR (50) NOT NULL,
-    CONSTRAINT [PK_DimSalesReason_SalesReasonKey] PRIMARY KEY CLUSTERED ([SalesReasonKey] ASC)
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

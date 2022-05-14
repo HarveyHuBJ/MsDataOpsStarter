@@ -5,8 +5,5 @@
     [SpanishProductSubcategoryName]  NVARCHAR (50) NOT NULL,
     [FrenchProductSubcategoryName]   NVARCHAR (50) NOT NULL,
     [ProductCategoryKey]             INT           NULL,
-    CONSTRAINT [PK_DimProductSubcategory_ProductSubcategoryKey] PRIMARY KEY CLUSTERED ([ProductSubcategoryKey] ASC),
-    CONSTRAINT [FK_DimProductSubcategory_DimProductCategory] FOREIGN KEY ([ProductCategoryKey]) REFERENCES [dbo].[DimProductCategory] ([ProductCategoryKey]),
-    CONSTRAINT [AK_DimProductSubcategory_ProductSubcategoryAlternateKey] UNIQUE NONCLUSTERED ([ProductSubcategoryAlternateKey] ASC)
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

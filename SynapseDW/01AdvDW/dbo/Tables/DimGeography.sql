@@ -10,7 +10,5 @@
     [PostalCode]               NVARCHAR (15) NULL,
     [SalesTerritoryKey]        INT           NULL,
     [IpAddressLocator]         NVARCHAR (15) NULL,
-    CONSTRAINT [PK_DimGeography_GeographyKey] PRIMARY KEY CLUSTERED ([GeographyKey] ASC),
-    CONSTRAINT [FK_DimGeography_DimSalesTerritory] FOREIGN KEY ([SalesTerritoryKey]) REFERENCES [dbo].[DimSalesTerritory] ([SalesTerritoryKey])
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

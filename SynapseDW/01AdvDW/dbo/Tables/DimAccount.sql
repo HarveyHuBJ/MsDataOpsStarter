@@ -8,8 +8,7 @@
     [Operator]                      NVARCHAR (50)  NULL,
     [CustomMembers]                 NVARCHAR (300) NULL,
     [ValueType]                     NVARCHAR (50)  NULL,
-    [CustomMemberOptions]           NVARCHAR (200) NULL,
-    CONSTRAINT [PK_DimAccount] PRIMARY KEY CLUSTERED ([AccountKey] ASC),
-    CONSTRAINT [FK_DimAccount_DimAccount] FOREIGN KEY ([ParentAccountKey]) REFERENCES [dbo].[DimAccount] ([AccountKey])
-);
+    [CustomMemberOptions]           NVARCHAR (200) NULL, 
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);
 

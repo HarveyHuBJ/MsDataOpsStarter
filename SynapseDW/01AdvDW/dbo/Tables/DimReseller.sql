@@ -19,8 +19,5 @@
     [MinPaymentAmount]     MONEY         NULL,
     [AnnualRevenue]        MONEY         NULL,
     [YearOpened]           INT           NULL,
-    CONSTRAINT [PK_DimReseller_ResellerKey] PRIMARY KEY CLUSTERED ([ResellerKey] ASC),
-    CONSTRAINT [FK_DimReseller_DimGeography] FOREIGN KEY ([GeographyKey]) REFERENCES [dbo].[DimGeography] ([GeographyKey]),
-    CONSTRAINT [AK_DimReseller_ResellerAlternateKey] UNIQUE NONCLUSTERED ([ResellerAlternateKey] ASC)
-);
-
+)
+WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);

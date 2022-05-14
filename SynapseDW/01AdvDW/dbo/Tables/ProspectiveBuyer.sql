@@ -23,6 +23,5 @@
     [Phone]                NVARCHAR (20)  NULL,
     [Salutation]           NVARCHAR (8)   NULL,
     [Unknown]              INT            NULL,
-    CONSTRAINT [PK_ProspectiveBuyer_ProspectiveBuyerKey] PRIMARY KEY CLUSTERED ([ProspectiveBuyerKey] ASC)
-);
-
+)
+WITH (DISTRIBUTION=ROUND_ROBIN, CLUSTERED  INDEX([ProspectiveBuyerKey]));
