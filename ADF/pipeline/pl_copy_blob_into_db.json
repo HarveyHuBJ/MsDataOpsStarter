@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pl_copy_blob_into_db",
 	"properties": {
 		"activities": [
 			{

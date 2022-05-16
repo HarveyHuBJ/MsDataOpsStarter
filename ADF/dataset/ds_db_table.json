@@ -1,5 +1,5 @@
 {
-	"name": "db_table",
+	"name": "ds_db_table",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SalesDemo_SqlDB",
