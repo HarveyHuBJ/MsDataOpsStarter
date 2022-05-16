@@ -1,0 +1,89 @@
+{
+	"name": "pl_bottom_copy_blob_into_db",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy supplier",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": {
+							"value": "@{concat('Truncate table ',pipeline().parameters.SchemaName,'.',pipeline().parameters.TableName)}",
+							"type": "Expression"
+						},
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"value": "@pipeline().parameters.Mappings",
+						"type": "Expression"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_blob_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": "1g/data",
+							"file": "supplier.tbl"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_db_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.TableName",
+								"type": "Expression"
+							},
+							"SchemaName": {
+								"value": "@pipeline().parameters.SchemaName",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"TableName": {
+				"type": "string"
+			},
+			"SchemaName": {
+				"type": "string"
+			},
+			"Mappings": {
+				"type": "object"
+			}
+		},
+		"folder": {
+			"name": "g1"
+		},
+		"annotations": []
+	}
+}

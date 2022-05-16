@@ -1,0 +1,46 @@
+{
+	"name": "pl_initTables",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure-initTables",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[common].[usp_InitTables]",
+					"storedProcedureParameters": {
+						"stg": {
+							"value": {
+								"value": "@pipeline().parameters.stage",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "SalesDemo_SqlDB",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"stage": {
+				"type": "int",
+				"defaultValue": 0
+			}
+		},
+		"folder": {
+			"name": "g1"
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,104 @@
+{
+	"name": "pl_top_copy_object",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup-GetObjectTaskInfo",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[usp_GetObjectCopyTaskInfo]",
+						"storedProcedureParameters": {
+							"objectName": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().parameters.objectName",
+									"type": "Expression"
+								}
+							},
+							"schemaName": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().parameters.schmaName",
+									"type": "Expression"
+								}
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_db_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.objectName",
+								"type": "Expression"
+							},
+							"SchemaName": {
+								"value": "@pipeline().parameters.schmaName",
+								"type": "Expression"
+							}
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline-bottom",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Lookup-GetObjectTaskInfo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_bottom_copy_blob_into_db",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"TableName": {
+							"value": "@pipeline().parameters.objectName",
+							"type": "Expression"
+						},
+						"SchemaName": {
+							"value": "@pipeline().parameters.schmaName",
+							"type": "Expression"
+						},
+						"Mappings": {
+							"value": "@json(activity('Lookup-GetObjectTaskInfo').output.firstRow.translator)",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"objectName": {
+				"type": "string"
+			},
+			"schmaName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "g1"
+		},
+		"annotations": []
+	}
+}
