@@ -1,14 +1,6 @@
 {
 	"name": "SalesDemoBlob",
 	"properties": {
-		"parameters": {
-			"folder": {
-				"type": "string"
-			},
-			"file": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
