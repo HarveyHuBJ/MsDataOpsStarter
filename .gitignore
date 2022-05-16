@@ -2,10 +2,22 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/AzureSqlDB/01AdvDb/.vs/01AdvDb/v17
-/AzureSqlDB/01AdvDb/bin/Debug
-/AzureSqlDB/01AdvDb/obj/Debug
-/SynapseDW/01AdvDW/bin/Debug
-/SynapseDW/01AdvDW/obj/Debug
+/AzureSqlDB/01AdvDb/.vs/
+/AzureSqlDB/01AdvDb/bin/
+/AzureSqlDB/01AdvDb/obj/
+/SynapseDW/01AdvDW/bin/
+/SynapseDW/01AdvDW/obj/
 /SynapseDW/01AdvDW/Import Schema Logs
 *.suo
+/AzureSqlDB/02TPCH/02TPCH/.vs/
+/AzureSqlDB/02TPCH/02TPCH/bin/
+/AzureSqlDB/02TPCH/02TPCH/obj/
+
+*.dbmdl
+*.jfm
+*.tlog
+*.tbl
+/TPCH/TPCDSkew/.vs/
+/TPCH/TPCDSkew/Debug
+/TPCH/TPCDSkew/Release
+/TPCH/TPCDSkew/UpgradeLog*.htm
