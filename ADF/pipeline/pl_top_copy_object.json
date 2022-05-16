@@ -52,6 +52,40 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "Execute Pipeline-bottom",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Lookup-GetObjectTaskInfo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_bottom_copy_blob_into_db",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"TableName": {
+							"value": "@pipeline().parameters.objectName",
+							"type": "Expression"
+						},
+						"SchemaName": {
+							"value": "@pipeline().parameters.schmaName",
+							"type": "Expression"
+						},
+						"Mappings": {
+							"value": "@json(activity('Lookup-GetObjectTaskInfo').output.firstRow.translator)",
+							"type": "Expression"
+						}
+					}
+				}
 			}
 		],
 		"parameters": {
