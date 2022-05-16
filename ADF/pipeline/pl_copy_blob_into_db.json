@@ -38,12 +38,8 @@
 					},
 					"enableStaging": false,
 					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
+						"value": "@pipeline().parameters.Mappings",
+						"type": "Expression"
 					}
 				},
 				"inputs": [
@@ -80,6 +76,9 @@
 			},
 			"SchemaName": {
 				"type": "string"
+			},
+			"Mappings": {
+				"type": "object"
 			}
 		},
 		"folder": {
