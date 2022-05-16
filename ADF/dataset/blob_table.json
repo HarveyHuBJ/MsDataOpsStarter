@@ -1,5 +1,5 @@
 {
-	"name": "tbl",
+	"name": "blob_table",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SalesDemoBlob",
