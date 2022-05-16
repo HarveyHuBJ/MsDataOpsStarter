@@ -70,6 +70,9 @@
     <Folder Include="Common" />
     <Folder Include="Common\StoredProcedures" />
     <Folder Include="Common\Views" />
+    <Folder Include="MetadataDriven" />
+    <Folder Include="MetadataDriven\Tables" />
+    <Folder Include="MetadataDriven\StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\NATION.sql" />
@@ -105,12 +108,16 @@
     <Build Include="10g\Tables\REGION.sql" />
     <Build Include="10g\Tables\SUPPLIER.sql" />
     <Build Include="security\schema.sql" />
-    <None Include="Common\InitExternalSource.sql" />
+    <None Include="Common\Init-ExternalSource.sql" />
     <Build Include="Common\StoredProcedures\usp_InitTables.sql" />
     <Build Include="Common\Views\v_TableSizes.sql" />
+    <Build Include="MetadataDriven\Tables\CopyData.sql" />
+    <Build Include="MetadataDriven\Tables\CopyDataMappings.sql" />
+    <Build Include="MetadataDriven\StoredProcedures\usp_GetObjectCopyTaskInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="02TPCH.publish.xml" />
+    <None Include="Common\Init-CopyData-And-Mappings.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\AzureV12\SqlSchemas\master.dacpac">
