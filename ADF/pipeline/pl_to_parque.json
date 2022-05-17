@@ -141,7 +141,17 @@
 				"outputs": [
 					{
 						"referenceName": "ds_blob_parquet",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							},
+							"file": {
+								"value": "@concat(pipeline().parameters.file,'.parquet')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
