@@ -1,0 +1,24 @@
+{
+	"name": "ds_blob_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SalesDemoBlob",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "g1"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@file",
+				"folderPath": "@folder",
+				"container": "raw-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
