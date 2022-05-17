@@ -114,6 +114,7 @@
     <Build Include="MetadataDriven\Tables\CopyData.sql" />
     <Build Include="MetadataDriven\Tables\CopyDataMappings.sql" />
     <Build Include="MetadataDriven\StoredProcedures\usp_GetObjectCopyTaskInfo.sql" />
+    <Build Include="Common\StoredProcedures\usp_ProfileTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="02TPCH.publish.xml" />

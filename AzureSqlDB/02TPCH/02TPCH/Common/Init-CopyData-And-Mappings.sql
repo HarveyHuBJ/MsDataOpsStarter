@@ -5,7 +5,7 @@ truncate table mddr.CopyDataMappings
 -- 1，2，4，5 存在mapping缺失，待调查
 --select * from mddr.CopyDataMappings
 
-if object_id('#metadata_config_table') is not null
+if object_id('tempdb..#metadata_config_table') is not null
     drop table #metadata_config_table;
 go
 create table #metadata_config_table (id int , name varchar(100) , mappings varchar(max));
