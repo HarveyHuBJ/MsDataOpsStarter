@@ -144,10 +144,12 @@
 		],
 		"parameters": {
 			"folder": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "1g/data"
 			},
 			"file": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "supplier.tbl"
 			}
 		},
 		"folder": {
