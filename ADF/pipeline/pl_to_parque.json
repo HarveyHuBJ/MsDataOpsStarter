@@ -144,7 +144,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"folder": {
-								"value": "1g/data",
+								"value": "@pipeline().parameters.folder",
 								"type": "Expression"
 							},
 							"file": {
