@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Save to parque",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,15 +16,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "ParquetSink",
@@ -42,72 +36,88 @@
 						"mappings": [
 							{
 								"source": {
-									"type": "String",
-									"ordinal": 1
+									"name": "S_SUPPKEY",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
 									"name": "S_SUPPKEY",
-									"physicalType": "String"
+									"type": "Int32",
+									"physicalType": "INT_32"
 								}
 							},
 							{
 								"source": {
+									"name": "S_NAME",
 									"type": "String",
-									"ordinal": 2
+									"physicalType": "char"
 								},
 								"sink": {
 									"name": "S_NAME",
-									"physicalType": "String"
+									"type": "String",
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
+									"name": "S_ADDRESS",
 									"type": "String",
-									"ordinal": 3
+									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "S_ADDRESS",
-									"physicalType": "String"
+									"type": "String",
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"type": "String",
-									"ordinal": 4
+									"name": "S_NATIONKEY",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
 									"name": "S_NATIONKEY",
-									"physicalType": "String"
+									"type": "Int32",
+									"physicalType": "INT_32"
 								}
 							},
 							{
 								"source": {
+									"name": "S_PHONE",
 									"type": "String",
-									"ordinal": 5
+									"physicalType": "char"
 								},
 								"sink": {
 									"name": "S_PHONE",
-									"physicalType": "String"
+									"type": "String",
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"type": "String",
-									"ordinal": 6
+									"name": "S_ACCTBAL",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 15
 								},
 								"sink": {
 									"name": "S_ACCTBAL",
-									"physicalType": "String"
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
 								}
 							},
 							{
 								"source": {
+									"name": "S_COMMENT",
 									"type": "String",
-									"ordinal": 7
+									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "S_COMMENT",
-									"physicalType": "String"
+									"type": "String",
+									"physicalType": "UTF8"
 								}
 							}
 						],
@@ -120,17 +130,11 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_blob_table",
+						"referenceName": "ds_db_table",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": {
-								"value": "@pipeline().parameters.folder",
-								"type": "Expression"
-							},
-							"file": {
-								"value": "@pipeline().parameters.file",
-								"type": "Expression"
-							}
+							"TableName": "supplier",
+							"SchemaName": "g1"
 						}
 					}
 				],
