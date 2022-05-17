@@ -5,6 +5,14 @@
 			"referenceName": "SalesDemoBlob",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"folder": {
+				"type": "string"
+			},
+			"file": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "g1"
 		},
@@ -13,8 +21,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@file",
-				"folderPath": "@folder",
+				"fileName": {
+					"value": "@dataset().file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
 				"container": "raw-data"
 			},
 			"compressionCodec": "snappy"
