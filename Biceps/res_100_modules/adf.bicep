@@ -2,9 +2,9 @@
 param familyName string = 'hh01'
 param env string='dev'
 param location string='eastasia'
-param name string = '${familyName}-${env}-adf'
+param name string = 'adf-${familyName}-${env}'
 
-resource name_resource 'Microsoft.DataFactory/factories@2018-06-01' =   {
+resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =   {
   name: name
   location: location
   properties: {
@@ -12,14 +12,14 @@ resource name_resource 'Microsoft.DataFactory/factories@2018-06-01' =   {
   }
 }
 
-resource name_default 'Microsoft.DataFactory/factories/managedVirtualNetworks@2018-06-01' =   {
-  parent: name_resource
+resource adf_vnet 'Microsoft.DataFactory/factories/managedVirtualNetworks@2018-06-01' =   {
+  parent: datafactories_resource
   name: 'default'
   properties: {}
 }
 
-resource name_AutoResolveIntegrationRuntime 'Microsoft.DataFactory/factories/integrationRuntimes@2018-06-01' =  {
-  parent: name_resource
+resource adf_integration_runtimes 'Microsoft.DataFactory/factories/integrationRuntimes@2018-06-01' =  {
+  parent: datafactories_resource
   name: 'AutoResolveIntegrationRuntime'
   properties: {
     type: 'Managed'
@@ -34,8 +34,17 @@ resource name_AutoResolveIntegrationRuntime 'Microsoft.DataFactory/factories/int
     }
   }
   dependsOn: [
-    name_default
+    adf_vnet
   ]
 }
 
+// var roleDefinitionId=''
+// resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview'={
+//   name:'abc'
+//   scope:resourceGroup()
+//   properties:{
+//     roleDefinitionId:roleDefinitionId
+//      principalType: 'ServicePrincipal'
+//   }
+// }
  

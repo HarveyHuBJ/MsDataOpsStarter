@@ -5,6 +5,7 @@
 1. [MSDOC learn-bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep)
 2. [fundamentals-bicep](https://docs.microsoft.com/en-us/learn/paths/fundamentals-bicep/)
 3. [使用 Bicep 和 GitHub Actions 部署 Azure 资源](https://docs.microsoft.com/en-us/learn/paths/bicep-github-actions/)
+4. [Examples](https://github.com/Azure/bicep/tree/main/docs/examples)
 
 
 ## 基本认识
@@ -129,3 +130,76 @@ module myModule 'modules/mymodule.bicep' = {
 - **模块应具有有意义的明确参数和输出。**考虑模块的用途。考虑模块是否应操作参数值，或者父模板是否应处理该参数值，然后将单个值传递给模块。同样，考虑模块应返回的输出，并确保它们对将使用该模块的模板有用。
 - **模块应尽可能独立。**如果模块需要使用变量来定义模块的一部分，则该变量通常应包含在模块文件中，而不是包含在父模板中。
 - **模块不应输出机密。**就像模板一样，不要为连接字符串或键等机密值创建模块输出。
+
+### 创建参数文件
+
+*使用参数文件*，可以轻松地将参数值作为一个集合一起指定。在参数文件中，为 Bicep 文件中的参数提供值。参数文件是使用 JavaScript 对象表示法 （JSON） 语言创建的。
+
+~~~json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanInstanceCount": {
+      "value": 3
+    },
+    "appServicePlanSku": {
+      "value": {
+        "name": "P1v3",
+        "tier": "PremiumV3"
+      }
+    },
+    "cosmosDBAccountLocations": {
+      "value": [
+        {
+          "locationName": "australiaeast"
+        },
+        {
+          "locationName": "southcentralus"
+        },
+        {
+          "locationName": "westeurope"
+        }
+      ]
+    }
+  }
+}
+~~~
+
+在部署时使用参数文件
+
+~~~bash
+az deployment group create \
+  --template-file main.bicep \
+  --parameters main.parameters.json
+~~~
+
+指定参数值的三种方法：默认值(p3)、命令行(p1)和参数文件(p2)
+
+### 保护您的参数
+
+~~~bash
+@secure()
+param sqlServerAdministratorLogin string
+
+@secure()
+param sqlServerAdministratorPassword string
+~~~
+
+
+
+将密钥放在KeyVault中，然后可以这样用
+
+~~~js
+resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' existing = {
+  name: keyVaultName
+}
+
+module applicationModule 'application.bicep' = {
+  name: 'application-module'
+  params: {
+    apiKey： keyVault.getSecret（'ApiKey'）
+  }
+}
+~~~
+

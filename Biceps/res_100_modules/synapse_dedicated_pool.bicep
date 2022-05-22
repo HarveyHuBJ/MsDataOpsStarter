@@ -1,20 +1,20 @@
 
 param familyName string = 'hh01'
 param env string='dev'
-param location string='eastasia'
-param workspaceName string = '${familyName}-${env}-adf'
+param location string= resourceGroup().location
+param workspaceName string = 'ws-${familyName}-${env}'
 
-param adls_account_name string = '${familyName}adlsaccount'
+param adls_account_name string = 'storage${familyName}${env}adls'
 param adls_file_system_name string = 'raw-data'
 
 param storageKind string = 'StorageV2'
 
-param sqlPoolName string = '${familyName}_${env}_dw'
+param sqlPoolName string = 'dwh_${familyName}_${env}_pool'
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
 param dwsku string = 'DW200c'
 
 
-  // var defaultDataLakeStorageAccountUrl =  'https://${adls_account_name}.dfs.core.windows.net'
+var defaultDataLakeStorageAccountUrl =  'https://${adls_account_name}.dfs.core.windows.net'
 
 
 resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' =   {
@@ -43,7 +43,7 @@ resource adls_file_system_resource 'Microsoft.Storage/storageAccounts/blobServic
   ]
 }
 
-var defaultDataLakeStorageAccountUrl = adls_account_resource.properties.primaryEndpoints.web
+// var defaultDataLakeStorageAccountUrl = adls_account_resource.properties.primaryEndpoints.web
 resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = {
   name: workspaceName
   location: location
@@ -51,7 +51,7 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
     type: 'SystemAssigned'
   }
   properties: {
-    defaultDataLakeStorage: {
+    defaultDataLakeScdtorage: {
       accountUrl: defaultDataLakeStorageAccountUrl
       filesystem: adls_file_system_name
       resourceId: adls_file_system_resource.id
@@ -61,10 +61,12 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
     managedResourceGroupName: ''
     azureADOnlyAuthentication: true
   }
-   
+  dependsOn:[
+    adls_account_resource
+  ]
 }
 
-resource name_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-01' =   {
+resource firewall_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-01' =   {
   parent: synapse_workspace_resource
   name: 'allowAll'
   properties: {
@@ -73,10 +75,11 @@ resource name_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-01' =
   }
 }
 
-
-resource workspaceName_sqlPoolName 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
+// var sqlPool_name = '${workspaceName}/${sqlPoolName}'
+resource sqlPool_resource 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
   location: location
-  name: '${workspaceName}/${sqlPoolName}'
+  name: sqlPoolName
+  parent: synapse_workspace_resource
   sku: {
     name: dwsku
   }
@@ -87,8 +90,8 @@ resource workspaceName_sqlPoolName 'Microsoft.Synapse/workspaces/sqlPools@2021-0
   }
 }
 
-resource workspaceName_sqlPoolName_config 'Microsoft.Synapse/workspaces/sqlPools/metadataSync@2021-06-01' = {
-  parent: workspaceName_sqlPoolName
+resource sqlpool_metadatasync 'Microsoft.Synapse/workspaces/sqlPools/metadataSync@2021-06-01' = {
+  parent: sqlPool_resource
   name: 'config'
   properties: {
     enabled: false

@@ -1,4 +1,5 @@
-param location string = 'eastasia'
+param env string='dev'
+param location string =  resourceGroup().location
 param familyName string='hh101'
 param administrators object = {
   administratorType: 'activeDirectory'
@@ -10,8 +11,8 @@ param administrators object = {
 }
 param primaryUserAssignedIdentityId string = ''
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
-param sqlServerName string = '${familyName}-db-${uniqueString(resourceGroup().id)}'
-param sqlDatabaseName string = '${familyName}-dbsvr-${uniqueString(resourceGroup().id)}'
+param sqlServerName string = 'db-${familyName}-${env}'
+param sqlDatabaseName string = 'dbsvr-${familyName}-${env}'
 param sqlDatabaseSku object = {
   name:'S0'
   tier:'Standard'

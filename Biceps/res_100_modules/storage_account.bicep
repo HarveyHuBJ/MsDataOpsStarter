@@ -1,6 +1,7 @@
 param location string = resourceGroup().location
-param familyName string
-param storageAccountName string = '${familyName}${uniqueString(resourceGroup().id)}'
+param env string = 'dev'
+param familyName string='hh101'
+param storageAccountName string = 'storage${familyName}${env}'
 // storage account for ADLS GEN2
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: storageAccountName
