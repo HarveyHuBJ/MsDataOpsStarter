@@ -55,3 +55,19 @@ module databricksModule './res_100_modules/databricks.bicep' = {
     env:env
   }
 }
+
+module purviewModule 'res_100_modules/purview.bicep'={
+  name:'purview02'
+  params:{
+    location:location
+    familyName:familyName
+    env:env
+  }
+}
+
+// output adf_msi string = adfModule.outputs.adf_msi
+// output purview_msi string = purviewModule.outputs.purview_msi
+// 将adf的 msi 和 purview的msi 加入到：
+//    1） sql dw的 db_owner中
+//    2） sql db的 db_owner中
+//    3） storage account 的 'storage Blob Data Owner'中

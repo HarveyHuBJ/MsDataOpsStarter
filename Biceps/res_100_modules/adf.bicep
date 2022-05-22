@@ -47,4 +47,5 @@ resource adf_integration_runtimes 'Microsoft.DataFactory/factories/integrationRu
 //      principalType: 'ServicePrincipal'
 //   }
 // }
- 
+
+output adf_msi string = datafactories_resource.name

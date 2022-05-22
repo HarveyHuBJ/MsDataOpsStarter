@@ -11,8 +11,8 @@ param administrators object = {
 }
 param primaryUserAssignedIdentityId string = ''
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
-param sqlServerName string = 'db-${familyName}-${env}'
-param sqlDatabaseName string = 'dbsvr-${familyName}-${env}'
+param sqlServerName string = 'dbsrv-${familyName}-${env}'
+param sqlDatabaseName string = 'db-${familyName}-${env}'
 param sqlDatabaseSku object = {
   name:'S0'
   tier:'Standard'
