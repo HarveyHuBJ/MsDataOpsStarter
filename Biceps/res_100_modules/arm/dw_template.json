@@ -1,0 +1,65 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sqlPoolName": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "workspaceName": {
+            "type": "string"
+        },
+        "collation": {
+            "type": "string"
+        },
+        "metadataSync": {
+            "type": "bool",
+            "defaultValue": false
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": {}
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "GRS"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Synapse/workspaces/sqlPools",
+            "apiVersion": "2021-06-01",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tags')]",
+            "name": "[concat(parameters('workspaceName'), '/', parameters('sqlPoolName'))]",
+            "sku": {
+                "name": "[parameters('sku')]"
+            },
+            "properties": {
+                "createMode": "Default",
+                "collation": "[parameters('collation')]",
+                "storageAccountType": "[parameters('storageAccountType')]"
+            },
+            "resources": [
+                {
+                    "condition": "[parameters('metadataSync')]",
+                    "apiVersion": "2021-06-01",
+                    "dependsOn": [
+                        "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'), '/sqlPools/', parameters('sqlPoolName'))]"
+                    ],
+                    "location": "[parameters('location')]",
+                    "name": "config",
+                    "properties": {
+                        "Enabled": "[parameters('metadataSync')]"
+                    },
+                    "type": "metadataSync"
+                }
+            ]
+        }
+    ]
+}
