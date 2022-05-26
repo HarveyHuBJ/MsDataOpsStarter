@@ -34,7 +34,7 @@ jobs:
         path: ${{ env.SRC_DATA }}
         
     - name: Display structure of downloaded files
-      run: dir
+      run: tree .
       working-directory: ${{ env.SRC_DATA }}
     # - uses: azure/login@v1                            # dataops_spn
     #   with:
@@ -45,6 +45,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
+          az storage container create --name srcdata --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}
           az storage blob upload-batch -s ${{ env.SRC_DATA }} -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}
 
 
