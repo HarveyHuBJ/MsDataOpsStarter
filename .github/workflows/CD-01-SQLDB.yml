@@ -57,7 +57,11 @@ jobs:
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
         arguments: "/dsp deploy_script.sql /p:IgnoreColumnOrder=true" # optional
 
-
+    - name: Upload deploy_script Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: deploy_script
+        path: deploy_script*.*
 
 
       
