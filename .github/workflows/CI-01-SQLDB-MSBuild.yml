@@ -47,6 +47,8 @@ jobs:
         name: ${{env.ARTIFACT_NAME}}
         path: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}/*.dacpac
 
+    
+
       
 
         

@@ -27,16 +27,18 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/download-artifact@v3
+    # - uses: actions/download-artifact@v3
+    - name: Download dacpac from CI
+      uses: aochmann/actions-download-artifact@1.0.4
       with:
         repo: HarveyHuBJ/MsDataOpsStarter
-        token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
-        path: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}
+        path: .
         
     - name: Display structure of downloaded files
       run: dir
-      working-directory: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}
+      working-directory: .
 
 
 
