@@ -49,7 +49,7 @@ jobs:
         # The connection string, including authentication information, for the Azure SQL Server database.
         connection-string: ${{secrets.SQL_CONNECTION_STRING}}
         # Path to DACPAC file to deploy
-        dacpac-package: ${{ env.ARTIFACT_NAME }}.dacpac # optional
+        dacpac-package: 01AdvDb.dacpac # optional
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
         arguments: "/p:DropObjectsNotInSource=true" # optional
 
