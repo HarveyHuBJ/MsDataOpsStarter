@@ -21,7 +21,7 @@ env:
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
 
-  DB_SERVER: dbsrv-hh101-dev
+  DB_SERVER: dbsrv-hh101-dev.database.windows.net
 permissions:
   contents: read
 
