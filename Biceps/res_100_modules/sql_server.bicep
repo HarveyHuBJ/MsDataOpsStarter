@@ -1,14 +1,18 @@
 param env string='dev'
 param location string =  resourceGroup().location
 param familyName string='hh101'
-param administrators object = {
+param db_administrators object = {
   administratorType: 'activeDirectory'
   login: 'adminuser@cpuhackthon.onmicrosoft.com'
   sid: '679e0424-4461-4989-807a-a1a94edc55a0'
   tenantId: 'efa728a8-8af1-45bd-9e56-d8ce0bdc90da'
-  azureADOnlyAuthentication: true
+  azureADOnlyAuthentication: false
   principalType: 'User'
 }
+
+@secure()
+param db_admin_password string
+
 param primaryUserAssignedIdentityId string = ''
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
 param sqlServerName string = 'dbsrv-${familyName}-${env}'
@@ -23,8 +27,12 @@ resource sqlServer 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: sqlServerName
   location: location
   properties: {
-    administrators: administrators
+    administrators: db_administrators
     primaryUserAssignedIdentityId: primaryUserAssignedIdentityId
+    publicNetworkAccess:'Enabled'
+    administratorLogin: 'db_admin'
+    administratorLoginPassword: db_admin_password
+
   }
   
   resource sqlServerFirewallRules 'firewallRules@2020-11-01-preview' = {
