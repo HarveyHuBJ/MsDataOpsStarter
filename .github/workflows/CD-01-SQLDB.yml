@@ -27,7 +27,7 @@ permissions:
 
 jobs:
   Deploy-SQLDB:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Download dacpac from CI
@@ -42,14 +42,14 @@ jobs:
     - name: Display structure of downloaded files
       run: dir
       working-directory: .
-    # - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
         # Name of the Azure SQL Server name, like Fabrikam.database.windows.net.
-        # server-name: ${{env.DB_SERVER}} # optional
+        server-name: ${{env.DB_SERVER}} # optional
         # The connection string, including authentication information, for the Azure SQL Server database.
         connection-string: ${{secrets.SQL_CONNECTION_STRING}}
         # Path to DACPAC file to deploy
