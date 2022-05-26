@@ -40,7 +40,9 @@ jobs:
     - name: Display structure of downloaded files
       run: dir
       working-directory: .
-
+    - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
