@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - ADF
+      - ./ADF
 
 env:
   ARTIFACT_NAME: adf
