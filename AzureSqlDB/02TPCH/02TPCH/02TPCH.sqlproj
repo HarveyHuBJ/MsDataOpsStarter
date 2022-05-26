@@ -119,6 +119,7 @@
   <ItemGroup>
     <None Include="02TPCH.publish.xml" />
     <None Include="Common\Init-CopyData-And-Mappings.sql" />
+    <None Include="Common\AAD_User.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\AzureV12\SqlSchemas\master.dacpac">

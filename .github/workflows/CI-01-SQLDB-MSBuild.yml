@@ -1,4 +1,4 @@
-name: CI-SQLDB-MSBuild
+name: CI-01-SQLDB-MSBuild
 
 on:
   push:

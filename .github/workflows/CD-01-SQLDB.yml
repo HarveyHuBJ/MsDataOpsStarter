@@ -1,4 +1,4 @@
-name: CD-SQLDB
+name: CD-01-SQLDB
 
 on:
   workflow_run:

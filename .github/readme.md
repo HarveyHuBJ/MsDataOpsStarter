@@ -1,5 +1,10 @@
 # CICD 说明
-## 1. Data In Git
+
+## 1. Infra as Code
+
+
+
+## 2. Data In Git
 
 这里主要指的是在代码中管理的数据，通常包括但不限于：
 
@@ -59,6 +64,8 @@ WITH (
 
 ### 参考文档
 
-1. azcopy
-2. bulk insert from blob
+1. [azcopy](https://docs.microsoft.com/zh-cn/azure/storage/common/storage-ref-azcopy-copy?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json)
+2. [bulk insert from blob](https://azure.microsoft.com/en-us/updates/preview-loading-files-from-azure-blob-storage-into-sql-database/)
+
+
 

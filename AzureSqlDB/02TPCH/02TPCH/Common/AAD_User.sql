@@ -7,5 +7,5 @@ EXEC sp_addrolemember 'db_datawriter', [AppSP];
 GRANT ALTER ANY USER TO [AppSp];
 
 
--- az CLI
+-- az CLI --
 -- az sql server ad-admin
