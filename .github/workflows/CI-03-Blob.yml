@@ -7,7 +7,7 @@ on:
       - "main"
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_WORKSPACE: 00Data\
+  SOLUTION_WORKSPACE: 00Data
   ARTIFACT_NAME: Data
 
   # Configuration type to build.
