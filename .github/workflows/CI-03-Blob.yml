@@ -1,4 +1,4 @@
-name: CD-03-Blob
+name: CI-03-Blob
 
 on:
   workflow_dispatch:
