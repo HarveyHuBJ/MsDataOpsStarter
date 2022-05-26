@@ -23,7 +23,7 @@ jobs:
       - name: export adf template
         working-directory: ./ADF
         run: |
-          npm init
+          npm install
           npm run build export ./ /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/DevDataFactory ../ArmTemplateOutput
       - name: Upload ADF_ARMTEMPLATE Artifact
         uses: actions/upload-artifact@v3
