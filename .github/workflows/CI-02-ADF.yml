@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: setup npm
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          cache: 'npm'
+      # - name: setup npm
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 14
+      #     cache: 'npm'
 
       - name: export adf template
         working-directory: ./ADF
