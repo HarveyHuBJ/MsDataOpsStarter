@@ -14,6 +14,8 @@ env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: Data
   STORAGE_ACCOUNT: storagehh101dev 
+  SRC_DATA: srcdata
+  
 permissions:
   contents: read
 
@@ -29,11 +31,11 @@ jobs:
         repo: HarveyHuBJ/MsDataOpsStarter
         github_token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
-        path: .
+        path: ${{ env.SRC_DATA }}
         
     - name: Display structure of downloaded files
       run: dir
-      working-directory: ./Data
+      working-directory: ${{ env.SRC_DATA }}
     - uses: azure/login@v1                            # dataops_spn
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -43,7 +45,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az storage blob upload-batch -s ./data -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }}
+          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }}
 
 
       
