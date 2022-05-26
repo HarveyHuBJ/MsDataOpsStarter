@@ -65,6 +65,13 @@ module purviewModule 'res_100_modules/purview.bicep'={
   }
 }
 
+module rbacModule 'res_100_modules/_rbac.bicep'={
+  name:'rbac'
+  params:{
+    principalId:adfModule.outputs.adf_msi_id
+  }
+}
+
 // output adf_msi string = adfModule.outputs.adf_msi
 // output purview_msi string = purviewModule.outputs.purview_msi
 // 将adf的 msi 和 purview的msi 加入到：
