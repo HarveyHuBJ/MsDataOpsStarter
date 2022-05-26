@@ -1,0 +1,34 @@
+name: CI-02-ADF
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ADF
+
+env:
+  ARTIFACT_NAME: adf
+
+jobs:
+  build-adf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup npm
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+
+      - name: export adf template
+        working-directory: ./ADF
+        run: |
+          npm init
+          npm run build export ./ /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/DevDataFactory ../ArmTemplateOutput
+      - name: Upload ADF_ARMTEMPLATE Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{env.ARTIFACT_NAME}}
+          path: ArmTemplateOutput
+

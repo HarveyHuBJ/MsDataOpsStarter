@@ -203,3 +203,13 @@ module applicationModule 'application.bicep' = {
 }
 ~~~
 
+* 单独部署sql database 
+> az deployment group create --template-file sql_server.bicep --parameters db_admin_password=Qwer@1234db
+
+* 单独部署ADF
+> az deployment group create --template-file adf.bicep 
+
+
+## TODO
+1. 使用RBAC ， 将ADF MI 加入到STOREAGE的blob writer中
+2. 使用deployscript ， 将ADF MI 加入到SQL 的db_owner中

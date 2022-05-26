@@ -22,3 +22,5 @@
 /TPCH/TPCDSkew/Release
 /TPCH/TPCDSkew/UpgradeLog*.htm
 /.vs
+package-lock.json
+ADF/node_modules/*
