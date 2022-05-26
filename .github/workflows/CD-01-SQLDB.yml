@@ -55,7 +55,7 @@ jobs:
         # Path to DACPAC file to deploy
         dacpac-package: 01AdvDb.dacpac # optional
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
-        arguments: "/p:dsp=deploy_script.sql" # optional
+        arguments: "/dsp deploy_script.sql /p:IgnoreColumnOrder=true" # optional
 
 
 
