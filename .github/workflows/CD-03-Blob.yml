@@ -7,15 +7,15 @@ on:
       - completed
 
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - "main"
+  push:
+    branches:
+      - "main"
 env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: Data
   STORAGE_ACCOUNT: storagehh101dev 
   SRC_DATA: srcdata
-  
+
 permissions:
   contents: read
 

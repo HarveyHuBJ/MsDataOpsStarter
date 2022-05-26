@@ -2,9 +2,9 @@ name: CI-03-Blob
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_WORKSPACE: 00Data
