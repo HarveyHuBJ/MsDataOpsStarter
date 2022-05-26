@@ -1,0 +1,34 @@
+name: CD-02-ADF
+
+on:
+  workflow_run:
+    workflows: [CI-02-ADF]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+env:
+  ARTIFACT_NAME: deploy_script
+
+jobs:
+  publish-adf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download dacpac from CI
+        uses: aochmann/actions-download-artifact@1.0.4
+    # - uses: actions/download-artifact@v3
+        with:
+          repo: HarveyHuBJ/MsDataOpsStarter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.ARTIFACT_NAME }}
+          path: .
+
+      - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: abc
+        run: |
+          
+
