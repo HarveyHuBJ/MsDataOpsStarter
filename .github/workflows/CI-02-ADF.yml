@@ -1,9 +1,9 @@
 name: CI-02-ADF
 
 on:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
   workflow_dispatch:
 
 env:

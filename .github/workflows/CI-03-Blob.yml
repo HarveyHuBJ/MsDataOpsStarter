@@ -2,9 +2,9 @@ name: CI-03-Blob
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - "main"
+  push:
+    branches:
+      - "main"
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_WORKSPACE: 00Data
@@ -27,7 +27,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.ARTIFACT_NAME}}
-        path: ${{env.SOLUTION_WORKSPACE}}/*
+        path: ${{env.SOLUTION_WORKSPACE}}/02TPCH100M/*
 
 
       
