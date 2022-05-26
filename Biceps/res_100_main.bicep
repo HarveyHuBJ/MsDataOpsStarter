@@ -8,6 +8,9 @@ param location string = 'eastasia'
 param familyName string = 'dataopslab'
 param env string = 'dev'
 
+@secure()
+param db_admin_password string
+
 module storageModule './res_100_modules/storage_account.bicep' = {
   name: 'storage02'
   params: {
@@ -32,7 +35,8 @@ module sqldbModule './res_100_modules/sql_server.bicep' = {
   params: {
     location: location
     familyName: familyName
-    env:env
+    env: env
+    db_admin_password: db_admin_password
   }
 }
 
