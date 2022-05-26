@@ -36,16 +36,16 @@ jobs:
     - name: Display structure of downloaded files
       run: dir
       working-directory: ${{ env.SRC_DATA }}
-    - uses: azure/login@v1                            # dataops_spn
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # - uses: azure/login@v1                            # dataops_spn
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - name: Azure CLI script - az copy data
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }}
+          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}
 
 
       
