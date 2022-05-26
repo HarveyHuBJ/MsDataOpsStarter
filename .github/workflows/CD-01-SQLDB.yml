@@ -49,7 +49,7 @@ jobs:
       uses: Azure/sql-action@v1.3
       with:
         # Name of the Azure SQL Server name, like Fabrikam.database.windows.net.
-        server-name: ${{env.DB_SERVER}} # optional
+        # server-name: ${{env.DB_SERVER}} # optional
         # The connection string, including authentication information, for the Azure SQL Server database.
         connection-string: ${{secrets.SQL_CONNECTION_STRING}}
         # Path to DACPAC file to deploy
