@@ -1,9 +1,0 @@
-{
-	"name": "adf-hh1",
-	"location": "eastasia",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "07899f9e-8461-4099-a609-cfe5a7ecb075",
-		"tenantId": "efa728a8-8af1-45bd-9e56-d8ce0bdc90da"
-	}
-}

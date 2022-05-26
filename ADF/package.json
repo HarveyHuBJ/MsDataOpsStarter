@@ -1,7 +1,7 @@
 {
     "name": "adf",
     "version": "1.0.0",
-    "description": "",
+    "description": "adf package for dataops demo",
     "main": "index.js",
     "scripts": {
         "build": "node node_modules/@microsoft/azure-data-factory-utilities/lib/index"
