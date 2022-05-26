@@ -1,6 +1,7 @@
 {
 	"name": "pl_initTables",
 	"properties": {
+		"description": "初始化TPCH的表数据，\n使用存储过程， 从指定的blob中读取",
 		"activities": [
 			{
 				"name": "Stored procedure-initTables",
