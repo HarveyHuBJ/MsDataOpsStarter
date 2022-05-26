@@ -1,0 +1,51 @@
+name: CD-03-Blob
+
+on:
+  workflow_run:
+    workflows: [CI-03-Blob]
+    types:
+      - completed
+
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - "main"
+env:
+  # Path to the solution file relative to the root of the project.
+  ARTIFACT_NAME: Data
+  STORAGE_ACCOUNT: storagehh101dev 
+permissions:
+  contents: read
+
+jobs:
+  Deploy-SQLDB:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download dacpac from CI
+      uses: aochmann/actions-download-artifact@1.0.4
+    # - uses: actions/download-artifact@v3
+      with:
+        repo: HarveyHuBJ/MsDataOpsStarter
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ env.ARTIFACT_NAME }}
+        path: .
+        
+    - name: Display structure of downloaded files
+      run: dir
+      working-directory: ./Data
+    - uses: azure/login@v1                            # dataops_spn
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Azure CLI script - az copy data
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.30.0
+        inlineScript: |
+          az storage blob upload-batch -s ./data -d srcdata --account-name  ${{ env.STORAGE_ACCOUNT }}
+
+
+      
+
+        
