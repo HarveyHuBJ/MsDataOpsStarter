@@ -28,8 +28,11 @@ jobs:
 
     steps:
     - name: Download dacpac from CI
-      uses: actions/download-artifact@v3
+      uses: aochmann/actions-download-artifact@1.0.4
+    # - uses: actions/download-artifact@v3
       with:
+        repo: HarveyHuBJ/MsDataOpsStarter
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
         path: .
         
