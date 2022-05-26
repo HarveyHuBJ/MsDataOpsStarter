@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "./ADF/**"
   workflow_dispatch:
 
 env:
