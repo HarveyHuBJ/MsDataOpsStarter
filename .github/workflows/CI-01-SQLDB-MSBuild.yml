@@ -1,9 +1,9 @@
 name: CI-01-SQLDB-MSBuild
 
 on:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 
   workflow_dispatch:
 

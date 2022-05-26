@@ -2,7 +2,7 @@ name: CD-01-SQLDB
 
 on:
   workflow_run:
-    workflows: [CI-SQLDB-MSBuild]
+    workflows: [CI-01-SQLDB-MSBuild]
     types:
       - completed
 
@@ -32,11 +32,11 @@ jobs:
         repo: HarveyHuBJ/MsDataOpsStarter
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
-        path: path/to/artifact
+        path: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}
         
     - name: Display structure of downloaded files
       run: dir
-      working-directory: path/to/artifact
+      working-directory: ${{env.SOLUTION_WORKSPACE}}/bin/${{env.BUILD_CONFIGURATION}}
 
 
 
