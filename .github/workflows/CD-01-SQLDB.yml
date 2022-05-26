@@ -27,7 +27,7 @@ permissions:
 
 jobs:
   Deploy-SQLDB:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Download dacpac from CI
