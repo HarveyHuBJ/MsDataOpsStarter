@@ -9,7 +9,9 @@ on:
   workflow_dispatch:
 
 env:
-  ARTIFACT_NAME: deploy_script
+  RESOURCE_GROUP_NAME: rg-dataops-starter
+  DATA_FACTORY_NAME: adf-hh01-dev
+  ARM_FILE_NAME: ArmTemplateOutput/ARMTemplateForFactory.json
 
 jobs:
   publish-adf:
@@ -28,7 +30,11 @@ jobs:
       - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: abc
-        run: |
+      - name: Deploy Data Factory
+        uses: Azure/data-factory-deploy-action@v1.2.0
+        with:
+          resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+          dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
+          armTemplateFile: ${{ env.ARM_FILE_NAME }}
           
 
