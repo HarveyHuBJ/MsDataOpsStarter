@@ -15,6 +15,7 @@ env:
   ARTIFACT_NAME: Data
   STORAGE_ACCOUNT: storagehh101dev 
   SRC_DATA: srcdata
+  KEY_VAULT: kv-hh101-dev
 
 permissions:
   contents: read
@@ -36,20 +37,29 @@ jobs:
     - name: Display structure of downloaded files
       run: tree .
       working-directory: ${{ env.SRC_DATA }}
-    #### az login doesn't work , use storage key instead here.  
-    # - uses: azure/login@v1                            # github_dataops_spn
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    #### az login to access key vault 
+    - name: az login with github_dataops_spn
+      uses: azure/login@v1                            # github_dataops_spn
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     
+    - uses: Azure/get-keyvault-secrets@v1
+      id: getSecretAction # ID for secrets that you will reference
+      name: retrieve blob key
+      with:
+        keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
+        secrets: 'secret-storagehh101dev-key'  # comma separated list of secret keys to fetch from key vault 
+
     - name: Azure CLI script - az copy data
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          if [$(az storage container exists --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}) = false ]; then
-            az storage container create --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}
+          if [$(az storage container exists --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}) = false ]; then
+            az storage container create --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}
           fi
-          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{secrets.STORAGE_KEY_101}}
+          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}
 
 
       
