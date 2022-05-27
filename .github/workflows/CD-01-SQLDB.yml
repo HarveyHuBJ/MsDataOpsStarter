@@ -15,13 +15,16 @@ env:
   SOLUTION_WORKSPACE: AzureSqlDB\01AdvDb\
   SOLUTION_FILE_PATH: 01AdvDb.sqlproj
   ARTIFACT_NAME: AdvWorks2016
+  KEY_VAULT: kv-hh101-dev
+  DB_SERVER: dbsrv-hh101-dev.database.windows.net
+  DB_NAME: db-hh101-dev
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
+  DB_USER_LOGIN: db_admin
 
-  DB_SERVER: dbsrv-hh101-dev.database.windows.net
 permissions:
   contents: read
 
@@ -45,13 +48,21 @@ jobs:
     - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: Azure/get-keyvault-secrets@v1
+      id: getSecretAction # ID for secrets that you will reference
+      name: retrieve dbadmin password
+      with:
+        keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
+        secrets: 'secret-storagehh101dev-key'  # comma separated list of secret keys to fetch from key vault 
+     
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
         # Name of the Azure SQL Server name, like Fabrikam.database.windows.net.
         # server-name: ${{env.DB_SERVER}} # optional
         # The connection string, including authentication information, for the Azure SQL Server database.
-        connection-string: ${{secrets.SQL_CONNECTION_STRING}}
+        connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbsrv-hh101-dev-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
         # Path to DACPAC file to deploy
         dacpac-package: 01AdvDb.dacpac # optional
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
