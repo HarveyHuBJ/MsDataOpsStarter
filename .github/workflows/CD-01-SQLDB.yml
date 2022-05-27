@@ -54,7 +54,7 @@ jobs:
       name: retrieve dbadmin password
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
-        secrets: 'secret-storagehh101dev-key'  # comma separated list of secret keys to fetch from key vault 
+        secrets: 'secret-dbsrv-hh101-dev-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
      
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
