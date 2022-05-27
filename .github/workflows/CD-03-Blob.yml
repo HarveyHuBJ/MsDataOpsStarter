@@ -14,7 +14,7 @@ env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: Data
   STORAGE_ACCOUNT: storagehh101dev 
-  SRC_DATA: srcdata
+  SRC_DATA: src-data   # same as blob container
   KEY_VAULT: kv-hh101-dev
 
 permissions:
