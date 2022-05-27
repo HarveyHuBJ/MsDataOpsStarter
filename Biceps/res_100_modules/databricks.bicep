@@ -1,5 +1,5 @@
 param env string='dev'
-param familyName string=''
+param familyName string='hh101'
 param workspaceName string='dbk-ws-${familyName}-${env}'
 
 @allowed([

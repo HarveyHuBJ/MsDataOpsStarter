@@ -64,7 +64,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' = {
       family: 'A'
     }
     publicNetworkAccess: 'Enabled'
-    enableSoftDelete: true
+    enableSoftDelete: false
     softDeleteRetentionInDays: 90
     networkAcls: {
       defaultAction: 'Allow'

@@ -5,7 +5,7 @@
 param location string = resourceGroup().location
 
 @description('所有资源名称的前缀,仅字母数字组合')
-param familyName string = 'dataopslab'
+param familyName string = 'hh101'
 
 @description('部署环境名称')
 @allowed([
@@ -25,10 +25,18 @@ param github_devops_spn_id string = '7da72d5b-2ba3-45aa-b44d-277ff74d5830' // sp
 @description('adminUser is the account to login, which has most of the privileges')
 param admin_user_id string = '679e0424-4461-4989-807a-a1a94edc55a0'  // admin user objectId
 
-@secure()
-param db_admin_password string
 
-module keyvaultModule 'res_100_modules/keyvault.bicep'={
+@description('')
+@allowed([
+  0
+  100
+  200
+  300
+  400
+])
+param level int = 0
+
+module keyvaultModule 'res_100_modules/keyvault.bicep'= {
   name: 'keyvault02'
   params:{
     location: location
@@ -40,7 +48,7 @@ module keyvaultModule 'res_100_modules/keyvault.bicep'={
   }
 }
 
-module adfModule './res_100_modules/adf.bicep' = {
+module adfModule './res_100_modules/adf.bicep' = if( level>0) {
   name: 'adf02'
   params: {
     location: location
@@ -49,7 +57,7 @@ module adfModule './res_100_modules/adf.bicep' = {
   }
 }
 
-module storageModule './res_100_modules/storage_account.bicep' = {
+module storageModule './res_100_modules/storage_account.bicep' = if( level>0)  {
   name: 'storage02'
   params: {
     location: location
@@ -63,17 +71,20 @@ module storageModule './res_100_modules/storage_account.bicep' = {
 
 
 
-module sqldbModule './res_100_modules/sql_server.bicep' = {
+module sqldbModule './res_100_modules/sql_server.bicep' = if( level>0)  {
   name: 'sqldb02'
   params: {
     location: location
     familyName: familyName
     env: env
   }
+  dependsOn:[
+    keyvaultModule
+  ]
 }
 
 
-module synapseModule './res_100_modules/synapse_dedicated_pool.bicep' = {
+module synapseModule './res_100_modules/synapse_dedicated_pool.bicep' = if( level>100) {
   name: 'synapse02'
   params: {
     location: location
@@ -83,7 +94,7 @@ module synapseModule './res_100_modules/synapse_dedicated_pool.bicep' = {
 }
 
 
-module databricksModule './res_100_modules/databricks.bicep' = {
+module databricksModule './res_100_modules/databricks.bicep' = if( level>100) {
   name: 'databricks02'
   params: {
     location: location
@@ -92,7 +103,7 @@ module databricksModule './res_100_modules/databricks.bicep' = {
   }
 }
 
-module purviewModule 'res_100_modules/purview.bicep'={
+module purviewModule 'res_100_modules/purview.bicep'= if( level>200) {
   name:'purview02'
   params:{
     location:location
@@ -101,7 +112,7 @@ module purviewModule 'res_100_modules/purview.bicep'={
   }
 }
 
-module rbacModule 'res_100_modules/_rbac.bicep'={
+module rbacModule 'res_100_modules/_rbac.bicep'= {
   name:'rbac'
   params:{
     principalId:adfModule.outputs.adf_msi_id

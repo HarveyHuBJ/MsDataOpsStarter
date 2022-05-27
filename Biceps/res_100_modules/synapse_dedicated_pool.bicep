@@ -1,5 +1,5 @@
 
-param familyName string = 'hh01'
+param familyName string = 'hh101'
 param env string='dev'
 param location string= resourceGroup().location
 param workspaceName string = 'ws-${familyName}-${env}'
@@ -43,7 +43,7 @@ resource adls_file_system_resource 'Microsoft.Storage/storageAccounts/blobServic
   ]
 }
 
-// var defaultDataLakeStorageAccountUrl = adls_account_resource.properties.primaryEndpoints.web
+// var defaultDataLakeStorageAccountUrl2 = adls_account_resource.properties.primaryEndpoints.web
 resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = {
   name: workspaceName
   location: location
@@ -51,7 +51,7 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
     type: 'SystemAssigned'
   }
   properties: {
-    defaultDataLakeScdtorage: {
+    defaultDataLakeStorage: {
       accountUrl: defaultDataLakeStorageAccountUrl
       filesystem: adls_file_system_name
       resourceId: adls_file_system_resource.id
