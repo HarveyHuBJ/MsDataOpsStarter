@@ -1,6 +1,6 @@
  
 param roleDefinitionID string='ba92f5b4-2d11-453d-a403-e96b0029c9fe' // blob data contributor
-param principalId string='' // resource msi
+param principalId string  // resource msi
 
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview'={

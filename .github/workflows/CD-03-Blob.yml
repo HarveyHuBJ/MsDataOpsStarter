@@ -36,7 +36,8 @@ jobs:
     - name: Display structure of downloaded files
       run: tree .
       working-directory: ${{ env.SRC_DATA }}
-    # - uses: azure/login@v1                            # dataops_spn
+    #### az login doesn't work , use storage key instead here.  
+    # - uses: azure/login@v1                            # github_dataops_spn
     #   with:
     #     creds: ${{ secrets.AZURE_CREDENTIALS }}
     
