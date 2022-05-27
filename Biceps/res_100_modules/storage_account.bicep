@@ -2,6 +2,7 @@ param location string = resourceGroup().location
 param env string = 'dev'
 param familyName string='hh101'
 param storageAccountName string = 'storage${familyName}${env}'
+param containerName string = 'src-data'
 param keyvaultName string = 'kv-${familyName}-${env}'
 param exp_unix_time int = 1716776048 // 2024-5-17
 
@@ -17,7 +18,24 @@ resource storageAccount_resource 'Microsoft.Storage/storageAccounts@2021-06-01' 
   properties: {
     accessTier: 'Hot'
   }
+
+  // container named src-data
+  resource blob_resource 'blobServices' = {
+    name: 'default'
+    resource blob_container_resource 'containers' = {
+      name: containerName
+      properties: {
+        publicAccess: 'None'
+        defaultEncryptionScope: '$account-encryption-key'
+        denyEncryptionScopeOverride:false
+        immutableStorageWithVersioning:{
+          enabled: false
+        }
+      }
+    }
+  }
 }
+ 
 
 resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
   name: keyvaultName

@@ -56,9 +56,6 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          if [$(az storage container exists --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}) = false ]; then
-            az storage container create --name ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}
-          fi
           az storage blob upload-batch -s ${{ env.SRC_DATA }} -d ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}
 
 
