@@ -2,22 +2,29 @@ name: CD-03-x-BlobAsSQLExternal
 
 on:
   workflow_dispatch: 
+  push:
+    branches:
+      - "main"
 env:
   # Path to the solution file relative to the root of the project.
   FAMILY_NAME: hh101 
   ENV_NAME: dev 
-  STORAGE_ACCOUNT: storage${{env.FAMILY_NAME}}${{env.ENV_NAME}} 
-  SRC_DATA: src-data   # same as blob container
-  KEY_VAULT: kv-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
-  DB_SERVER: dbsrv-${{env.FAMILY_NAME}}-dev.database.windows.net
-  DB_NAME: db-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
-  DB_USER_LOGIN: db_admin
+
 permissions:
   contents: read
 
 jobs:
   Deploy-SQLDB:
     runs-on: ubuntu-latest
+    env:
+      STORAGE_ACCOUNT: storage${{env.FAMILY_NAME}}${{env.ENV_NAME}} 
+      SRC_DATA: src-data   # same as blob container
+
+      KEY_VAULT: kv-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
+      
+      DB_SERVER: dbsrv-${{env.FAMILY_NAME}}-dev.database.windows.net
+      DB_NAME: db-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
+      DB_USER_LOGIN: db_admin
 
     steps:
     - uses: actions/checkout@v3
