@@ -71,5 +71,17 @@ resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   }
 }
 
+resource keyVaultSecret3 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+  parent: keyvault_resource
+  name: 'secret-dmk'
+  properties: {
+    value: uniqueString(resourceGroup().id)
+    attributes:{
+      enabled: true
+      exp: exp_unix_time
+    }
+  }
+}
+
 output StorageAccountName string = storageAccount_resource.name
  
