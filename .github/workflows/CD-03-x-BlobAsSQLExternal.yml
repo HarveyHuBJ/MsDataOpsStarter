@@ -4,11 +4,13 @@ on:
   workflow_dispatch: 
 env:
   # Path to the solution file relative to the root of the project.
-  STORAGE_ACCOUNT: storagehh101dev 
+  FAMILY_NAME: hh101 
+  ENV_NAME: dev 
+  STORAGE_ACCOUNT: storage${{env.FAMILY_NAME}}${{env.ENV_NAME}} 
   SRC_DATA: src-data   # same as blob container
-  KEY_VAULT: kv-hh101-dev
-  DB_SERVER: dbsrv-hh101-dev.database.windows.net
-  DB_NAME: db-hh101-dev
+  KEY_VAULT: kv-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
+  DB_SERVER: dbsrv-${{env.FAMILY_NAME}}-dev.database.windows.net
+  DB_NAME: db-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
   DB_USER_LOGIN: db_admin
 permissions:
   contents: read
@@ -18,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
    
     #### az login to access key vault 
     - name: az login with github_dataops_spn
@@ -37,7 +40,7 @@ jobs:
       with:
         # The connection string, including authentication information, for the Azure SQL Server database.
         connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
-        sql-file: './AzureSqlDB/00AdminScripts/demo.sql'
+        sql-file: './AzureSqlDB/00AdminScripts/demo.sql' 
         # additional sqlcmd arguments will be applied.
         arguments: '-v cols=name,object_id'  
         # arguments: '-v dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
