@@ -2,9 +2,9 @@ name: CD-03-x-BlobAsSQLExternal
 
 on:
   workflow_dispatch: 
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 env:
   # Path to the solution file relative to the root of the project.
   FAMILY_NAME: hh101 
@@ -54,10 +54,10 @@ jobs:
       with:
         # The connection string, including authentication information, for the Azure SQL Server database.
         connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
-        sql-file: './AzureSqlDB/00AdminScripts/init_external_data_source.sql'  # demo.sql
+        sql-file: './AzureSqlDB/00AdminScripts/init_external_data_source.sql'  
         # additional sqlcmd arguments will be applied.
-        # arguments: '-v cols=name,object_id'  
         arguments: '-v name="${{env.FAMILY_NAME}}" dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
+        # arguments: '-v cols=name,object_id'   # for demo.sql
 
 
       
