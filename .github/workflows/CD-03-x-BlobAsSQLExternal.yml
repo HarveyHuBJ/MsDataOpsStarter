@@ -16,18 +16,23 @@ permissions:
 jobs:
   Deploy-SQLDB:
     runs-on: ubuntu-latest
-    env:
-      STORAGE_ACCOUNT: storage${{env.FAMILY_NAME}}${{env.ENV_NAME}} 
-      SRC_DATA: src-data   # same as blob container
-
-      KEY_VAULT: kv-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
-      
-      DB_SERVER: dbsrv-${{env.FAMILY_NAME}}-dev.database.windows.net
-      DB_NAME: db-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
-      DB_USER_LOGIN: db_admin
-
     steps:
+    #### set environment variables
+    - name: set environment variables
+      uses: allenevans/set-env@v2.0.0
+      with:
+        STORAGE_ACCOUNT: storage${{env.FAMILY_NAME}}${{env.ENV_NAME}} 
+        SRC_DATA: src-data   # same as blob container
+
+        KEY_VAULT: kv-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
+
+        DB_SERVER: dbsrv-${{env.FAMILY_NAME}}-dev.database.windows.net
+        DB_NAME: db-${{env.FAMILY_NAME}}-${{env.ENV_NAME}} 
+        DB_USER_LOGIN: db_admin
+
+    #### checkout repo.
     - uses: actions/checkout@v3
+      name: checkout repo.
    
     #### az login to access key vault 
     - name: az login with github_dataops_spn
@@ -35,13 +40,15 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
+    #### retrieve secrets, including secret-storage-sas,secret-dmk,secret-dbadmin-pwd
     - uses: Azure/get-keyvault-secrets@v1
       id: getSecretAction # ID for secrets that you will reference
-      name: retrieve blob sas
+      name: retrieve secrets
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
         secrets: 'secret-storage-sas,secret-dmk,secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
  
+    #### run sql script
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
