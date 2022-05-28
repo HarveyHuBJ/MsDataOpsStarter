@@ -16,3 +16,8 @@ WITH ( TYPE = BLOB_STORAGE,
           LOCATION = '$(blob_location)'
           , CREDENTIAL= MyAzureBlobStorageCredential --> CREDENTIAL is not required if a blob is configured for public (anonymous) access!
 );
+
+
+-- drop External DATA SOURCE MyAzureBlobStorage
+-- drop DATABASE SCOPED CREDENTIAL MyAzureBlobStorageCredential
+-- drop MASTER KEY

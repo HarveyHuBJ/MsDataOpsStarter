@@ -7,7 +7,9 @@ env:
   STORAGE_ACCOUNT: storagehh101dev 
   SRC_DATA: src-data   # same as blob container
   KEY_VAULT: kv-hh101-dev
-
+  DB_SERVER: dbsrv-hh101-dev.database.windows.net
+  DB_NAME: db-hh101-dev
+  DB_USER_LOGIN: db_admin
 permissions:
   contents: read
 
@@ -28,17 +30,17 @@ jobs:
       name: retrieve blob sas
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
-        secrets: 'secret-storagehh101dev-sas,secret-dmk,secret-dbsrv-hh101-dev-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
+        secrets: 'secret-storage-sas,secret-dmk,secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
  
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
         # The connection string, including authentication information, for the Azure SQL Server database.
-        connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbsrv-hh101-dev-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
+        connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
         sql-file: './AzureSqlDB/00AdminScripts/demo.sql'
         # additional sqlcmd arguments will be applied.
         arguments: '-v cols=name,object_id'  
-        # arguments: '-v dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storagehh101dev-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
+        # arguments: '-v dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
 
 
       

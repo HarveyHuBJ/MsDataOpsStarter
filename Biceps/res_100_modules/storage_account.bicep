@@ -43,7 +43,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
 
 resource keyVaultSecret1 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   parent: keyvault_resource
-  name: 'secret-${storageAccount_resource.name}-key'
+  name: 'secret-storage-key'
   properties: {
     value: storageAccount_resource.listKeys().keys[0].value
     attributes:{
@@ -55,7 +55,7 @@ resource keyVaultSecret1 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
 
 resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   parent: keyvault_resource
-  name: 'secret-${storageAccount_resource.name}-sas'
+  name: 'secret-storage-sas'
   properties: {
     value: listAccountSAS(storageAccount_resource.name, '2021-09-01', {
       signedProtocol: 'https'

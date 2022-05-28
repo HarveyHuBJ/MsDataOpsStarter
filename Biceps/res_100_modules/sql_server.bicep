@@ -67,7 +67,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
 
 resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   parent: keyvault_resource
-  name: 'secret-${sqlServer.name}-dbadmin-pwd'
+  name: 'secret-dbadmin-pwd'
   properties: {
     value:  db_admin_password
     attributes:{

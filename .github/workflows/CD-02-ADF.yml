@@ -10,7 +10,7 @@ on:
 
 env:
   RESOURCE_GROUP_NAME: rg-dataops-starter
-  DATA_FACTORY_NAME: adf-hh01-dev
+  DATA_FACTORY_NAME: adf-hh101-dev
   ARM_FILE_NAME: ArmTemplateOutput/ARMTemplateForFactory.json
 
 jobs:

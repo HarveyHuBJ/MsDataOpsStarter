@@ -49,14 +49,14 @@ jobs:
       name: retrieve blob key
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
-        secrets: 'secret-storagehh101dev-key'  # comma separated list of secret keys to fetch from key vault 
+        secrets: 'secret-storage-key'  # comma separated list of secret keys to fetch from key vault 
 
     - name: Azure CLI script - az copy data
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storagehh101dev-key}}
+          az storage blob upload-batch -s ${{ env.SRC_DATA }} -d ${{ env.SRC_DATA }} --account-name  ${{ env.STORAGE_ACCOUNT }} --account-key ${{steps.getSecretAction.outputs.secret-storage-key}}
 
 
       
