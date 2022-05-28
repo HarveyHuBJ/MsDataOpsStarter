@@ -1,0 +1,1 @@
+select $(cols) from sys.tables

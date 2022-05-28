@@ -41,11 +41,29 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
   name: keyvaultName
 }
 
-resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+resource keyVaultSecret1 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   parent: keyvault_resource
   name: 'secret-${storageAccount_resource.name}-key'
   properties: {
     value: storageAccount_resource.listKeys().keys[0].value
+    attributes:{
+      enabled: true
+      exp: exp_unix_time
+    }
+  }
+}
+
+resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+  parent: keyvault_resource
+  name: 'secret-${storageAccount_resource.name}-sas'
+  properties: {
+    value: listAccountSAS(storageAccount_resource.name, '2021-09-01', {
+      signedProtocol: 'https'
+      signedResourceTypes: 'sco'
+      signedPermission: 'rl'
+      signedServices: 'b'
+      signedExpiry: '2022-12-01T00:00:00Z'
+    }).accountSasToken
     attributes:{
       enabled: true
       exp: exp_unix_time
