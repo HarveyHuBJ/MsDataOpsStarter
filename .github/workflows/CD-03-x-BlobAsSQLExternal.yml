@@ -57,7 +57,7 @@ jobs:
         sql-file: './AzureSqlDB/00AdminScripts/init_external_data_source.sql'  # demo.sql
         # additional sqlcmd arguments will be applied.
         # arguments: '-v cols=name,object_id'  
-        arguments: '-v dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
+        arguments: '-v name="${{env.FAMILY_NAME}}" dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
 
 
       
