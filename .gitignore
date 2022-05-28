@@ -23,3 +23,6 @@
 /TPCH/TPCDSkew/UpgradeLog*.htm
 /.vs
 ADF/node_modules/*
+/AzureSqlDB/01AdvDB_Module1/bin/
+/AzureSqlDB/01AdvDB_Module1/obj/
+*.sqlproj.user

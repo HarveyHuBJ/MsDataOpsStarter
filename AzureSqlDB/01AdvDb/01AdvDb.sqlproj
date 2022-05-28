@@ -224,4 +224,12 @@
     <Build Include="Sales\XMLSchemaCollections\StoreSurveySchemaCollection.sql" />
     <Build Include="ExtendedProperties.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\01AdvDB_Module1\01AdvDB_Module1.sqlproj">
+      <Name>01AdvDB_Module1</Name>
+      <Project>{da33435f-663f-4354-87da-d2c344000f24}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
