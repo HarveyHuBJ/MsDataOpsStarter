@@ -1,3 +1,5 @@
+
+
 -- step1, MASTER KEY
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '$(dmk_password)';
 GO
