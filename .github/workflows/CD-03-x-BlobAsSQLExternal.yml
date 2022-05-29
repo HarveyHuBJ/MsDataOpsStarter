@@ -2,6 +2,15 @@ name: CD-03-x-BlobAsSQLExternal
 
 on:
   workflow_dispatch: 
+    inputs:
+        ci_run_number:
+          description: 'ci run number'     
+          required: true
+          default: '19'
+        file_codes:
+          description: 'input file#(eg #1,#2); leave empty for running all loading'     
+          required: true
+          default: ''
   # push:
   #   branches:
   #     - "main"
@@ -48,8 +57,8 @@ jobs:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
         secrets: 'secret-storage-sas,secret-dmk,secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
  
-    #### run sql script
-    - name: Azure SQL Deploy
+    #### run sql script - call init_external_data_source
+    - name: Azure SQL Deploy - call init_external_data_source
       uses: Azure/sql-action@v1.3
       with:
         # The connection string, including authentication information, for the Azure SQL Server database.
@@ -59,6 +68,17 @@ jobs:
         arguments: '-v name="${{env.FAMILY_NAME}}" dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
         # arguments: '-v cols=name,object_id'   # for demo.sql
 
+ 
+    #### run sql script - call init_external_data_source
+    - name: Azure SQL Deploy - call bulk_inserts
+      uses: Azure/sql-action@v1.3
+      with:
+        # The connection string, including authentication information, for the Azure SQL Server database.
+        connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
+        sql-file: './AzureSqlDB/00AdminScripts/bulk_inserts.sql'  
+        # additional sqlcmd arguments will be applied.
+        arguments: '-v name="${{env.FAMILY_NAME}}" files="${{github.event.inputs.file_codes }}" root="ci-run/${{github.event.inputs.ci_run_number}}/00Data/01csv" '  
+        # arguments: '-v cols=name,object_id'   # for demo.sql
 
       
 

@@ -66,6 +66,9 @@
     <Build Include="Lab\Stored Procedures\uspReloadLabData.sql" />
     <Build Include="Lab\Stored Procedures\uspCreateScopedCredential.sql" />
     <Build Include="Lab\Stored Procedures\uspCreateExternalDataSource.sql" />
+    <Build Include="Lab\Tables\mlbootcamp5_train.sql" />
+    <Build Include="Lab\Tables\Table1.sql" />
+    <Build Include="Lab\Tables\telecom_churn.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\AzureV12\SqlSchemas\master.dacpac">
@@ -73,5 +76,8 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
     </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="01AdvDB_Module1.publish.xml" />
   </ItemGroup>
 </Project>
