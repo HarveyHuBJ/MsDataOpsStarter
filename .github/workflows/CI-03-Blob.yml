@@ -16,7 +16,7 @@ env:
   BUILD_CONFIGURATION: Release
 
 jobs:
-  Deploy-SQLDB:
+  SQL-AdminOps-LoadData:
     runs-on: ubuntu-latest
 
     steps:
