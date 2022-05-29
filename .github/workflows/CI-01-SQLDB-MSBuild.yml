@@ -6,7 +6,7 @@ on:
   #     - "main"
 
   workflow_dispatch:
-
+  workflow_call:
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_WORKSPACE: AzureSqlDB\01AdvDb\

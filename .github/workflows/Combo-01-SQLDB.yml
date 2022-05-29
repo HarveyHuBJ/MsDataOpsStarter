@@ -1,0 +1,12 @@
+name: Combo-01-SQLDB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-CI-01-SQLDB:
+    uses: ./.github/workflows/CI-01-SQLDB-MSBuild.yml
+  
+  call-CD-01-SQLDB:
+    needs: call-CI-01-SQLDB
+    uses: ./.github/workflows/CD-01-SQLDB.yml  
