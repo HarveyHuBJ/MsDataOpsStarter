@@ -23,11 +23,15 @@ jobs:
     - uses: actions/checkout@v3
     - name: browser
       run: tree .
+    - name: Copy to Artifact Folder
+      run: |
+        mkdir -p ./artifacts/ci-run/${{github.RUN_NUMBER}}/ 
+        cp -r ${{env.SOLUTION_WORKSPACE}}/ ./artifacts/ci-run/${{github.RUN_NUMBER}}/
     - name: Upload Data Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.ARTIFACT_NAME}}$$${{github.RUN_ID}}
-        path: ${{env.SOLUTION_WORKSPACE}}/*
+        name: ${{env.ARTIFACT_NAME}}$
+        path: ./artifacts/ci-run/${{github.RUN_NUMBER}}/
 
 
       
