@@ -30,8 +30,8 @@ jobs:
     - name: Upload Data Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.ARTIFACT_NAME}}$
-        path: ./artifacts/ci-run/${{github.RUN_NUMBER}}/
+        name: ${{env.ARTIFACT_NAME}}
+        path: ./artifacts/
 
 
       
