@@ -10,6 +10,7 @@ BEGIN
 
 
     -- step2, DATABASE SCOPED CREDENTIAL
+    -- issue, it seems SAS cann't input as a parameter for SAS has some special characters, like '=' , '&'
     IF not exists (select top 1 1 from sys.database_scoped_credentials where name ='$(name)Credential')
         CREATE DATABASE SCOPED CREDENTIAL $(name)Credential
         WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
