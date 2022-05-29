@@ -26,7 +26,7 @@ jobs:
     - name: Upload Data Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.ARTIFACT_NAME}}
+        name: ${{env.ARTIFACT_NAME}}$$${{GITHUB_RUN_NUMBER}}
         path: ${{env.SOLUTION_WORKSPACE}}/*
 
 
