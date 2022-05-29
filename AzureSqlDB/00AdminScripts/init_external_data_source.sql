@@ -1,3 +1,7 @@
+
+PRINT '$(name)Credential'
+PRINT 'SAS is [$(sas)]'
+
 IF not exists (select top 1 1 from sys.external_data_sources a where name ='$(name)BlobStorage')
 BEGIN
     -- step1, MASTER KEY
@@ -11,8 +15,7 @@ BEGIN
         WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
         SECRET = '$(sas)';
 
-    PRINT '$(name)Credential'
-    PRINT '$(sas)'
+
 
     -- step3, EXTERNAL DATA SOURCE
     CREATE EXTERNAL DATA SOURCE $(name)BlobStorage

@@ -60,7 +60,7 @@ jobs:
     ### inspect secrets
     - name: echo secrets
       run: |
-        echo ${{steps.getSecretAction.outputs.secret-storage-sas}}
+        echo '${{steps.getSecretAction.outputs.secret-storage-sas}}'
 
     #### run sql script - call init_external_data_source
     - name: Azure SQL Deploy - call init_external_data_source
