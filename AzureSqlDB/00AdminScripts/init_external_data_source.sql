@@ -1,6 +1,8 @@
 
-PRINT '$(name)Credential'
-PRINT 'SAS is [$(sas)]'
+-- PRINT 'SAS is [$(sas)]'
+-- ATTENTION : $(sas) cann't correctly get as expected, so PLEASE update your DATABASE SCOPED CREDENTIAL mannually!!!
+--  eg.
+--     ALTER DATABASE SCOPED CREDENTIAL {YOUR-CRED} WITH IDENTITY = 'SHARED ACCESS SIGNATURE',  SECRET = '{YOUR SAS}';
 
 IF not exists (select top 1 1 from sys.external_data_sources a where name ='$(name)BlobStorage')
 BEGIN
