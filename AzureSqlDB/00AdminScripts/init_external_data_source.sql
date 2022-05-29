@@ -6,11 +6,13 @@ BEGIN
 
 
     -- step2, DATABASE SCOPED CREDENTIAL
-    IF not exists (select top 1 1 from sys.symmetric_keys where name ='$(name)Credential')
+    IF not exists (select top 1 1 from sys.database_scoped_credentials where name ='$(name)Credential')
         CREATE DATABASE SCOPED CREDENTIAL $(name)Credential
         WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
         SECRET = '$(sas)';
 
+    PRINT '$(name)Credential'
+    PRINT '$(sas)'
 
     -- step3, EXTERNAL DATA SOURCE
     CREATE EXTERNAL DATA SOURCE $(name)BlobStorage
