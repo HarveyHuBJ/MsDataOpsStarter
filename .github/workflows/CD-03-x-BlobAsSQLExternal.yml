@@ -8,9 +8,9 @@ on:
           required: true
           default: '19'
         file_codes:
-          description: 'input file#(eg #1,#2); leave empty for running all loading'     
+          description: 'input file#(eg #1,#2); input "all" for running all loading'     
           required: true
-          default: ''
+          default: 'all'
   # push:
   #   branches:
   #     - "main"
@@ -65,7 +65,7 @@ jobs:
         connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
         sql-file: './AzureSqlDB/00AdminScripts/init_external_data_source.sql'  
         # additional sqlcmd arguments will be applied.
-        arguments: '-v name="${{env.FAMILY_NAME}}" dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas="${{steps.getSecretAction.outputs.secret-storage-sas}}" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
+        arguments: '-v name="${{env.FAMILY_NAME}}" dmk_password="${{steps.getSecretAction.outputs.secret-dmk}}" sas=\"${{steps.getSecretAction.outputs.secret-storage-sas}}\" blob_location="https://${{env.STORAGE_ACCOUNT}}.blob.core.windows.net/${{env.SRC_DATA}}"'  
         # arguments: '-v cols=name,object_id'   # for demo.sql
 
  
