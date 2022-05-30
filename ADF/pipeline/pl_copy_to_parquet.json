@@ -1,6 +1,7 @@
 {
 	"name": "pl_copy_to_parquet",
 	"properties": {
+		"description": "transform data as .parquet format",
 		"activities": [
 			{
 				"name": "Copy data1",
