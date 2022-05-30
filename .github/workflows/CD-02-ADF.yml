@@ -7,34 +7,41 @@ on:
       - completed
 
   workflow_dispatch:
+  workflow_call:
 
 env:
+  FAMILY_NAME: hh101 
+  ENV_NAME: dev 
   RESOURCE_GROUP_NAME: rg-dataops-starter
   DATA_FACTORY_NAME: adf-hh101-dev
-  ARM_FILE_NAME: ArmTemplateOutput/ARMTemplateForFactory.json
+  ARM_FILE_NAME: ARMTemplateForFactory.json
+  ARM_PARAMETER_FILE_NAME: ARMTemplateParametersForFactory.json
 
 jobs:
   publish-adf:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download dacpac from CI
+#### Download Artifact
+      - name: Download artifact from CI
         uses: aochmann/actions-download-artifact@1.0.4
-    # - uses: actions/download-artifact@v3
         with:
           repo: HarveyHuBJ/MsDataOpsStarter
           github_token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.ARTIFACT_NAME }}
           path: .
 
+#### Azure login 
       - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy Data Factory
         uses: Azure/data-factory-deploy-action@v1.2.0
         with:
           resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
           armTemplateFile: ${{ env.ARM_FILE_NAME }}
-          
+          armTemplateParametersFile: ${{ env.ARM_PARAMETER_FILE_NAME }}
+          # additionalParameters: 'key1=value key2=value keyN=value'
 
