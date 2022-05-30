@@ -30,7 +30,7 @@ jobs:
       - name: Copy to Artifact Folder
         run: |
           mkdir -p ./artifacts/ci-run/${{github.RUN_NUMBER}}/ 
-          cp -r ./${{ADF_FOLDER}}/* ./artifacts/
+          cp -r ./${{env.ADF_FOLDER}}/* ./artifacts/
           echo 'ci-run:${{github.RUN_NUMBER}}'> ./artifacts/readme.txt
 
 #### Upload Artifact
