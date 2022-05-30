@@ -1,0 +1,52 @@
+name: CD-02-ADF-Publish
+
+on:
+  workflow_run:
+    workflows: [CI-02-ADF-Publish]
+    types:
+      - completed
+
+  workflow_dispatch:
+  workflow_call:
+  # push:
+  #   branches:
+  #     - "main"
+env:
+  FAMILY_NAME: hh101 
+  ENV_NAME: sit 
+  ARTIFACT_NAME: adf_arm_template
+  RESOURCE_GROUP_NAME: rg-dataops-starter
+  DATA_FACTORY_NAME: adf-hh101-sit
+  ARM_FILE_NAME: ARMTemplateForFactory.json
+  ARM_PARAMETER_FILE_NAME: ARMTemplateParametersForFactory.json
+# Get-AzDataFactoryV2Trigger -ResourceGroupName rg-dataops-starter -DataFactoryName adf-hh101-dev
+jobs:
+  publish-adf:
+    runs-on: ubuntu-latest
+
+    steps:
+#### Download Artifact
+      - name: Download artifact from CI
+        uses: aochmann/actions-download-artifact@1.0.4
+        with:
+          repo: HarveyHuBJ/MsDataOpsStarter
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.ARTIFACT_NAME }}
+          path: .
+
+#### Azure login 
+      - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true                      # or error: Run Connect-AzAccount to login
+      - name: Deploy Data Factory
+        uses: Azure/data-factory-deploy-action@v1.2.0
+        with:
+          resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+          dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
+          armTemplateFile: ./${{ env.ARM_FILE_NAME }}
+          armTemplateParametersFile: ./${{ env.ARM_PARAMETER_FILE_NAME }}
+          
+          # https://github.com/Azure/data-factory-deploy-action
+          # additionalParameters: 'key1=value key2=value keyN=value'
+
