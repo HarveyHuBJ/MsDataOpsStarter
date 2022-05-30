@@ -8,7 +8,9 @@ on:
 
   workflow_dispatch:
   workflow_call:
-
+  push:
+    branches:
+      - "main"
 env:
   FAMILY_NAME: hh101 
   ENV_NAME: dev 
@@ -17,7 +19,7 @@ env:
   DATA_FACTORY_NAME: adf-hh101-dev
   ARM_FILE_NAME: ARMTemplateForFactory.json
   ARM_PARAMETER_FILE_NAME: ARMTemplateParametersForFactory.json
-
+# Get-AzDataFactoryV2Trigger -ResourceGroupName rg-dataops-starter -DataFactoryName adf-hh101-dev
 jobs:
   publish-adf:
     runs-on: ubuntu-latest
@@ -36,7 +38,7 @@ jobs:
       - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+          enable-AzPSSession: true 
       - name: Deploy Data Factory
         uses: Azure/data-factory-deploy-action@v1.2.0
         with:
@@ -44,5 +46,6 @@ jobs:
           dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
           armTemplateFile: ./ArmTemplateOutput/${{ env.ARM_FILE_NAME }}
           armTemplateParametersFile: ./ArmTemplateOutput/${{ env.ARM_PARAMETER_FILE_NAME }}
+          
           # additionalParameters: 'key1=value key2=value keyN=value'
 
