@@ -1,0 +1,20 @@
+{
+	"name": "ds_parquet_writer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@parquetFile",
+				"container": "@container"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

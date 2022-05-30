@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "ds_csv_reader",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -29,6 +29,7 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []
