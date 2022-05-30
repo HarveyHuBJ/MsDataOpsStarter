@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 env:
-  ARTIFACT_NAME: adf
+  ARTIFACT_NAME: adf_arm_template
 
 jobs:
   build-adf:

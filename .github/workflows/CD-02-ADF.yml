@@ -12,6 +12,7 @@ on:
 env:
   FAMILY_NAME: hh101 
   ENV_NAME: dev 
+  ARTIFACT_NAME: adf_arm_template
   RESOURCE_GROUP_NAME: rg-dataops-starter
   DATA_FACTORY_NAME: adf-hh101-dev
   ARM_FILE_NAME: ARMTemplateForFactory.json
