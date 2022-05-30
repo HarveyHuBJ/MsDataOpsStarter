@@ -59,3 +59,5 @@ jobs:
           dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
           armTemplateFile: ./artifacts/${{ env.ARM_FILE_NAME }}
           armTemplateParametersFile: ./artifacts/${{ env.ARM_PARAMETER_FILE_NAME }}
+
+## Testing...
