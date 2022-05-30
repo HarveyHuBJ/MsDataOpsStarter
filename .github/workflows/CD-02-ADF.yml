@@ -38,7 +38,7 @@ jobs:
       - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true 
+          enable-AzPSSession: true                      # or error: Run Connect-AzAccount to login
       - name: Deploy Data Factory
         uses: Azure/data-factory-deploy-action@v1.2.0
         with:
@@ -47,5 +47,6 @@ jobs:
           armTemplateFile: ./ArmTemplateOutput/${{ env.ARM_FILE_NAME }}
           armTemplateParametersFile: ./ArmTemplateOutput/${{ env.ARM_PARAMETER_FILE_NAME }}
           
+          # https://github.com/Azure/data-factory-deploy-action
           # additionalParameters: 'key1=value key2=value keyN=value'
 
