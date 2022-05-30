@@ -1,33 +1,36 @@
 name: CI-02-ADF
 
 on:
-  # push:
-  #   branches:
-  #     - "main"
+  push:
+    branches:
+      - "adf_publish"
   workflow_dispatch:
   workflow_call:
 
 env:
   ARTIFACT_NAME: adf_arm_template
+  ADF_FOLDER: adf-hh101-dev
 
 jobs:
   build-adf:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: adf_publish
 
 #### Export ADF built template
-      - name: export adf template
-        working-directory: ./ADF
-        run: |
-          npm install
-          npm run build export ./ /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/DevDataFactory ../ArmTemplateOutput
+      # - name: export adf template
+      #   working-directory: ./${{ADF_FOLDER}}
+      #   run: |
+      #     npm install
+      #     npm run build export ./ /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/DevDataFactory ../ArmTemplateOutput
       
 #### Copy to Artifact Folder, and add readme.txt
       - name: Copy to Artifact Folder
         run: |
           mkdir -p ./artifacts/ci-run/${{github.RUN_NUMBER}}/ 
-          cp -r ./ArmTemplateOutput/ ./artifacts/
+          cp -r ./${{ADF_FOLDER}}/* ./artifacts/
           echo 'ci-run:${{github.RUN_NUMBER}}'> ./artifacts/readme.txt
 
 #### Upload Artifact
