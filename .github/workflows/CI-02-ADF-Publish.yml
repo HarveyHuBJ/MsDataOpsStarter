@@ -18,7 +18,7 @@ env:
   DATA_FACTORY_NAME: adf-hh101-sit
 
 jobs:
-  build-adf:
+  publish-adf:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
