@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=dbsrv-hh101-dev.database.windows.net;Initial Catalog=db-hh101-dev"
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=smartplandbsvr.database.windows.net;Initial Catalog=smartplandb"
 		}
 	}
 }
