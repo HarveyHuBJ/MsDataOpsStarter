@@ -25,6 +25,440 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_copy_to_parquet')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Account length",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Account length",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Area code",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Area code",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "International plan",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "International plan",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Voice mail plan",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Voice mail plan",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Number vmail messages",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Number vmail messages",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total day minutes",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total day minutes",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total day calls",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total day calls",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total day charge",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total day charge",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total eve minutes",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total eve minutes",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total eve calls",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total eve calls",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total eve charge",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total eve charge",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total night minutes",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total night minutes",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total night calls",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total night calls",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total night charge",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total night charge",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total intl minutes",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total intl minutes",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total intl calls",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total intl calls",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Total intl charge",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Total intl charge",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer service calls",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer service calls",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Churn",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Churn",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_csv_reader",
+								"type": "DatasetReference",
+								"parameters": {
+									"p_container": {
+										"value": "@pipeline().parameters.p_container",
+										"type": "Expression"
+									},
+									"p_filepath": {
+										"value": "@pipeline().parameters.p_csvFile",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_parquet_writer",
+								"type": "DatasetReference",
+								"parameters": {
+									"container": {
+										"value": "@pipeline().parameters.p_container",
+										"type": "Expression"
+									},
+									"parquetFile": {
+										"value": "@pipeline().parameters.p_pqFile",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"p_container": {
+						"type": "string",
+						"defaultValue": "src-data"
+					},
+					"p_csvFile": {
+						"type": "string",
+						"defaultValue": "01csv/telecom_churn.csv"
+					},
+					"p_pqFile": {
+						"type": "string",
+						"defaultValue": "01csv/parquet/telecom_churn.parquet"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/datasets/ds_csv_reader')]",
+				"[concat(variables('factoryId'), '/datasets/ds_parquet_writer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_csv_reader')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"p_container": {
+						"type": "string"
+					},
+					"p_filepath": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().p_filepath",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().p_container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_parquet_writer')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"container": {
+						"type": "string"
+					},
+					"parquetFile": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().parquetFile",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -33,10 +467,15 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[variables('factoryId')]"
+				"[variables('factoryId')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
