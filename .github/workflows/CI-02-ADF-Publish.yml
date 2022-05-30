@@ -1,4 +1,4 @@
-name: CI-02-ADF
+name: CI-02-ADF-Publish
 
 on:
   push:
@@ -10,6 +10,12 @@ on:
 env:
   ARTIFACT_NAME: adf_arm_template
   ADF_FOLDER: adf-hh101-dev
+  ## deploying ARM
+  ARM_FILE_NAME: ARMTemplateForFactory.json
+  ARM_PARAMETER_FILE_NAME: ARMTemplateParametersForFactory.json
+  ## deploying target ADF
+  RESOURCE_GROUP_NAME: rg-dataops-starter
+  DATA_FACTORY_NAME: adf-hh101-sit
 
 jobs:
   build-adf:
@@ -40,3 +46,16 @@ jobs:
           name: ${{env.ARTIFACT_NAME}}
           path: ./artifacts/
 
+#### azure login
+      - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true                      # or error: Run Connect-AzAccount to login
+#### Deploy Data Factory
+      - name: Deploy Data Factory
+        uses: Azure/data-factory-deploy-action@v1.2.0
+        with:
+          resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
+          dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
+          armTemplateFile: ./artifacts/${{ env.ARM_FILE_NAME }}
+          armTemplateParametersFile: ./artifacts/${{ env.ARM_PARAMETER_FILE_NAME }}
