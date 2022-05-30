@@ -1,0 +1,12 @@
+{
+	"name": "adf-hh01-dev",
+	"properties": {
+		"globalParameters": {
+			"environment": {
+				"type": "string",
+				"value": "dev"
+			}
+		}
+	},
+	"location": "eastasia"
+}
