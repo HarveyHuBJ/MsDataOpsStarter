@@ -42,7 +42,7 @@ jobs:
         with:
           resourceGroupName: ${{ env.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ env.DATA_FACTORY_NAME }}
-          armTemplateFile: ${{ env.ARM_FILE_NAME }}
-          armTemplateParametersFile: ${{ env.ARM_PARAMETER_FILE_NAME }}
+          armTemplateFile: ./ArmTemplateOutput/${{ env.ARM_FILE_NAME }}
+          armTemplateParametersFile: ./ArmTemplateOutput/${{ env.ARM_PARAMETER_FILE_NAME }}
           # additionalParameters: 'key1=value key2=value keyN=value'
 
