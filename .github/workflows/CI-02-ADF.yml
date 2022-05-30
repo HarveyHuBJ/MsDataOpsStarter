@@ -35,5 +35,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{env.ARTIFACT_NAME}}
-          path: ./artifacts
+          path: ./artifacts/
 
