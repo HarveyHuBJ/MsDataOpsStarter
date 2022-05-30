@@ -182,6 +182,7 @@
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "transform data as .parquet format",
 				"activities": [
 					{
 						"name": "Copy data1",
