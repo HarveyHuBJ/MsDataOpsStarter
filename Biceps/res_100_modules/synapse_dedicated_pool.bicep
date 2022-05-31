@@ -63,7 +63,7 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
     managedVirtualNetwork: ''
     managedResourceGroupName: ''
     azureADOnlyAuthentication: false
-    sqlAdministratorLogin: 'db_admin'
+    sqlAdministratorLogin: 'dw_admin'
     sqlAdministratorLoginPassword: dw_admin_password
     cspWorkspaceAdminProperties:{
        initialWorkspaceAdminObjectId: adminId
@@ -95,9 +95,7 @@ resource sqlPool_resource 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
     createMode: 'Default'
     collation: collation
     storageAccountType:  'LRS'
-   
   }
-  
 }
 
 resource sqlpool_metadatasync 'Microsoft.Synapse/workspaces/sqlPools/metadataSync@2021-06-01' = {

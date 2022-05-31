@@ -1,10 +1,10 @@
 name: CD-05-SynapseDW
 
 on:
-  workflow_run:
-    workflows: [CI-05-SynapseDW-MSBuild]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: [CI-05-SynapseDW-MSBuild]
+  #   types:
+  #     - completed
 
   workflow_call:
   workflow_dispatch:
@@ -14,21 +14,17 @@ on:
 env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: AdvWorksDW
-  KEY_VAULT: kv-hh101-dev
-  DB_SERVER: dbsrv-hh101-dev.database.windows.net
-  DB_NAME: db-hh101-dev
-  DB_USER_LOGIN: db_admin
+  KEY_VAULT: kv-hh101-sit
 
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
+  Synapse_Workspace: dwh_hh101_sit_pool.database.windows.net
+  DW_NAME: dwh_hh101_sit_pool
+  DW_USER_LOGIN: dw_admin
 
 permissions:
   contents: read
 
 jobs:
-  Deploy-SQLDB:
+  Deploy-Synapse-DW:
     runs-on: ubuntu-latest
 
     steps:
@@ -50,10 +46,10 @@ jobs:
 
     - uses: Azure/get-keyvault-secrets@v1
       id: getSecretAction # ID for secrets that you will reference
-      name: retrieve dbadmin password
+      name: retrieve dw-admin password
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
-        secrets: 'secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
+        secrets: 'secret-dwadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
      
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
@@ -61,9 +57,9 @@ jobs:
         # Name of the Azure SQL Server name, like Fabrikam.database.windows.net.
         # server-name: ${{env.DB_SERVER}} # optional
         # The connection string, including authentication information, for the Azure SQL Server database.
-        connection-string: Server=tcp:${{env.DB_SERVER}},1433;Initial Catalog=${{env.DB_NAME}};Persist Security Info=False;User ID=${{env.DB_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dbadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
+        connection-string: Server=tcp:${{env.Synapse_Workspace}},1433;Initial Catalog=${{env.DW_NAME}};Persist Security Info=False;User ID=${{env.DW_USER_LOGIN}};Password=${{steps.getSecretAction.outputs.secret-dwadmin-pwd}};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;
         # Path to DACPAC file to deploy
-        dacpac-package: 01AdvDb.dacpac # optional
+        dacpac-package: 01AdvDW.dacpac # optional
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
         arguments: "/dsp:deploy_script.sql /p:IgnoreColumnOrder=true" # optional
 
