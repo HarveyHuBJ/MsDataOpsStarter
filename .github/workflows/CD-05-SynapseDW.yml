@@ -8,15 +8,15 @@ on:
 
   workflow_call:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - "main"
+  push:
+    branches:
+      - "main"
 env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: AdvWorksDW
   KEY_VAULT: kv-hh101-sit
 
-  Synapse_Workspace: dwh_hh101_sit_pool.database.windows.net
+  Synapse_Workspace: ws-hh101-sit.sql.azuresynapse.net
   DW_NAME: dwh_hh101_sit_pool
   DW_USER_LOGIN: dw_admin
 
