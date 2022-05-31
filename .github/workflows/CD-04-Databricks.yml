@@ -36,11 +36,11 @@ jobs:
 
 # #### install databricks CLI
       - name: install-databricks-cli
-        uses: microsoft/install-databricks-cli@v1.0.0
+        uses: microsoft/install-databricks-cli@main
 
 # #### databricks-import-directory
       - name: databricks-import-directory
-        uses: microsoft/databricks-import-directory@v1.0.0
+        uses: microsoft/databricks-import-directory@main
         with:
           databricks-host: 'https://adb-336735846936280.0.azuredatabricks.net/'
           databricks-token: 'dapi7b1ec4a537bfe2ad44e0c9c925848ef0'
