@@ -3,6 +3,11 @@ param familyName string='hh101'
 param workspaceName string='dbk-ws-${familyName}-${env}'
 
 param keyvaultName string = 'kv-${familyName}-${env}'
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
 
 @secure()
 param databricks_token string=''   // replace with a real one
@@ -21,6 +26,7 @@ var managedResourceGroupName = 'databricks-rg-${workspaceName}'
 resource ws 'Microsoft.Databricks/workspaces@2018-04-01' = {
   name: workspaceName
   location: location
+  tags:tags
   sku: {
     name: pricingTier
   }

@@ -26,7 +26,7 @@ param github_devops_spn_id string = '7da72d5b-2ba3-45aa-b44d-277ff74d5830' // sp
 param admin_user_id string = '679e0424-4461-4989-807a-a1a94edc55a0'  // admin user objectId
 
 
-@description('')
+@description('Levels : 0, 100, 200, 300, 400')
 @allowed([
   0
   100
@@ -36,11 +36,22 @@ param admin_user_id string = '679e0424-4461-4989-807a-a1a94edc55a0'  // admin us
 ])
 param level int = 0
 
+
+@description('Tags for resources')
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
+
+
+// ------------------------
 module keyvaultModule 'res_100_modules/keyvault.bicep'= {
   name: 'keyvault02'
   params:{
     location: location
     familyName: familyName
+    tags: tags
     env: env
     tenantId: tenantId
     spn_id: github_devops_spn_id
@@ -53,6 +64,7 @@ module adfModule './res_100_modules/adf.bicep' = if( level>0) {
   params: {
     location: location
     familyName: familyName
+    tags:tags
     env:env
   }
 }
@@ -62,6 +74,7 @@ module storageModule './res_100_modules/storage_account.bicep' = if( level>0)  {
   params: {
     location: location
     familyName: familyName
+    tags:tags
     env:env
   }
   dependsOn:[
@@ -76,6 +89,7 @@ module sqldbModule './res_100_modules/sql_server.bicep' = if( level>0)  {
   params: {
     location: location
     familyName: familyName
+    tags:tags
     env: env
   }
   dependsOn:[
@@ -89,6 +103,7 @@ module synapseModule './res_100_modules/synapse_dedicated_pool.bicep' = if( leve
   params: {
     location: location
     familyName: familyName
+    tags:tags
     env:env
   }
   dependsOn:[
@@ -102,6 +117,7 @@ module databricksModule './res_100_modules/databricks.bicep' = if( level>100) {
   params: {
     location: location
     familyName: familyName
+    tags:tags
     env:env
   }
   dependsOn:[
@@ -114,6 +130,7 @@ module purviewModule 'res_100_modules/purview.bicep'= if( level>200) {
   params:{
     location:location
     familyName:familyName
+    tags: tags
     env:env
   }
 }

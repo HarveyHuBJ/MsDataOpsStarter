@@ -16,11 +16,19 @@ param sqlDatabaseSku object = {
   tier:'Standard'
 }
 
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
+
+
 var db_admin_password = substring('Pwd0!${uniqueString(resourceGroup().id)}',0, 12)
 
 resource sqlServer 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: sqlServerName
   location: location
+  tags:tags
   properties: {
     administrators:  {
       administratorType: 'ActiveDirectory'
@@ -49,6 +57,7 @@ resource sqlServer 'Microsoft.Sql/servers@2020-11-01-preview' = {
 resource sqlDatabase 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
   parent: sqlServer
   name: sqlDatabaseName
+  tags:tags
   location: location
   sku: {
     name: sqlDatabaseSku.name

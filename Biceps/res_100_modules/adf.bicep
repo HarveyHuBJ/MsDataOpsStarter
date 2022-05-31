@@ -7,6 +7,11 @@ param name string = 'adf-${familyName}-${env}'
 // github repo
 param repo_accountName string ='HarveyHuBJ'
 param repo_repositoryName string ='MsDataOpsStarter'
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
 
 // only bind git repo on 'dev' environment
 var repoConfiguration= {
@@ -20,6 +25,7 @@ var repoConfiguration= {
 resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =   {
   name: name
   location: location
+  tags:tags
   properties: {
     publicNetworkAccess: 'Enabled'
     repoConfiguration:repoConfiguration  // comment this line when not 'dev' environment

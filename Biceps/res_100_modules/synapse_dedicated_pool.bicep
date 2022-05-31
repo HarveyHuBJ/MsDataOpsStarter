@@ -17,12 +17,18 @@ param adminId string='679e0424-4461-4989-807a-a1a94edc55a0'
 param keyvaultName string = 'kv-${familyName}-${env}'
 param exp_unix_time int = 1716776048 // 2024-5-17
 
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
 
 var dw_admin_password = substring('Pwd0!${uniqueString(resourceGroup().id)}',0, 12)
-var tde_name = '${workspaceName}-tde'
+ 
 resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' =   {
   name: adls_account_name
   location: location
+  tags:tags
   properties: {
     accessTier: 'Hot'
     supportsHttpsTrafficOnly: true
@@ -32,8 +38,7 @@ resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' = 
   sku: {
     name: 'Standard_LRS'
   }
-  kind: storageKind
-  tags: {}
+  kind: storageKind 
 }
 
 resource adls_file_system_resource 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-01-01' =  {
@@ -49,6 +54,7 @@ resource adls_file_system_resource 'Microsoft.Storage/storageAccounts/blobServic
 // var defaultDataLakeStorageAccountUrl2 = adls_account_resource.properties.primaryEndpoints.web
 resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = {
   name: workspaceName
+  tags:tags  
   location: location
   identity: {
     type: 'SystemAssigned'
@@ -89,6 +95,7 @@ resource firewall_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-0
 resource sqlPool_resource 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
   location: location
   name: sqlPoolName
+  tags:tags
   parent: synapse_workspace_resource
   sku: {
     name: dw_sku

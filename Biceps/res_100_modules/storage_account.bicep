@@ -6,10 +6,16 @@ param containerName string = 'src-data'
 param keyvaultName string = 'kv-${familyName}-${env}'
 param exp_unix_time int = 1716776048 // 2024-5-17
 
+param tags object = {
+  env: env
+  owner: 'harveyhu@microsoft.com'
+  project: 'dataops-starter-lab'
+}
 
 // storage account for ADLS GEN2
 resource storageAccount_resource 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: storageAccountName
+  tags:tags
   location: location
   sku: {
     name: 'Standard_LRS'
