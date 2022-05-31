@@ -19,7 +19,7 @@ param exp_unix_time int = 1716776048 // 2024-5-17
 
 
 var dw_admin_password = substring('Pwd0!${uniqueString(resourceGroup().id)}',0, 12)
-
+var tde_name = '${workspaceName}-tde'
 resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' =   {
   name: adls_account_name
   location: location
@@ -73,6 +73,7 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
 
   }
   
+
 }
 
 resource firewall_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-01' =   {
@@ -96,6 +97,12 @@ resource sqlPool_resource 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
     createMode: 'Default'
     collation: collation
     storageAccountType:  'LRS'
+  }
+  resource synapse_workspace_tde  'transparentDataEncryption' = {
+    name: 'current'
+    properties:{
+      status: 'Enabled'
+    }
   }
 }
 

@@ -1,16 +1,16 @@
 name: CD-05-SynapseDW
 
 on:
-  # workflow_run:
-  #   workflows: [CI-05-SynapseDW-MSBuild]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: [CI-05-SynapseDW-MSBuild]
+    types:
+      - completed
 
   workflow_call:
   workflow_dispatch:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
 env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: AdvWorksDW

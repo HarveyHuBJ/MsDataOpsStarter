@@ -59,6 +59,12 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
     maxSizeBytes:53687091200
     zoneRedundant:false
   }
+  resource synapse_workspace_tde  'transparentDataEncryption' = {
+    name: 'current'
+    properties:{
+     state: 'Enabled'
+   }
+  }
 }
 
 resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
