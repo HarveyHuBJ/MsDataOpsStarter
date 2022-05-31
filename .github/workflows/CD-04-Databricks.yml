@@ -17,6 +17,7 @@ env:
   ARTIFACT_NAME: az_databricks_artifact
   RESOURCE_GROUP_NAME: rg-dataops-starter
   DATABRICKS_NAME: dbk-ws-hh101-sit
+  DATABRICKS_TOKEN: dbk-ws-hh101-sit
 
 # Get-AzDataFactoryV2Trigger -ResourceGroupName rg-dataops-starter -DataFactoryName adf-hh101-dev
 jobs:
@@ -33,17 +34,34 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: dist
 
-#### Azure login 
-      - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true                      # or error: Run Connect-AzAccount to login
+# #### install databricks CLI
+      - name: install-databricks-cli
+        uses: microsoft/install-databricks-cli@v1.0.0
 
-      - name: Upload files
-        uses: databricks/upload-dbfs-temp@v0
-        id: upload_wheel
+# #### databricks-import-directory
+      - name: databricks-import-directory
+        uses: microsoft/databricks-import-directory@v1.0.0
         with:
-          local-path: dist/*
+          databricks-host: 'https://adb-336735846936280.0.azuredatabricks.net/'
+          databricks-token: 'dapi7b1ec4a537bfe2ad44e0c9c925848ef0'
+          local-path: ./dist
+          remote-path: /Users/adminuser@cpuhackthon.onmicrosoft.com/
+    
+
+# #### Azure login 
+#       - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
+#         with:
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
+#           enable-AzPSSession: true                      # or error: Run Connect-AzAccount to login
+
+# #### Upload files
+#       - name: Upload files
+#         uses: databricks/upload-dbfs-temp@v0
+#         id: upload_wheel
+#         with:
+#           local-path: dist/*
+#           databricks-host: ${{ env.DATABRICKS_NAME }}
+#           databricks-token:  ${{ env.DATABRICKS_TOKEN }}
 
  
 

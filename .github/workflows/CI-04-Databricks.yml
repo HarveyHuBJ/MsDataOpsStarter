@@ -1,16 +1,16 @@
 name: CI-04-Databricks
 
 on:
-  push:
-    branches:
-      - "main"
+  # push:
+  #   branches:
+  #     - "main"
   workflow_dispatch:
   workflow_call:
 
 env:
   ARTIFACT_NAME: az_databricks_artifact
   DATABRICKS_FOLDER: AzureDataBricks
-  
+
 jobs:
   build-adf:
     runs-on: ubuntu-latest
