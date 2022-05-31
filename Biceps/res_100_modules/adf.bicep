@@ -8,18 +8,21 @@ param name string = 'adf-${familyName}-${env}'
 param repo_accountName string ='HarveyHuBJ'
 param repo_repositoryName string ='MsDataOpsStarter'
 
+// only bind git repo on 'dev' environment
+var repoConfiguration= {
+  type: 'FactoryGitHubConfiguration'
+  accountName: repo_accountName
+  repositoryName: repo_repositoryName
+  collaborationBranch: 'main'
+  rootFolder: '/ADF'
+}
+
 resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =   {
   name: name
   location: location
   properties: {
     publicNetworkAccess: 'Enabled'
-    repoConfiguration:{
-      type: 'FactoryGitHubConfiguration'
-      accountName: repo_accountName
-      repositoryName: repo_repositoryName
-      collaborationBranch: 'main'
-      rootFolder: '/ADF'
-    }
+    repoConfiguration:repoConfiguration  // comment this line when not 'dev' environment
   }
   identity:{
     type: 'SystemAssigned'
