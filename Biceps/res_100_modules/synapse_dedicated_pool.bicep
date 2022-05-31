@@ -11,11 +11,14 @@ param storageKind string = 'StorageV2'
 
 param sqlPoolName string = 'dwh_${familyName}_${env}_pool'
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
-param dwsku string = 'DW200c'
+param dw_sku string = 'DW200c'
+param adminId string='679e0424-4461-4989-807a-a1a94edc55a0'
+
+param keyvaultName string = 'kv-${familyName}-${env}'
+param exp_unix_time int = 1716776048 // 2024-5-17
 
 
-var defaultDataLakeStorageAccountUrl =  'https://${adls_account_name}.dfs.core.windows.net'
-
+var dw_admin_password = substring('Pwd0!${uniqueString(resourceGroup().id)}',0, 12)
 
 resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' =   {
   name: adls_account_name
@@ -52,18 +55,23 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
   }
   properties: {
     defaultDataLakeStorage: {
-      accountUrl: defaultDataLakeStorageAccountUrl
+      accountUrl: adls_account_resource.properties.primaryEndpoints.dfs
       filesystem: adls_file_system_name
       resourceId: adls_file_system_resource.id
       createManagedPrivateEndpoint: false
     }
     managedVirtualNetwork: ''
     managedResourceGroupName: ''
-    azureADOnlyAuthentication: true
+    azureADOnlyAuthentication: false
+    sqlAdministratorLogin: 'db_admin'
+    sqlAdministratorLoginPassword: dw_admin_password
+    cspWorkspaceAdminProperties:{
+       initialWorkspaceAdminObjectId: adminId
+    }
+    trustedServiceBypassEnabled:true
+
   }
-  dependsOn:[
-    adls_account_resource
-  ]
+  
 }
 
 resource firewall_allowAll 'Microsoft.Synapse/workspaces/firewallrules@2021-06-01' =   {
@@ -81,13 +89,15 @@ resource sqlPool_resource 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = {
   name: sqlPoolName
   parent: synapse_workspace_resource
   sku: {
-    name: dwsku
+    name: dw_sku
   }
   properties: {
     createMode: 'Default'
     collation: collation
     storageAccountType:  'LRS'
+   
   }
+  
 }
 
 resource sqlpool_metadatasync 'Microsoft.Synapse/workspaces/sqlPools/metadataSync@2021-06-01' = {
@@ -95,5 +105,23 @@ resource sqlpool_metadatasync 'Microsoft.Synapse/workspaces/sqlPools/metadataSyn
   name: 'config'
   properties: {
     enabled: false
+  }
+}
+
+
+// save password in keyvault
+resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
+  name: keyvaultName
+}
+
+resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+  parent: keyvault_resource
+  name: 'secret-dwadmin-pwd'
+  properties: {
+    value:  dw_admin_password
+    attributes:{
+      enabled: true
+      exp: exp_unix_time
+    }
   }
 }

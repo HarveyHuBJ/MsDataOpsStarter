@@ -2,6 +2,12 @@ param env string='dev'
 param familyName string='hh101'
 param workspaceName string='dbk-ws-${familyName}-${env}'
 
+param keyvaultName string = 'kv-${familyName}-${env}'
+
+@secure()
+param databricks_token string=''   // replace with a real one
+param exp_unix_time int = 1716776048 // 2024-5-17
+
 @allowed([
   'standard'
   'premium'
@@ -19,7 +25,24 @@ resource ws 'Microsoft.Databricks/workspaces@2018-04-01' = {
     name: pricingTier
   }
   properties: {
-    // TODO: improve once we have scoping functions
     managedResourceGroupId: '${subscription().id}/resourceGroups/${managedResourceGroupName}'
+  }
+}
+
+
+resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
+  name: keyvaultName
+}
+
+// need update when token generated!!!
+resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = if (databricks_token != ''){
+  parent: keyvault_resource
+  name: 'secret-databricks-token'
+  properties: {
+    value:  databricks_token
+    attributes:{
+      enabled: true
+      exp: exp_unix_time
+    }
   }
 }

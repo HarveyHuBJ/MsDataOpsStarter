@@ -14,7 +14,7 @@ param familyName string = 'hh101'
   'uat'
   'prod'
 ])
-param env string = 'dev'
+param env string = 'sit'
 
 @description('tenantId')
 param tenantId string = 'efa728a8-8af1-45bd-9e56-d8ce0bdc90da'  // 
@@ -91,6 +91,9 @@ module synapseModule './res_100_modules/synapse_dedicated_pool.bicep' = if( leve
     familyName: familyName
     env:env
   }
+  dependsOn:[
+    keyvaultModule
+  ]
 }
 
 
@@ -101,6 +104,9 @@ module databricksModule './res_100_modules/databricks.bicep' = if( level>100) {
     familyName: familyName
     env:env
   }
+  dependsOn:[
+    keyvaultModule
+  ]
 }
 
 module purviewModule 'res_100_modules/purview.bicep'= if( level>200) {
