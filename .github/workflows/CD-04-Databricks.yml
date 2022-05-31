@@ -40,12 +40,17 @@ jobs:
 
 # #### databricks-import-directory
       - name: databricks-import-directory
-        uses: microsoft/databricks-import-directory@main
-        with:
-          databricks-host: 'https://adb-336735846936280.0.azuredatabricks.net/'
-          databricks-token: 'dapi7b1ec4a537bfe2ad44e0c9c925848ef0'
-          local-path: ./dist
-          remote-path: /Users/adminuser@cpuhackthon.onmicrosoft.com/
+        run: | 
+          echo "Uploading notebooks from $LOCAL_NOTEBOOKS_PATH to $REMOTE_NOTEBOOK_PATH in the workspace $DATABRICKS_HOST"
+          databricks workspace import_dir --overwrite "${LOCAL_NOTEBOOKS_PATH}" "${REMOTE_NOTEBOOK_PATH}" --debug
+        shell: bash
+        env:
+          DATABRICKS_HOST: 'https://adb-336735846936280.0.azuredatabricks.net/'
+          DATABRICKS_TOKEN: 'dapi7b1ec4a537bfe2ad44e0c9c925848ef0'
+          LOCAL_NOTEBOOKS_PATH: ./dist
+          REMOTE_NOTEBOOK_PATH: /Users/adminuser@cpuhackthon.onmicrosoft.com/
+
+   
     
 
 # #### Azure login 
