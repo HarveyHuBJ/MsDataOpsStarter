@@ -60,6 +60,7 @@ resource synapse_workspace_resource 'Microsoft.Synapse/workspaces@2021-06-01' = 
       resourceId: adls_file_system_resource.id
       createManagedPrivateEndpoint: false
     }
+    
     managedVirtualNetwork: ''
     managedResourceGroupName: ''
     azureADOnlyAuthentication: false

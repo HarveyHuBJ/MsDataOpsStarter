@@ -22,7 +22,7 @@
     [Class]                 NCHAR (2)       NULL,
     [Style]                 NCHAR (2)       NULL,
     [ModelName]             NVARCHAR (50)   NULL,
-    [LargePhoto]            VARBINARY (MAX) NULL,
+    --[LargePhoto]            VARBINARY (MAX) NULL,
     [EnglishDescription]    NVARCHAR (400)  NULL,
     [FrenchDescription]     NVARCHAR (400)  NULL,
     [ChineseDescription]    NVARCHAR (400)  NULL,

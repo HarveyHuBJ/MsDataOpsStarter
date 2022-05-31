@@ -4,6 +4,6 @@
     [SalesTerritoryRegion]       NVARCHAR (50)   NOT NULL,
     [SalesTerritoryCountry]      NVARCHAR (50)   NOT NULL,
     [SalesTerritoryGroup]        NVARCHAR (50)   NULL,
-    [SalesTerritoryImage]        VARBINARY (MAX) NULL,
+    --[SalesTerritoryImage]        VARBINARY (MAX) NULL,
 )
 WITH (DISTRIBUTION=REPLICATE, CLUSTERED COLUMNSTORE INDEX);
