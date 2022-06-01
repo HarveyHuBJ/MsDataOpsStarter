@@ -20,7 +20,7 @@
 
 
 
-## 3. 实验步骤一
+## 3. 实验一步骤
 
 ### a.  进入根目录C:\Code\DataOpsStarter\
 
@@ -195,7 +195,7 @@ resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
 ~~~cmd
 az bicep install && az bicep upgrade        # 确保安装了bicep 模块
 
-az login					# 登录
+az login					# 登录。 使用AdminUser账号
 
 az account set --subscription {your subscription ID}  # 选择订阅
 
@@ -207,6 +207,8 @@ az configure --defaults group=rg-dataops-starter  # 设置默认资源组； 如
 ### d. 运行Bicep
 
 ~~~cmd
+# 进入工作区目录
+cd C:\Code\DataOpsStart\12lab
 # 部署Bicep 文件
 az deployment group create --template-file storage-account.bicep
 ~~~
@@ -241,7 +243,7 @@ az deployment group create --template-file storage-account.bicep
 
  
 
-## 4. 实验步骤二
+## 4. 实验二步骤
 
 ### a. 导出ARM模板
 
@@ -261,7 +263,7 @@ az bicep decompile --file storageARM.json
 
 将会自动产生一个 **storageARM.bicep** 文件。 
 
-不过这个文件建议不要直接拿来用， 需要重构并且做参数化处理。具体过程请参与Bicep文档。
+不过这个文件建议不要直接拿来用， 需要重构并且做参数化处理。具体过程请参考Bicep文档。
 
 
 

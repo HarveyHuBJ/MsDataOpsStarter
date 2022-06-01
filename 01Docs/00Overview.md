@@ -88,7 +88,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * 了解如何从Github Action Marketplace中查询
 * 了解如何使用VS Code 编写workflow
 
-#### [实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)](12lab.md)
+#### [实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaC)](12lab.md)
 
 * 实现使用Bicep创建一个KeyVault 和存储账号StorageAccount，并在KeyVault中保存访问Key
 * 了解如何使用VS Code编写Bicep

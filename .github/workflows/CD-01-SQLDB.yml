@@ -34,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+#### Download Artifact
     - name: Download dacpac from CI
       uses: aochmann/actions-download-artifact@1.0.4
     # - uses: actions/download-artifact@v3
@@ -46,10 +47,12 @@ jobs:
     - name: Display structure of downloaded files
       run: dir
       working-directory: .
+#### Azure login 
     - uses: azure/login@v1                            # Azure login required to add a temporary firewall rule
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+#### retrieve dbadmin password
     - uses: Azure/get-keyvault-secrets@v1
       id: getSecretAction # ID for secrets that you will reference
       name: retrieve dbadmin password
@@ -57,6 +60,7 @@ jobs:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
         secrets: 'secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
      
+#### Azure SQL Deploy with Dacpac
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1.3
       with:
@@ -69,6 +73,7 @@ jobs:
         # In case DACPAC option is selected, additional SqlPackage arguments that will be applied. When SQL query option is selected, additional sqlcmd arguments will be applied.
         arguments: "/dsp:deploy_script.sql /p:IgnoreColumnOrder=true" # optional
 
+#### Upload deploy_script Artifact
     - name: Upload deploy_script Artifact
       uses: actions/upload-artifact@v3
       with:
