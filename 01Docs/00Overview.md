@@ -12,7 +12,7 @@ TODO
 
 但不包括： 
 
-* 产品深度介绍， 例如github, synapse等
+* 产品深度介绍， 例如GitHub, Synapse等
 * 数据分析深度介绍
 * 安全措施深度介绍
 
@@ -34,10 +34,10 @@ TODO
 
 | 信息：             | 示例：                               | 说明：                                                       |
 | ------------------ | ------------------------------------ | ------------------------------------------------------------ |
-| **TenantID**       | efa728a8-8af1-45bd-9e56-d8ce0bdc90da | 在**AAD Overview**页面可用看到                               |
-| **SubscriptionID** | f79d0fce-39b1-4498-9c2e-18a27eaa8054 | 从任意资源的url中可用看到                                    |
-| **SPN ObjectID**   | 7da72d5b-2ba3-45aa-b44d-277ff74d5830 | 在**AAD Enterprise Applications** 下可用找到SPN的objectID。<br />(注意不是ApplicationID) |
-| **AdminID**        | 679e0424-4461-4989-807a-a1a94edc55a0 | 在AAD User Profile 页面可用看到（ Object ID)                 |
+| **TenantID**       | efa728a8-\*\*\*\*-\*\*\*\*-\*\*\*\*\-d8ce0bdc90da | 在**AAD Overview**页面可用看到                               |
+| **SubscriptionID** | f79d0fce-\*\*\*\*-\*\*\*\*-\*\*\*\*\-18a27eaa8054 | 从任意资源的url中可用看到                                    |
+| **SPN ObjectID**   | 7da72d5b-\*\*\*\*-\*\*\*\*-\*\*\*\*\-277ff74d5830 | 在**AAD Enterprise Applications** 下可用找到SPN的objectID。<br />(注意不是ApplicationID) |
+| **AdminID**        | 679e0424-\*\*\*\*-\*\*\*\*-\*\*\*\*\-a1a94edc55a0 | 在AAD User Profile 页面可用看到（ Object ID)                 |
 | **ResourceGroup**  | rg-dataops-starter                   | 实验过程中的所有资源都放在这个ResourceGroup 中               |
 
 
