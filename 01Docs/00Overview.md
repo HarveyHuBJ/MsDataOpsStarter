@@ -2,19 +2,22 @@
 
 ## 背景
 
-TODO
+由于IOT设备的应用、云计算存储能力的增长、数据分析驱动决策的需要，企业中数据每年的增长速度非常快。对于大量数据的价值挖掘，89%的企业都会面临数据管理上的困难：数据本身的变化、需求的变化，新尝试的引入，可能需要非常长时间才能真正产生见解。从数据团队角度来说，会面临很多计划外的工作，比如解决数据权限问题、数据错误溯源等，导致效率很低，也对数据缺乏信任，创新的时间也就更短了（*March 2020 Gartner Survey, Data Management Struggles to Balance Innovation and Control*）
 
+![March 2020 Gartner Survey, Data Management Struggles to Balance Innovation and Control](./.image/DataManagementSurvey.png =450x)
+
+数据的动态性和大体量、当前技术的多样性和敏捷需求的迫切性都让数据运维化（DataOps）成为企业重要的能力。DataOps的价值可以总结为四大点：敏捷性、可靠性、稳健性和创新性。通过采取正确的DataOps实践，可以帮助企业通过合理的团队合作，更快地使用数据创造价值。
 
 
 ## 目标
 
-通过一系列的动手实验， 帮助学员掌握在项目中实施DataOps的路径， 包括相关产品和技术手段。 
+通过一系列的动手实验， 帮助掌握在项目中实施DataOps的路径， 相关产品和技术手段，涵盖持续集成、持续部署、持续质量、持续安全、持续治理、持续运维和持续改进与合作。 
 
 但不包括： 
 
 * 产品深度介绍， 例如GitHub, Synapse等
 * 数据分析深度介绍
-* 安全措施深度介绍
+* 安全方案深度介绍
 
 
 
@@ -82,20 +85,20 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 ### == Level 100 ==
 
-#### [实验1-1 - 了解Github Workflow and Action](11lab.md) 
+#### [实验1-1 - [CICD] 了解Github Workflow and Action](11lab.md) 
 
 * 实现在GitHub Action 中输出Hello world
 * 了解如何从Github Action Marketplace中查询
 * 了解如何使用VS Code 编写workflow
 
-#### [实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)](12lab.md)
+#### [实验1-2 - [CICD] 了解Bicep, 实现Infrastructure as Code (IaS)](12lab.md)
 
 * 实现使用Bicep创建一个KeyVault 和存储账号StorageAccount，并在KeyVault中保存访问Key
 * 了解如何使用VS Code编写Bicep
 * 了解Bicep官方文档
 * 了解如何从JSON ARM中反向获取Bicep
 
-#### [实验1-3 - 了解测试数据发布到存储Blob和AzureSQL](13lab.md)
+#### [实验1-3 - [CICD] 了解测试数据发布到存储Blob和AzureSQL](13lab.md)
 
 * 实现将数据文件csv提交到git
 * 通过CI->artifacts->CD的过程将数据发布到blob
@@ -104,19 +107,19 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * 通过CI->artifacts->CD的过程， 发布数据库
 * 通过CD的过程， 将blob的数据发布到数据库
 
-#### [实验1-4 - 了解ADF数据流水线](14lab.md)
+#### [实验1-4 - [CICD] 了解ADF数据流水线](14lab.md)
 
 * 创建2个环境ADF资源，第一个配置Git repo; 配置ADF访问存储账号和数据的权限
 * 创建ADF数据流水线, 实现将Blob数据复制到数据库
 * 通过publish->CI->artifacts->CD的过程， 将ADF发布到下一环境
 
-#### [实验1-5 - 了解Databricks](15lab.md)
+#### [实验1-5 - [CICD] 了解Databricks](15lab.md)
 
 * 创建2个环境Databricks资源， 第一个配置Git repo
 * 第二个配置Databricks token
 * 通过CI->artifacts->CD的过程， 将Notebooks发布到下一环境
 
-#### [实验1-6 - 了解Synapse](16lab.md)
+#### [实验1-6 - [CICD] 了解Synapse](16lab.md)
 
 * 创建Synapse资源， 并在KeyVault中保存连接串和ADLS key
 * 通过CI->artifacts->CD的过程， 发布数据仓库
@@ -128,28 +131,27 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 ### == Level 200 ==
 
-#### [实验2-1 - 了解GIT FLow 和 GITHub Flow 分支协作模式](21lab.md) 
+#### [实验2-1 - [CICD] 了解GIT FLow 和 GITHub Flow 分支协作模式](21lab.md) 
 
 * 了解Git flow和Github flow
 * 了解Pull request 和分支策略(policy)
 * 了解代码合并和解决冲突
 
-#### [实验2-2 - 深入了解GitHub的Workflow](22lab.md)
+#### [实验2-2 - [CICD] 深入了解GitHub的Workflow](22lab.md)
 
-* 定义action
 * 了解常用的触发机制
 * 了解自定义Action
 * 了解组合Workflow
 * 了解环境变量和secrets
 * 了解“守门员” （Approver）
 
-#### [实验2-3 - Bicep进阶](23lab.md)
+#### [实验2-3 - [CICD] Bicep进阶](23lab.md)
 
 * 了解模块引用机制
 * 了解依赖和引用已有资源
 * 了解循环和条件判断
 
-#### [实验2-4 - ADF 进阶](24lab.md) 	
+#### [实验2-4 - [CICD] ADF 进阶](24lab.md) 	
 
 * 参数化LinkService, DataSet, Pipleline
 * FlagFeature Pipeline
@@ -157,19 +159,20 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * Copy活动的并行优化
 * Pipeline组合调用
 
-#### [实验2-5 - SoTa测试框架应用](25lab.md)
+#### [实验2-5 - [CQ] 持续质量（一）SoTa测试框架应用](25lab.md)
 
 *  部署ADF + Synapse + DB， 包括schema
 *  上传测试用例
 *  执行测试用例
 *  查看测试结果
 
-#### [实验2-6 - 持续质量Continuous Quality ](26lab.md)
+#### [实验2-6 - [CQ] 持续质量（二）开源框架或工具及流程](26lab.md)
 
 * 了解Unit Test 框架之一 （pytest, nunit, vstest)
 * 了解GreatExpection
 * 了解[PR-CI] + [QA-CI] + [Fast-CI]
 
+数据平台拓展内容：
 #### [实验2-7 - Synapse进阶 ](27lab.md) 
 
 * 了解单库拆分
@@ -190,18 +193,18 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 ### == Level 300 ==
 
-#### [实验3-1 - 持续监控和反馈](31lab.md)
+#### [实验3-1 - [CO] 持续监控和反馈](31lab.md)
 
 * 了解ELK监控体系
 * 了解Azure Monitor体系
 
-#### [实验3-2 - Synapse的数据血缘分析](32lab.md)
+#### [实验3-2 - [CG] Synapse的数据血缘分析](32lab.md)
 
 * 了解DacFx 和 antlr， 了解抽象语法树（AST)
 * 了解图数据库，了解Neo4j
 * 了解血缘结果展示
 
-#### [实验3-3 - 数据治理进阶](33lab.md)
+#### [实验3-3 - [CG] 数据治理进阶](33lab.md)
 
 * 部署Purview
 * 了解数据资产， 管理数据资产
@@ -209,11 +212,12 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * 了解数据分类 + 自定义规则
 * 了解数据洞察
 
-#### [实验3-4 - 数据反哺流水线](34lab.md)
+#### [实验3-4 - [CQ] 数据反哺流水线](34lab.md)
 
 * 了解数据脱敏
 * 了解数据反哺流水线过程
 
+MLOps等拓展内容：
 #### [实验3-5 - ML数据及版本管理](35lab.md)
 
 * 了解Databricks的ML flow
