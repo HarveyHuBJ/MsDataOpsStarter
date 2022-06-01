@@ -12,7 +12,7 @@ TODO
 
 但不包括： 
 
-* 产品深度介绍， 例如github, synapse等
+* 产品深度介绍， 例如GitHub, Synapse等
 * 数据分析深度介绍
 * 安全措施深度介绍
 
