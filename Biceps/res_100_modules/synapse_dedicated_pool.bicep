@@ -39,6 +39,7 @@ resource adls_account_resource 'Microsoft.Storage/storageAccounts@2021-01-01' = 
     name: 'Standard_LRS'
   }
   kind: storageKind 
+  
 }
 
 resource adls_file_system_resource 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-01-01' =  {
@@ -127,11 +128,26 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-10-01' existing={
   name: keyvaultName
 }
 
+// dedicate pool account password
 resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   parent: keyvault_resource
   name: 'secret-dwadmin-pwd'
   properties: {
     value:  dw_admin_password
+    attributes:{
+      enabled: true
+      exp: exp_unix_time
+    }
+  }
+}
+
+
+// ADLS storage key
+resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
+  parent: keyvault_resource
+  name: 'secret-adls-key'
+  properties: {
+    value:  adls_account_resource.listKeys().keys[0].value
     attributes:{
       enabled: true
       exp: exp_unix_time

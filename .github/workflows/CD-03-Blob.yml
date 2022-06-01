@@ -13,9 +13,9 @@ on:
 env:
   # Path to the solution file relative to the root of the project.
   ARTIFACT_NAME: Data
-  STORAGE_ACCOUNT: storagehh101dev 
+  STORAGE_ACCOUNT: storagehh101dev   # storage account name
   SRC_DATA: src-data   # same as blob container
-  KEY_VAULT: kv-hh101-dev
+  KEY_VAULT: kv-hh101-dev  # key vault name
 
 permissions:
   contents: read
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download dacpac from CI
+    - name: Download artifact from CI
       uses: aochmann/actions-download-artifact@1.0.4
     # - uses: actions/download-artifact@v3
       with:
@@ -34,23 +34,26 @@ jobs:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.SRC_DATA }}
         
+#### Display structure of downloaded files
     - name: Display structure of downloaded files
       run: tree .
       working-directory: ${{ env.SRC_DATA }}
 
-    #### az login to access key vault 
+#### az login to access key vault 
     - name: az login with github_dataops_spn
       uses: azure/login@v1                            # github_dataops_spn
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
+#### Retrieve storage key
     - uses: Azure/get-keyvault-secrets@v1
       id: getSecretAction # ID for secrets that you will reference
-      name: retrieve blob key
+      name: retrieve storage key
       with:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
         secrets: 'secret-storage-key'  # comma separated list of secret keys to fetch from key vault 
 
+#### upload multi-files to blob
     - name: Azure CLI script - az copy data
       uses: azure/CLI@v1
       with:
