@@ -29,7 +29,7 @@
 
 * 一个AAD User (name : adminuser@yourdomain.com)， 作为  subscription 的Owner
 
-* 一个SPN （name: github-cicd-spn) , 作为  rg-dataops-starter 的contributor
+* 一个SPN （name: github-cicd-spn) , 作为  rg-dataops-starter 的contributor； 并且保存为Github的secret: AZURE_CREDENTIALS
 
   
 

@@ -236,7 +236,7 @@ az deployment group create --template-file storage-account.bicep
 
 ### e. 观察结果
 
-通过上面的步骤， 首先我们可以看到在Azure 的Portal中， 资源组rg-dataops-starter下新增加了两个资源：
+通过上面的步骤， 首先我们可以看到在Azure 的Portal中， 资源组**rg-dataops-starter**下新增加了两个资源：
 
 - KeyVault : kv-hh101-dev
 - Storage Account : storagehh101dev

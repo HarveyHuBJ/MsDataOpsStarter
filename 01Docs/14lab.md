@@ -65,7 +65,7 @@ resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =  
   tags:tags
   properties: {
     publicNetworkAccess: 'Enabled'
-    repoConfiguration:repoConfiguration  // comment this line when not 'dev' environment
+    repoConfiguration: repoConfiguration:  // comment this line when not 'dev' environment
   }
   identity:{
     type: 'SystemAssigned'
@@ -149,13 +149,15 @@ az deployment group create --template-file adf.bicep --parameters env=sit
 
 
 
-### e. 打开ADF（dev)，按提示完成git repo的账号验证。 
+### * e. 打开ADF（dev)，按提示完成git repo的账号验证。 
 
 ​		然后将main分支内容同步到ADF。 
 
 ​        新建一个Pipeline， 并保存提交。 
 
 ​        相关代码会提交到github的代码repo中。
+
+补充pipeline creation 介绍
 
  ### f.  本地同步ADF代码， 并查看新建Pipeline的代码
 
@@ -169,7 +171,7 @@ az deployment group create --template-file adf.bicep --parameters env=sit
 
 ### g. 打开ADF(dev), 点击publish
 
-​        **publish** 操作会将ADF的内容build成一个ARM template， 并同步到adf_publish 分支中； 并且这个分支与main分支内容无关。 
+​        **publish** 操作会将ADF的内容build成一个ARM template， 并同步到adf_publish 分支中； **并且这个分支与main分支内容无关**。 
 
 ​        我们可以打开这个分支看看内容：
 

@@ -102,7 +102,7 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = if (dat
 
 需要注意的是， 这个token 无法预置， 也无法自动生成。 dev环境不需要， SIT环境需要。
 
-需要在Databricks Workspace建好后， 手动在设置页中生成一个， 然后填补到Bicep的变量值位置； 最后再重新运行Bicep， 将其保存到Key Vault中。 
+需要在Databricks Workspace建好后， 手动在设置页中生成一个token， 然后填补到Bicep的变量值位置； 最后再重新运行Bicep， 将其保存到Key Vault中。 
 
 关于Token的生成， 请参考：
 

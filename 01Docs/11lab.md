@@ -105,7 +105,7 @@ jobs:
 
 
 
-### g. 打开Action页， 选择刚才的workflow，并观察结果
+### g. 打开Action页， 选择刚才的workflow，启动；并观察结果
 
 
 

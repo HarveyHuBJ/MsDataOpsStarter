@@ -23,6 +23,8 @@
 
 
 
+![image-20220602144920262](C:\Users\harveyhu\SourceCode\Github\HarveyHuBJ\MsDataOpsStarter\01Docs\13lab\ssdt.png)
+
 ## 3. 实验一
 
 > 目标： 
@@ -88,11 +90,11 @@ jobs:
 
 ​        值得一提的是，每次数据修改后重新提交， 重新通过CI上传的目录都是加了CI Run Number的编号的， 起到了版本化的作用。 
 
-| #    | Actions                    | 说明                                               |
-| ---- | -------------------------- | -------------------------------------------------- |
-| 1    | actions/checkout@v3        | 签出代码，默认使用main分支                         |
-| 2    | bash: cp                   | 将内容拷贝到artifacts中， 并依据Run_number分子目录 |
-| 3    | actions/upload-artifact@v3 | 将./artifacts 内容上传到Repo的Artifacts            |
+| #    | Actions                    | 说明                                                   |
+| ---- | -------------------------- | ------------------------------------------------------ |
+| 1    | actions/checkout@v3        | 签出代码，默认使用main分支                             |
+| 2    | bash: cp                   | 将内容拷贝到artifacts中， **并依据Run_number分子目录** |
+| 3    | actions/upload-artifact@v3 | 将./artifacts 内容上传到Repo的Artifacts                |
 
 
 
@@ -206,7 +208,7 @@ CD 完成后， 会在Blob中出现新加的数据文件。
 
 > 目标：
 >
-> ​		创建Azure Database 资源; 
+> ​		创建Azure SQL Database 资源; 
 >
 >  ​         并将数据库的连接信息保存到KeyVault中
 
