@@ -88,6 +88,14 @@ jobs:
 
 ​        值得一提的是，每次数据修改后重新提交， 重新通过CI上传的目录都是加了CI Run Number的编号的， 起到了版本化的作用。 
 
+| #    | Actions                    | 说明                                               |
+| ---- | -------------------------- | -------------------------------------------------- |
+| 1    | actions/checkout@v3        | 签出代码，默认使用main分支                         |
+| 2    | bash: cp                   | 将内容拷贝到artifacts中， 并依据Run_number分子目录 |
+| 3    | actions/upload-artifact@v3 | 将./artifacts 内容上传到Repo的Artifacts            |
+
+
+
 ### d. 新建CD workflow
 
 ​		在\\.github\workflow目录下，新建文件lab13-CD-Blob.yml, 内容如下：
@@ -161,6 +169,14 @@ jobs:
 
 ​        上述CD的过程， 是将上一步CI生成的artifacts 文件，复制到Azure 存储账户的BLOB中。 其中需要从KeyVault中获取访问Azure存储账户的密钥， 
 
+| #    | Actions                                  | 说明                                        |
+| ---- | ---------------------------------------- | ------------------------------------------- |
+| 1    | aochmann/actions-download-artifact@1.0.4 | 将上一步CI上传的Artifacts 下载              |
+| 2    | bash: tree                               | 查看目录内容                                |
+| 3    | azure/login@v1                           | 登录azure， 使用预置的SPN                   |
+| 4    | Azure/get-keyvault-secrets@v1            | 获取key vault中指定的secrets, 后面会用到    |
+| 5    | azure/CLI@v1                             | 运行AZ CLI的命令， 将文件上传到Azure Blob中 |
+
 ### e. 分别运行CI CD
 
 如果CD中配置了workflow_run， 如下所示， 则会自动在CI 完成的时候开始启动
@@ -232,7 +248,7 @@ param tags object = {
 
 var db_admin_password = substring('Pwd0!${uniqueString(resourceGroup().id)}',0, 12)
 
-resource sqlServer 'Microsoft.Sql/servers@2020-11-01-preview' = {
+resource sqlServer_resource 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: sqlServerName
   location: location
   tags:tags
@@ -261,8 +277,8 @@ resource sqlServer 'Microsoft.Sql/servers@2020-11-01-preview' = {
   }
 }
 
-resource sqlDatabase 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
-  parent: sqlServer
+resource sqlDatabase_resource 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
+  parent: sqlServer_resource
   name: sqlDatabaseName
   tags:tags
   location: location
@@ -308,6 +324,15 @@ resource keyVaultSecret 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
 ​      	上述文件将创建一个Azure SQL Server资源， 一个SQL Database资源（含防火墙设置)， 并将数据库的登录账号db_admin的密码保存到了现有的KeyVault中。
 
 ​		  数据库可用同时支持SQL 认证方式（sqladmin) 和AAD认证方式(adminuser@yourAAD.com)。
+
+| #    | 资源                   | 说明                                                         |
+| ---- | ---------------------- | ------------------------------------------------------------ |
+| 1    | sqlServer_resource     | SQL Server 实例                                              |
+| 2    | sqlServerFirewallRules | SQL Server 防火墙， 本例按全IP通行设置                       |
+| 3    | sqlDatabase_resource   | SQL Database实例， 依赖于sqlServer_resource                  |
+| 4    | keyVaultSecret         | 将db_admin用户的密码保存到KeyVault的Secrets中： secret-dbadmin-pwd |
+
+
 
 ### c.  使用AZ-CLI登录
 
@@ -492,6 +517,13 @@ jobs:
 
 ​		上述CI的过程， 是将/13lab/Db目录下的数据库工程使用**MSBUILD**编译后， 将*.dacpac 上传到Repo的Artifact中。
 
+| #    | Actions                        | 说明                                 |
+| ---- | ------------------------------ | ------------------------------------ |
+| 1    | actions/checkout@v3            | 签出main分支（默认）代码             |
+| 2    | microsoft/setup-msbuild@v1.0.2 | 安装msbuild工具                      |
+| 3    | bash run: nuget restore        | 恢复项目的nuget依赖项                |
+| 4    | actions/upload-artifact@v3     | 将build的结构上传的Repo的artifacts中 |
+
 
 
 ### d. 新建CD workflow
@@ -588,6 +620,16 @@ jobs:
 
  
 
+| #    | Actions                                  | 说明                                                   |
+| ---- | ---------------------------------------- | ------------------------------------------------------ |
+| 1    | aochmann/actions-download-artifact@1.0.4 | 下载指定的Repo artifacts                               |
+| 2    | azure/login@v1                           | 使用SPN登录Azure                                       |
+| 3    | Azure/get-keyvault-secrets@v1            | 获取KeyVault中指定的secrets                            |
+| 4    | Azure/sql-action@v1.3                    | 将Dacpac发布到指定的数据库， 并输出增量的deploy_script |
+| 5    | actions/upload-artifact@v3               | 将增量deploy_script 上传的Repo的artifacts              |
+
+
+
 ### e. 分别运行CI CD
 
 如果CD中配置了workflow_run， 如下所示， 则会自动在CI 完成的时候开始启动
@@ -683,10 +725,6 @@ jobs:
         keyvault: ${{env.KEY_VAULT}} # name of key vault in Azure portal
         secrets: 'secret-storage-sas,secret-dmk,secret-dbadmin-pwd'  # comma separated list of secret keys to fetch from key vault 
  
-    ### inspect secrets
-    - name: echo secrets
-      run: |
-        echo '${{steps.getSecretAction.outputs.secret-storage-sas}}'
 
     #### run sql script - call init_external_data_source
     - name: Azure SQL Deploy - call init_external_data_source
@@ -712,6 +750,16 @@ jobs:
          
 
 ~~~
+
+| #    | Actions                   |                                                              |
+| ---- | ------------------------- | ------------------------------------------------------------ |
+| 1    | allenevans/set-env@v2.0.0 | 设置环境变量， 使用已有的一些环境变量值                      |
+| 2    | actions/checkout@v3       | 签出main分支（默认）的代码                                   |
+| 3    | azure/login@v1            | 使用SPN登录Azure                                             |
+| 4    | Azure/sql-action@v1.3     | 将指定的sql script文件在指定的SQL Database上运行， 并且使用了参数化 |
+| 5    | Azure/sql-action@v1.3     | 同上， 运行了另一个sql script文件。                          |
+
+
 
 另外使用了2个sql 文件作为数据导入的实现， 均保存在**13lab\AdminScripts**目录下：
 
@@ -798,6 +846,6 @@ lab13-CD-Database-x-BulkInsert.yml 在手动触发的时候， 会提示输入�
 
 ## 8. 参考资料
 
-[1. Data-tier Applications - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
+[[1]. Data-tier Applications - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
 
-[2. Access external data: SQL Server - PolyBase - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/polybase/polybase-configure-sql-server?view=sql-server-ver16)
+[[2]. Access external data: SQL Server - PolyBase - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/polybase/polybase-configure-sql-server?view=sql-server-ver16)

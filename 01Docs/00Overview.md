@@ -11,7 +11,7 @@
 
 ## 目标
 
-通过一系列的动手实验， 帮助掌握在项目中实施DataOps的路径， 相关产品和技术手段，涵盖持续集成、持续部署、持续质量、持续安全、持续治理、持续运维和持续改进与合作。 
+通过一系列的动手实验， 帮助掌握在项目中实施DataOps的路径， 相关产品和技术手段，涵盖持续集成CI、持续部署CD、持续质量DQ、持续安全CS、持续治理CG、持续运维CO和持续改进与合作CC。 
 
 但不包括： 
 
@@ -83,21 +83,18 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 
 
-| 服务组件                       | 说明                                                     |      |
-| ------------------------------ | -------------------------------------------------------- | ---- |
-| GIT Hub Service                | 源码管理；CICD Workflow管理                              |      |
-| GIT Runner                     | 执行CICD Workflow管理                                    |      |
-| Azure Key Vault                | 保存机密信息Secrets                                      |      |
-| Azure Data Lake Service(Gen 2) | 数据湖，保存文件格式的数据（业务）                       |      |
-| Azure Storage Account          | 数据存储Blob, 保存文件格式的数据（测试、配置）           |      |
-| Azure SQL Database             | 数据库，可作为1）DataMart, 2) 测试配置库 3）流水线配置库 |      |
-| Azure Data Factory             | 组装和运行数据流水线                                     |      |
-| Azure Synapse Analytics        | 数据仓库                                                 |      |
-| Azure Databricks               | 数据湖仓一体                                             |      |
-| Azure Purview                  | 数据治理                                                 |      |
-|                                |                                                          |      |
-|                                |                                                          |      |
-|                                |                                                          |      |
+| #    | 服务组件                       | 说明                                                     |      |
+| ---- | ------------------------------ | -------------------------------------------------------- | ---- |
+| 1    | GIT Hub Service                | 源码管理；CICD Workflow管理                              |      |
+| 2    | GIT Runner                     | 执行CICD Workflow管理                                    |      |
+| 3    | Azure Key Vault                | 保存机密信息Secrets                                      |      |
+| 4    | Azure Data Lake Service(Gen 2) | 数据湖，保存文件格式的数据（业务）                       |      |
+| 5    | Azure Storage Account          | 数据存储Blob, 保存文件格式的数据（测试、配置）           |      |
+| 6    | Azure SQL Database             | 数据库，可作为1）DataMart, 2) 测试配置库 3）流水线配置库 |      |
+| 7    | Azure Data Factory             | 组装和运行数据流水线                                     |      |
+| 8    | Azure Synapse Analytics        | 数据仓库                                                 |      |
+| 9    | Azure Databricks               | 数据湖仓一体                                             |      |
+| 10   | Azure Purview                  | 数据治理                                                 |      |
 
 
 
@@ -146,7 +143,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * 创建Synapse资源， 并在KeyVault中保存连接串和ADLS key
 * 通过CI->artifacts->CD的过程， 发布数据仓库
 
-#### [实验1-7 - 清理资源](17lab.md)
+#### [实验1-7 - [CICD] 清理资源](17lab.md)
 
 * 通过AZ CLI Deployment 清理资源
 * 了解增量模式和完整模式

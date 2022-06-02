@@ -23,7 +23,7 @@ param location string = resourceGroup().location
 
 var managedResourceGroupName = 'databricks-rg-${workspaceName}'
 
-resource ws 'Microsoft.Databricks/workspaces@2018-04-01' = {
+resource databricks_ws_resource 'Microsoft.Databricks/workspaces@2018-04-01' = {
   name: workspaceName
   location: location
   tags:tags

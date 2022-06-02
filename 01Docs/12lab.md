@@ -45,9 +45,9 @@ param containerName string = 'src-data'
 param keyvaultName string = 'kv-${familyName}-${env}'
 param exp_unix_time int = 1716776048 // 2024-5-17
 
-param tenantId string = 'efa728a8-8af1-45bd-9e56-d8ce0bdc90da'  // replace: tenantId
-param spn_id  string = '7da72d5b-2ba3-45aa-b44d-277ff74d5830' // replace: spn object id
-param adminId string= '679e0424-4461-4989-807a-a1a94edc55a0'  // replace: admin user objectId
+param tenantId string = 'efa728a8-****-****-9e56-d8ce0bdc90da'  // replace: tenantId
+param spn_id  string = '7da72d5b-****-****-b44d-277ff74d5830' // replace: spn object id
+param adminId string= '679e0424-****-****-807a-a1a94edc55a0'  // replace: admin user objectId
 
 param tags object = {
   env: env
@@ -288,13 +288,13 @@ az bicep decompile --file storageARM.json
 
 ## 5. 参考资料
 
-### [1. MSDOC learn-bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep)
+[[1]. MSDOC learn-bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep)
 
-### [2. fundamentals-bicep](https://docs.microsoft.com/en-us/learn/paths/fundamentals-bicep/)
+[[2]. fundamentals-bicep](https://docs.microsoft.com/en-us/learn/paths/fundamentals-bicep/)
 
-### [3. 使用 Bicep 和 GitHub Actions 部署 Azure 资源](https://docs.microsoft.com/en-us/learn/paths/bicep-github-actions/)
+[[3]. 使用 Bicep 和 GitHub Actions 部署 Azure 资源](https://docs.microsoft.com/en-us/learn/paths/bicep-github-actions/)
 
-### [4. Bicep Deployment Examples](https://github.com/Azure/bicep/tree/main/docs/examples)
+[[4]. Bicep Deployment Examples](https://github.com/Azure/bicep/tree/main/docs/examples)
 
-### [5. Decompile ARM template JSON to Bicep - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile?tabs=azure-cli)
+[[5]. Decompile ARM template JSON to Bicep - Azure Resource Manager | Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile?tabs=azure-cli)
 

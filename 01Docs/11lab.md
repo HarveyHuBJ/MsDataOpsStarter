@@ -97,12 +97,22 @@ jobs:
 
 
 
+| #    | action              | 说明                                                         |
+| ---- | ------------------- | ------------------------------------------------------------ |
+| 1    | actions/checkout@v3 | 从main分支（默认）签出代码                                   |
+| 2    | bach : run echo     | 单行 - 向界面打印文字                                        |
+| 3    | bach : run echo     | 多行 - 向界面打印文字； 且输出一些内置变量, 例如$GITHUB_RUN_NUMBER |
+
+
+
 ### g. 打开Action页， 选择刚才的workflow，并观察结果
 
 
 
 ## 4. 参考资料
 
-### [a. Using workflows - GitHub Docs](https://docs.github.com/en/actions/using-workflows)
+[[1]. Using workflows - GitHub Docs](https://docs.github.com/en/actions/using-workflows)
 
-### [b. Using starter workflows - GitHub Docs](https://docs.github.com/en/actions/using-workflows/using-starter-workflows)
+[[2]. Using starter workflows - GitHub Docs](https://docs.github.com/en/actions/using-workflows/using-starter-workflows)
+
+[[3]. Contexts - GitHub Docs](https://docs.github.com/en/actions/learn-github-actions/contexts)

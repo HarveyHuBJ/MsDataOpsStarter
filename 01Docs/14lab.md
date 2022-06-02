@@ -73,7 +73,7 @@ resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =  
 
 }
 
-resource adf_vnet 'Microsoft.DataFactory/factories/managedVirtualNetworks@2018-06-01' =   {
+resource adf_vnet_resource 'Microsoft.DataFactory/factories/managedVirtualNetworks@2018-06-01' =   {
   parent: datafactories_resource
   name: 'default'
   properties: {}
@@ -102,6 +102,14 @@ resource adf_integration_runtimes 'Microsoft.DataFactory/factories/integrationRu
 ~~~
 
 ​		ADF的内容将会与 '**/14lab/ADF**' 保持同步 , ADF的发布分支默认是adf_publish branch。
+
+| #    | 资源                     | 说明                   |
+| ---- | ------------------------ | ---------------------- |
+| 1    | datafactories_resource   | 数据工厂实例资源       |
+| 2    | adf_vnet_resource        | 数据工厂的默认网络实例 |
+| 3    | adf_integration_runtimes | 数据工厂的IR实例       |
+
+
 
 ### b.  使用AZ-CLI登录
 
