@@ -1,7 +1,7 @@
 
 param familyName string = 'hh101'
 param env string='dev'
-param location string='eastasia'
+param location string= resourceGroup().location
 param name string = 'adf-${familyName}-${env}'
 
 // github repo
@@ -28,7 +28,7 @@ resource datafactories_resource 'Microsoft.DataFactory/factories@2018-06-01' =  
   tags:tags
   properties: {
     publicNetworkAccess: 'Enabled'
-    repoConfiguration:repoConfiguration  // comment this line when not 'dev' environment
+    repoConfiguration: repoConfiguration  // comment this line when not 'dev' environment
   }
   identity:{
     type: 'SystemAssigned'

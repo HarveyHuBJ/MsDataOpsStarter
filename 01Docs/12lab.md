@@ -1,6 +1,6 @@
 # 1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)
 
-## 1. 实验目的
+## 1. 实验概述
 
 - 实现使用Bicep创建一个KeyVault 和存储账号StorageAccount，并在KeyVault中保存访问Key
 - 了解如何使用VS Code编写Bicep
@@ -13,14 +13,19 @@
 
 - Azure账号及订阅
 - Resource Group 及SPN （resource group contributor)
-- VS Code
+- VS Code & 插件 Bicep 
 - AZ CLI
   - 下载及安装 [How to install the Azure CLI | Microsoft Docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 
 
+## 3. 实验一
 
-## 3. 实验一步骤
+>目标: 
+>
+>​        使用Bicep部署Azure Storage Account 和Key Vault
+>
+>​        并且将Storage Account的Key和SAS保存到KeyVault中
 
 ### a.  进入根目录C:\Code\DataOpsStarter\
 
@@ -188,6 +193,14 @@ resource keyVaultSecret2 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
 
 ​      	上述文件将创建一个KeyVault资源， 一个Storage BLob资源（含一个名为**src-data**的container)， 并将StorageAccount的Key, 一个为期约半年的SAS保存到了KeyVault中。
 
+| #    | 资源                    | 说明                                                         |
+| ---- | ----------------------- | ------------------------------------------------------------ |
+| 1    | keyvault_resource       | Key Vault 资源                                               |
+| 2    | storageAccount_resource | Storage Account资源                                          |
+| 3    | blob_resource           | Blob 资源， 在Storage Account资源内部                        |
+| 4    | keyVaultSecret1         | Blob的访问key, 保存到KeyVault Secret中： **secret-storage-key** |
+| 5    | keyVaultSecret2         | Blob的访问SAS, 保存到KeyVault Secret中： **secret-storage-sas** |
+
 
 
 ### c.  使用AZ-CLI登录
@@ -243,7 +256,13 @@ az deployment group create --template-file storage-account.bicep
 
  
 
-## 4. 实验二步骤
+## 4. 实验二
+
+>目标: 
+>
+>​        尝试将ARM模板反向编译成bicep文件
+>
+>
 
 ### a. 导出ARM模板
 

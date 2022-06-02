@@ -2,12 +2,11 @@
 
 
 
-## 1. 实验目的
+## 1. 实验概述
 
 * 实现在GitHub Action 中输出Hello world
 * 了解如何从Github Action Marketplace中查询
 
-* 了解如何使用VS Code 编写workflow
 
 
 
@@ -17,7 +16,11 @@
 
 
 
-## 3. 实验步骤
+## 3. 实验一
+
+>目标：
+>
+>​	使用Github workflow， 执行输出`Hello world`；
 
 ### a. 登录http://github.com；
 
@@ -45,9 +48,9 @@ git clone https://{your PAT}@github.com/{YourOrg}/{YourRepo, like DataOpsStarter
 
 ### d. 浏览Marketplace， 并尝试search； 不过先不做任何选择；
 
-### e. 选择从空的模板新建；
+### e. 选择从空的模板新建（在线编辑）；
 
-###  f. 将下面代码复制到文件中，并将代码提交到远程repo；
+###  f. 将下面代码复制到在线文件中，并将代码提交到repo；
 
 ~~~yml
 # This is a basic workflow to help you get started with Actions

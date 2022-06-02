@@ -1,6 +1,6 @@
 # # 1-3 - 了解测试数据发布到存储Blob和AzureSQL
 
-## 1. 实验目的
+## 1. 实验概述
 
 - 实现将数据文件csv提交到git
 - 通过CI->artifacts->CD的过程将数据发布到blob
@@ -15,15 +15,15 @@
 
 - Azure账号及订阅
 - Resource Group 及SPN （resource group contributor)
-- VS Code
-- Visual Studio 2019 +
+- VS Code & 插件 Bicep 
+- Visual Studio 2019 + & SSDT 组件
 - SSMS (SQL Server Management Studio 2019+)
 - AZ CLI
   - 下载及安装 [How to install the Azure CLI | Microsoft Docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 
 
-## 3. 实验一步骤
+## 3. 实验一
 
 > 目标： 
 >
@@ -35,7 +35,7 @@
 >
 > ​          因为GIT的限制， 数据大小最好在100M以内。
 
-### a.  进入根目录C:\Code\DataOpsStart\
+### a.  进入根目录C:\Code\DataOpsStarter\
 
 ​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarter\ ; 
 
@@ -125,7 +125,7 @@ jobs:
       uses: aochmann/actions-download-artifact@1.0.4
     # - uses: actions/download-artifact@v3
       with:
-        repo: HarveyHuBJ/MsDataOpsStarter
+        repo: HarveyHuBJ/DataOpsStarter
         github_token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.SRC_DATA }}
@@ -186,13 +186,13 @@ CD 完成后， 会在Blob中出现新加的数据文件。
 
 
 
-## 4. 实验二步骤
+## 4. 实验二
 
 > 目标：
 >
 > ​		创建Azure Database 资源; 
 >
->  	   并将数据库的连接信息保存到KeyVault中
+>  ​         并将数据库的连接信息保存到KeyVault中
 
 
 
@@ -329,7 +329,7 @@ az configure --defaults group=rg-dataops-starter  # 设置默认资源组； 如
 
 ~~~cmd
 # 进入工作区目录
-cd C:\Code\DataOpsStart\13lab
+cd C:\Code\DataOpsStarter\13lab
 # 部署Bicep 文件
 az deployment group create --template-file sql_database.bicep
 ~~~
@@ -361,15 +361,15 @@ az deployment group create --template-file sql_database.bicep
 
 
 
-## 5. 实验三步骤
+## 5. 实验三
 
 > 目标：
 >
 > ​         将数据从Blob 同步到Azure SQL Database对应的Table表中
 
-### a. 进入根目录C:\Code\DataOpsStart\
+### a. 进入根目录C:\Code\DataOpsStarter\
 
-​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarter\ ; 
+​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarterer\ ; 
 
 ### b. 新建数据库工程DB Project
 
@@ -423,15 +423,15 @@ drop proc  [Lab].uspCreateExternalDataSource
 
 
 
-## 6. 实验四步骤
+## 6. 实验四
 
-> 目标: 
+> 目标:
 >
 > ​       使用CICD 的方式， 部署数据库
 
-### a.  进入根目录C:\Code\DataOpsStart\
+### a.  进入根目录C:\Code\DataOpsStarter\
 
-​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarter\ ; 
+​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarterer\ ; 
 
 ### b. 新建CI workflow
 
@@ -540,7 +540,7 @@ jobs:
       uses: aochmann/actions-download-artifact@1.0.4
     # - uses: actions/download-artifact@v3
       with:
-        repo: HarveyHuBJ/MsDataOpsStarter
+        repo: HarveyHuBJ/MsDataOpsStarterer
         github_token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ env.ARTIFACT_NAME }}
         path: .
@@ -609,7 +609,7 @@ CD 完成后，数据库中会数据库工程中的表、存储过程等对象�
 
 
 
-## 7. 实验五步骤
+## 7. 实验五
 
 > 目标: 
 >
@@ -617,9 +617,9 @@ CD 完成后，数据库中会数据库工程中的表、存储过程等对象�
 
 
 
-### a.  进入根目录C:\Code\DataOpsStart\
+### a.  进入根目录C:\Code\DataOpsStarter\
 
-​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarter\ ; 
+​	      使用**VS Code**打开根目录"C:\Code\DataOpsStarterer\ ; 
 
 ### b. 新建CD workflow
 

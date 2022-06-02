@@ -76,6 +76,28 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 ## 整体架构
 
+![Overview-Arch](.\Overview-Arch.png)
+
+
+
+| 服务组件                       | 说明                                                     |      |
+| ------------------------------ | -------------------------------------------------------- | ---- |
+| GIT Hub Service                | 源码管理；CICD Workflow管理                              |      |
+| GIT Runner                     | 执行CICD Workflow管理                                    |      |
+| Azure Key Vault                | 保存机密信息Secrets                                      |      |
+| Azure Data Lake Service(Gen 2) | 数据湖，保存文件格式的数据（业务）                       |      |
+| Azure Storage Account          | 数据存储Blob, 保存文件格式的数据（测试、配置）           |      |
+| Azure SQL Database             | 数据库，可作为1）DataMart, 2) 测试配置库 3）流水线配置库 |      |
+| Azure Data Factory             | 组装和运行数据流水线                                     |      |
+| Azure Synapse Analytics        | 数据仓库                                                 |      |
+| Azure Databricks               | 数据湖仓一体                                             |      |
+| Azure Purview                  | 数据治理                                                 |      |
+|                                |                                                          |      |
+|                                |                                                          |      |
+|                                |                                                          |      |
+
+
+
 
 
 ## 步骤：
@@ -136,7 +158,6 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 #### [实验2-2 - 深入了解GitHub的Workflow](22lab.md)
 
-* 定义action
 * 了解常用的触发机制
 * 了解自定义Action
 * 了解组合Workflow
@@ -186,6 +207,8 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 #### [实验2-9 - 混合云部署数据平台](29lab.md)
 
 * 了解混合云部署架构
+* Github Enterprise
+* Infra Securty
 * .....
 
 ### == Level 300 ==
@@ -217,4 +240,9 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 #### [实验3-5 - ML数据及版本管理](35lab.md)
 
 * 了解Databricks的ML flow
+* Streaming Flow
 * ...
+
+## 参考文档
+
+[[1]. Quickstart - Use Azure Key Vault secrets in GitHub Actions workflows | Microsoft Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-key-vault#define-a-service-principal)
