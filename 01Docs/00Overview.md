@@ -1,5 +1,20 @@
 # DataOps-Starter Overview
 
+
+
+| #    | Author                 | Revision              | Date     |
+| ---- | ---------------------- | --------------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization        | 2022-6-1 |
+| 2    | yuesheng@microsoft.com | Review and add '背景' | 2022-6-2 |
+
+
+
+
+
+[TOC]
+
+
+
 ## 背景
 
 由于IOT设备的应用、云计算存储能力的增长、数据分析驱动决策的需要，企业中数据每年的增长速度非常快。对于大量数据的价值挖掘，89%的企业都会面临数据管理上的困难：数据本身的变化、需求的变化，新尝试的引入，可能需要非常长时间才能真正产生见解。从数据团队角度来说，会面临很多计划外的工作，比如解决数据权限问题、数据错误溯源等，导致效率很低，也对数据缺乏信任，创新的时间也就更短了（*March 2020 Gartner Survey, Data Management Struggles to Balance Innovation and Control*）
@@ -45,7 +60,15 @@
 
 
 
-安装**Azure CLI** 后可用参考下面命令行：
+相关工具包括：
+
+* VS Code
+* Visual Studio 2019+
+* Azure CLI
+
+### 附：
+
+安装**Azure CLI** 后可用下面命令来获取SPN及 Github secrets.AZURE_CREDENTIALS信息：
 
 ~~~cmd
 az login					# 登录

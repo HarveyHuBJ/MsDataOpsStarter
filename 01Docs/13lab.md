@@ -1,4 +1,17 @@
-# # 1-3 - 了解测试数据发布到存储Blob和AzureSQL
+# 实验1-3 - 了解测试数据发布到存储Blob和AzureSQL
+
+| #    | Author                 | Revision       | Date     |
+| ---- | ---------------------- | -------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization | 2022-6-2 |
+| 2    |                        |                |          |
+
+
+
+[TOC]
+
+
+
+
 
 ## 1. 实验概述
 
@@ -23,7 +36,7 @@
 
 
 
-![image-20220602144920262](C:\Users\harveyhu\SourceCode\Github\HarveyHuBJ\MsDataOpsStarter\01Docs\13lab\ssdt.png)
+![image-20220602144920262](./13lab/ssdt.png)
 
 ## 3. 实验一
 
@@ -400,7 +413,11 @@ az deployment group create --template-file sql_database.bicep
 
 ### b. 新建数据库工程DB Project
 
-​         使用Visual Studio 2019或更高版本，在目录**13lab\DB**\ 新建数据库工程(DB.sqlproj)， 并将如下内容解压后， 添加到工程中。
+​         使用Visual Studio 2019或更高版本，在目录**13lab\DB**\ 新建数据库工程(DB.sqlproj)，注意选择项目的属性是
+
+![image-20220602161301961](./13lab/project-azuredb.png)
+
+​		然后将如下内容解压后， 添加到工程中。
 
 > https://adlssalesdemo.blob.core.windows.net/lab/DBProject.zip
 
@@ -851,3 +868,8 @@ lab13-CD-Database-x-BulkInsert.yml 在手动触发的时候， 会提示输入�
 [[1]. Data-tier Applications - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
 
 [[2]. Access external data: SQL Server - PolyBase - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/polybase/polybase-configure-sql-server?view=sql-server-ver16)
+
+[[3]. Create a New Database Project - SQL Server Data Tools (SSDT) | Microsoft Docs](https://docs.microsoft.com/en-us/sql/ssdt/how-to-create-a-new-database-project?view=sql-server-ver16)
+
+[[4]. Data-tier Applications - SQL Server | Microsoft Docs](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
+

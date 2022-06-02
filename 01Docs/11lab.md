@@ -1,5 +1,14 @@
 # 实验1-1 - 了解Github Workflow and Action 
 
+| #    | Author                 | Revision       | Date     |
+| ---- | ---------------------- | -------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization | 2022-6-2 |
+| 2    |                        |                |          |
+
+
+
+[TOC]
+
 
 
 ## 1. 实验概述

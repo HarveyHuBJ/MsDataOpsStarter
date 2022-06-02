@@ -1,4 +1,15 @@
-# 1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)
+# 实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)
+
+| #    | Author                 | Revision       | Date     |
+| ---- | ---------------------- | -------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization | 2022-6-2 |
+| 2    |                        |                |          |
+
+
+
+[TOC]
+
+
 
 ## 1. 实验概述
 
@@ -268,7 +279,7 @@ az deployment group create --template-file storage-account.bicep
 
 Portal中打开Storage Account资源， 点击左侧菜单Automation->Export Template
 
-![image-20220601120403490](.\12lab\exportTemplate.png)
+![image-20220601120403490](./12lab/exportTemplate.png)
 
 将JSON格式的ARM 文件导出到本地**~\12Lab**目录中，并保存名为 storageARM.json
 

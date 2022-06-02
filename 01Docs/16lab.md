@@ -1,4 +1,17 @@
-# # 1-6 - 了解Synapse
+# 实验1-6 - 了解Synapse
+
+| #    | Author                 | Revision       | Date     |
+| ---- | ---------------------- | -------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization | 2022-6-2 |
+| 2    |                        |                |          |
+
+
+
+[TOC]
+
+
+
+
 
 ## 1. 实验概述
 
@@ -238,7 +251,7 @@ az deployment group create --template-file synapse.bicep
 
 ### b. 给工程选择属性 "Microsoft Azure SQL Data Warehouse"
 
-![image-20220602102604866](.\16lab\property-DW.png)
+![image-20220602102604866](./16lab/property-DW.png)
 
 ### c. 将下面内容加入到数据库工程中
 
@@ -254,7 +267,7 @@ az deployment group create --template-file synapse.bicep
 
 右键点击项目文件， 选择发布， 可以将数据库工程发布到指定的Synapse dedicate pool 中。 
 
-![image-20220602103606684](.\16lab\publish.png)
+![image-20220602103606684](./16lab/publish.png)
 
 ### e. 观察后清理
 

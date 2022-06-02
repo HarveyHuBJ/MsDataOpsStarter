@@ -1,4 +1,17 @@
-# # 1-4 - 了解ADF数据流水线
+# 实验1-4 - 了解ADF数据流水线
+
+| #    | Author                 | Revision       | Date     |
+| ---- | ---------------------- | -------------- | -------- |
+| 1    | HarveyHu@microsoft.com | Initialization | 2022-6-2 |
+| 2    |                        |                |          |
+
+
+
+
+
+[TOC]
+
+
 
 ## 1. 实验概述
 
@@ -157,7 +170,11 @@ az deployment group create --template-file adf.bicep --parameters env=sit
 
 ​        相关代码会提交到github的代码repo中。
 
-补充pipeline creation 介绍
+​        创建Pipeline的过程，可以参考：
+
+[Use the Azure portal to create a data factory pipeline - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/tutorial-copy-data-portal#create-a-pipeline)
+
+ 
 
  ### f.  本地同步ADF代码， 并查看新建Pipeline的代码
 
@@ -345,10 +362,13 @@ CI 运行完成后， 在Summary页会有Artifact： adf_arm_template
 
 CD 完成后， SIT的ADF中会出现与DEV相同的内容。
 
-### 
+
 
 ## 4. 参考资料
 
 [[1]. Continuous integration and delivery - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery)
 
 [[2]. Automated publishing for continuous integration and delivery - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery-improvements)
+
+[[3]. Use the Azure portal to create a data factory pipeline - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/tutorial-copy-data-portal#create-a-pipeline)
+
