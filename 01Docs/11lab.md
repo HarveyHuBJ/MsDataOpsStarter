@@ -18,7 +18,6 @@
 
 ## 前提条件
 
-- 完成Overview中的准备
 - Github账号
 
 
