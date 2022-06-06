@@ -8,12 +8,7 @@
 | 2    | yuesheng@microsoft.com | Review and add '背景' | 2022-6-2 |
 
 
-
-
-
-[TOC]
-
-
+<br>
 
 ## 背景
 
@@ -82,7 +77,7 @@
 
 ## 整体架构
 
-![Overview-Arch](.\Overview-Arch.png)
+![Overview-Arch](./.image/Overview-Arch.png)
 
 
 
