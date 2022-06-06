@@ -47,15 +47,13 @@
 5. 将SPN的返回保存为Github的secret: AZURE_CREDENTIALS
     ~~~cmd
     # 将如下输出保存到GitHub Repo的secrets中作为 secrets.AZURE_CREDENTIALS
-    /*
     {
         "clientId": "<GUID>",
         "clientSecret": "<GUID>",
         "subscriptionId": "<GUID>",
         "tenantId": "<GUID>",
         (...)
-      }
-    */
+    }
     ~~~
 6. 为方便后续操作，记录如下信息：
 
