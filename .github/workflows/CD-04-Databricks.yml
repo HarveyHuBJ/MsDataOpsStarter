@@ -1,0 +1,11 @@
+name: CD-04-Databricks
+# Tmp workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  temp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world! 
