@@ -113,7 +113,7 @@
 * 了解Bicep官方文档
 * 了解如何从JSON ARM中反向获取Bicep
 
-#### [实验1-3 - [CICD] 了解测试数据发布到存储Blob和AzureSQL](13lab.md)
+#### [实验1-3 - [CICD] 了解测试数据发布到Blob存储和Azure SQL](13lab.md)
 
 * 实现将数据文件csv提交到git
 * 通过CI->artifacts->CD的过程将数据发布到blob

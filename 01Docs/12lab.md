@@ -1,4 +1,4 @@
-# 实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaS)
+# 实验1-2 - 了解Bicep, 实现Infrastructure as Code (IaC)
 
 | #    | Author                 | Revision       | Date     |
 | ---- | ---------------------- | -------------- | -------- |
@@ -19,7 +19,7 @@
 
 ## 前提条件
 
-- 完成Overview中的准备
+- 完成 Overview中的准备
 - 安装 VS Code 插件 Bicep 
 
 
@@ -31,11 +31,11 @@
 >
 >​        并且将Storage Account的Key和SAS保存到KeyVault中
 
-1. 使用**VS Code**打开根目录"C:\Code\DataOpsStarter\
+1. 使用 **VS Code** 打开根目录"C:\Code\DataOpsStarter\
 
-2. 新建子目录**12lab**， 在**12lab**下新建空文本文件**storage-account.bicep**； 并将如下内容拷贝到文件中：
+2. 新建子目录 **12lab**， 在 **12lab** 下新建空文本文件 **storage-account.bicep**； 并将如下内容拷贝到文件中：
 
-    ~~~json
+    ~~~powershell
     param location string = resourceGroup().location
     param env string = 'dev'
     param familyName string='hh101'                                 // replace: 

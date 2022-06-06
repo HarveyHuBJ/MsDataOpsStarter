@@ -28,11 +28,11 @@
 >
 >​	了解并使用Github workflow， 执行输出`Hello world`；
 
-1. 登录http://github.com；
+1. 登录 http://github.com；
 
-2. 新建Repo, 名称如 "DataOpsStarter"
+2. 新建 Repo, 名称如 "DataOpsStarter"
 
-3. 在C:\盘根目录下新建文件夹Code, 打开命令行窗口，同步代码仓库到本地
+3. 在C:\盘根目录下新建文件夹 Code, 打开命令行窗口，同步代码仓库到本地
 
     ~~~cmd
     cd c:\Code
@@ -40,7 +40,7 @@
     git clone https://github.com/{YourOrg}/{YourRepo, like DataOpsStarter}
     ~~~
 
-    若未登录，需要加上PAT
+    若未登录，需要加上 PAT
 
     ~~~cmd
     git clone https://{your PAT}@github.com/{YourOrg}/{YourRepo, like DataOpsStarter}
@@ -48,9 +48,9 @@
 
     其中，`your PAT` 获取自GitHub个人账户下， 开发者设置中。相关方法可用参考：[Creating a personal access token - GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
-4. 打开Action页，选择从空的模板新建（在线编辑）
+4. 打开 Action 页，选择从空的模板新建（在线编辑）
 
-5. 将下面代码复制到在线文件中，并将代码提交到repo
+5. 将下面代码复制到在线文件中，并将代码提交到 Repo
 
     ~~~yml
     # This is a basic workflow to help you get started with Actions
@@ -97,16 +97,16 @@
 
 
 
-    | #    | action              | 说明                                                         |
+    | #    | Action              | 说明                                                         |
     | ---- | ------------------- | ------------------------------------------------------------ |
     | 1    | actions/checkout@v3 | 从main分支（默认）签出代码                                   |
     | 2    | bach : run echo     | 单行 - 向界面打印文字                                        |
     | 3    | bach : run echo     | 多行 - 向界面打印文字； 且输出一些内置变量, 例如$GITHUB_RUN_NUMBER |
 
 
-7. 打开Action页， 选择刚才的workflow，启动；并观察结果
+7. 打开 Action 页， 选择刚才的 workflow，启动；并观察结果
 
-8. 再次进入Workflow编辑页面，浏览Marketplace， 可以搜索其他的Action进行尝试
+8. 再次进入 workflow 编辑页面，浏览右侧Marketplace， 搜索其他的Action进行尝试
 
 ## 参考资料
 
