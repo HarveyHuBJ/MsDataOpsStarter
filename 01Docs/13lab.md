@@ -7,7 +7,6 @@
 
 
 
-
 ## 实验概述
 
 - 实现将数据文件csv提交到git
@@ -25,7 +24,7 @@
 - 安装 VS Code & 插件 Bicep 
 - 安装 SSMS (SQL Server Management Studio 2019+)
 - 安装 Visual Studio 2019 + & SSDT 组件
-    ![image-20220602144920262](./13lab/ssdt.png)
+    ![SSDT](./13lab/ssdt.png)
 
 ## 实验一
 
@@ -183,7 +182,7 @@
 
 6. 观察结果。CI 完成后， 会在 workflow 的 Summary 页面上显示 Artifacts; 可用自行下载到本地，解压缩后观察 Artifacts 的内容；数据文件应该保存在 CI-run/xx/ 的目录下。CD 完成后， 会在 Blob 中出现新加的数据文件。
 
-    ![CI-Artifacts](.\13lab\CI-artifacts.png)
+    ![CI-Artifacts](./13lab/CI-artifacts.png)
 
 
 
