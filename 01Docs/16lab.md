@@ -239,7 +239,7 @@ az deployment group create --template-file synapse.bicep
 
 
 
-### 4. 实验二
+## 4. 实验二
 
 > 目标：
 >
@@ -279,7 +279,7 @@ az deployment group create --template-file synapse.bicep
 
 
 
-### 5. 实验三
+## 5. 实验三
 
 > 目标：
 >
@@ -454,7 +454,7 @@ CD 运行完成后， 会在Summary页显示Artifact :  deploy_script; 并且对
 
 
 
-## 5. 参考资料
+## 6. 参考资料
 
 [[1]. 什么是 Azure Synapse Analytics？ - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/zh-cn/azure/synapse-analytics/overview-what-is)
 

@@ -364,7 +364,7 @@ CD 完成后， SIT的ADF中会出现与DEV相同的内容。
 
 
 
-## 4. 参考资料
+## 5. 参考资料
 
 [[1]. Continuous integration and delivery - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery)
 
