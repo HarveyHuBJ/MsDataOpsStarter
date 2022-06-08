@@ -65,6 +65,7 @@
 * VS Code
 * Visual Studio 2019+
 * Azure CLI
+* SSMS
 
 ### 附：
 
@@ -100,6 +101,12 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 
 
+### 关于Artifacts
+
+实验中关于CICD的流水线， 都是基于 `CI -> Aritfacts -> CD`的逻辑结构。 关于Aritifacts, 请参考：
+
+[Storing workflow data as artifacts - GitHub Docs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts)
+
 ## 整体架构
 
 ![Overview-Arch](.\Overview-Arch.png)
@@ -123,7 +130,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 
 
-## 步骤：
+## 实验目录：
 
 ### == Level 100 ==
 
@@ -268,6 +275,12 @@ MLOps等拓展内容：
 * Streaming Flow
 * ...
 
+
+
+
+
 ## 参考文档
 
 [[1]. Quickstart - Use Azure Key Vault secrets in GitHub Actions workflows | Microsoft Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-key-vault#define-a-service-principal)
+
+[[2]. Storing workflow data as artifacts - GitHub Docs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts)

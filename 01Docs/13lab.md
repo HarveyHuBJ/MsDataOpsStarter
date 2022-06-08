@@ -36,7 +36,13 @@
 
 
 
-![image-20220602144920262](./13lab/ssdt.png)
+> VS CODE BICEP扩展
+
+![vs code bicep extension](./13lab/vscode_bicep.png)
+
+> Visual Studio 的SSDT组件安装
+
+![vs installer SSDT](./13lab/ssdt.png)
 
 ## 3. 实验一
 
