@@ -8,12 +8,7 @@
 | 2    | yuesheng@microsoft.com | Review and add '背景' | 2022-6-2 |
 
 
-
-
-
-[TOC]
-
-
+<br>
 
 ## 背景
 
@@ -38,61 +33,37 @@
 
 ## 提前准备
 
-* Azure 账号及一个可用的订阅
-
-* 一个ResourceGroup（name : rg-dataops-starter)
-
-* 一个AAD User (name : adminuser@yourdomain.com)， 作为  subscription 的Owner
-
-* 一个SPN （name: github-cicd-spn) , 作为  rg-dataops-starter 的contributor； 并且保存为Github的secret: AZURE_CREDENTIALS
-
-  
-
-  记录如下信息：
-
-| 信息：             | 示例：                               | 说明：                                                       |
-| ------------------ | ------------------------------------ | ------------------------------------------------------------ |
-| **TenantID**       | efa728a8-\*\*\*\*-\*\*\*\*-\*\*\*\*\-d8ce0bdc90da | 在**AAD Overview**页面可用看到                               |
-| **SubscriptionID** | f79d0fce-\*\*\*\*-\*\*\*\*-\*\*\*\*\-18a27eaa8054 | 从任意资源的url中可用看到                                    |
-| **SPN ObjectID**   | 7da72d5b-\*\*\*\*-\*\*\*\*-\*\*\*\*\-277ff74d5830 | 在**AAD Enterprise Applications** 下可用找到SPN的objectID。<br />(注意不是ApplicationID) |
-| **AdminID**        | 679e0424-\*\*\*\*-\*\*\*\*-\*\*\*\*\-a1a94edc55a0 | 在AAD User Profile 页面可用看到（ Object ID)                 |
-| **ResourceGroup**  | rg-dataops-starter                   | 实验过程中的所有资源都放在这个ResourceGroup 中               |
-
-
-
-相关工具包括：
+相关工具：
 
 * VS Code
 * Visual Studio 2019+
-* Azure CLI
-* SSMS
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+* SQL Server Management Studio (SSMS)
+环境准备：
+1. 拥有AAD用户 (name : adminuser@yourdomain.com)，作为  subscription 的Owner
+2. 打开Azure CLI，使用 `az login` 登录账号；`az account set --subscription $subscriptionID` 选择订阅
+3. 使用 `az group create -l eastasia -n $resourceGroupName` 创建一个ResourceGroup（需替换$resourceGroupName，如rg-dataops-starter)
+4. 使用 `az ad sp create-for-rbac --name $servicePrincipalName --role contributor --scopes /subscriptions/$subscriptionID/resourceGroups/$resourceGroupName --sdk-auth` 创建SPN并给指定资源组设RBAC为contributor（需替换 $servicePrincipalName，如github-cicd-spn）
+5. 将SPN的返回保存为Github的secret: AZURE_CREDENTIALS
+    ~~~cmd
+    # 将如下输出保存到GitHub Repo的secrets中作为 secrets.AZURE_CREDENTIALS
+    {
+        "clientId": "<GUID>",
+        "clientSecret": "<GUID>",
+        "subscriptionId": "<GUID>",
+        "tenantId": "<GUID>",
+        (...)
+    }
+    ~~~
+6. 为方便后续操作，记录如下信息：
 
-### 附：
-
-安装**Azure CLI** 后可用下面命令来获取SPN及 Github secrets.AZURE_CREDENTIALS信息：
-
-~~~cmd
-az login					# 登录
-
-az account set --subscription $subscriptionID  # 选择订阅
-
-az group create -l eastasia -n $resourceGroup  # 创建资源组
-
-az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes /subscriptions/$subscriptionID/resourceGroups/$resourceGroup --sdk-auth # 创建SPN并给指定资源组设RBAC （按需替换）
-
--------------------------------------
-# 将如下输出保存到GitHub Repo的secrets中作为 secrets.AZURE_CREDENTIALS
-/*
-{
-    "clientId": "<GUID>",
-    "clientSecret": "<GUID>",
-    "subscriptionId": "<GUID>",
-    "tenantId": "<GUID>",
-    (...)
-  }
-*/
-~~~
-
+      | 信息：             | 示例：                               | 说明：                                                       |
+      | ------------------ | ------------------------------------ | ------------------------------------------------------------ |
+      | **TenantID**       | efa728a8-\*\*\*\*-\*\*\*\*-\*\*\*\*\-d8ce0bdc90da | 在**AAD Overview**页面可用看到                               |
+      | **SubscriptionID** | f79d0fce-\*\*\*\*-\*\*\*\*-\*\*\*\*\-18a27eaa8054 | 从任意资源的url中可用看到                                    |
+      | **SPN ObjectID**   | 7da72d5b-\*\*\*\*-\*\*\*\*-\*\*\*\*\-277ff74d5830 | 在**AAD Enterprise Applications** 下可用找到SPN的objectID。<br />(注意不是ApplicationID) |
+      | **AdminID**        | 679e0424-\*\*\*\*-\*\*\*\*-\*\*\*\*\-a1a94edc55a0 | 在AAD User Profile 页面可用看到（ Object ID)                 |
+      | **ResourceGroup**  | rg-dataops-starter                   | 实验过程中的所有资源都放在这个ResourceGroup 中               |
 
 
 参考：
@@ -100,6 +71,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 [Quickstart - Use Azure Key Vault secrets in GitHub Actions workflows | Microsoft Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-key-vault#define-a-service-principal)
 
 
+<br>
 
 ### 关于Artifacts
 
@@ -109,7 +81,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 ## 整体架构
 
-![Overview-Arch](.\Overview-Arch.png)
+![Overview-Arch](./.image/Overview-Arch.png)
 
 
 
@@ -128,7 +100,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 
 
 
-
+<br>
 
 ## 实验目录：
 
@@ -147,7 +119,7 @@ az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes 
 * 了解Bicep官方文档
 * 了解如何从JSON ARM中反向获取Bicep
 
-#### [实验1-3 - [CICD] 了解测试数据发布到存储Blob和AzureSQL](13lab.md)
+#### [实验1-3 - [CICD] 了解测试数据发布到Blob存储和Azure SQL](13lab.md)
 
 * 实现将数据文件csv提交到git
 * 通过CI->artifacts->CD的过程将数据发布到blob
@@ -275,12 +247,6 @@ MLOps等拓展内容：
 * Streaming Flow
 * ...
 
-
-
-
-
 ## 参考文档
 
 [[1]. Quickstart - Use Azure Key Vault secrets in GitHub Actions workflows | Microsoft Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-key-vault#define-a-service-principal)
-
-[[2]. Storing workflow data as artifacts - GitHub Docs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts)
