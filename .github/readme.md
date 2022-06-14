@@ -6,6 +6,7 @@
 
 由于IOT设备的应用、云计算存储能力的增长、数据分析驱动决策的需要，企业中数据每年的增长速度非常快。对于大量数据的价值挖掘，89%的企业都会面临数据管理上的困难：数据本身的变化、需求的变化，新尝试的引入，可能需要非常长时间才能真正产生见解。从数据团队角度来说，会面临很多计划外的工作，比如解决数据权限问题、数据错误溯源等，导致效率很低，也对数据缺乏信任，创新的时间也就更短了（*March 2020 Gartner Survey, Data Management Struggles to Balance Innovation and Control*）
 ![March 2020 Gartner Survey, Data Management Struggles to Balance Innovation and Control](../01Docs/.image/DataManagementSurvey.png)
+
 数据的动态性和大体量、当前技术的多样性和敏捷需求的迫切性都让数据运维化（DataOps）成为企业重要的能力。DataOps的价值可以总结为四大点：敏捷性、可靠性、稳健性和创新性。通过采取正确的DataOps实践，可以帮助企业通过合理的团队合作，更快地使用数据创造价值。
 
 
