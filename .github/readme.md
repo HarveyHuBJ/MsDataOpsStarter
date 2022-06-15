@@ -92,20 +92,20 @@
 
 ### == Level 100 ==
 
-#### [实验1-1 - [CICD] 了解Github Workflow and Action](11lab.md) 
+#### [实验1-1 - [CICD] 了解Github Workflow and Action](../01Docs/11lab.md) 
 
 * 实现在GitHub Action 中输出Hello world
 * 了解如何从Github Action Marketplace中查询
 * 了解如何使用VS Code 编写workflow
 
-#### [实验1-2 - [CICD] 了解Bicep, 实现Infrastructure as Code (IaC)](12lab.md)
+#### [实验1-2 - [CICD] 了解Bicep, 实现Infrastructure as Code (IaC)](../01Docs/12lab.md)
 
 * 实现使用Bicep创建一个KeyVault 和存储账号StorageAccount，并在KeyVault中保存访问Key
 * 了解如何使用VS Code编写Bicep
 * 了解Bicep官方文档
 * 了解如何从JSON ARM中反向获取Bicep
 
-#### [实验1-3 - [CICD] 了解测试数据发布到Blob存储和Azure SQL](13lab.md)
+#### [实验1-3 - [CICD] 了解测试数据发布到Blob存储和Azure SQL](../01Docs/13lab.md)
 
 * 实现将数据文件csv提交到git
 * 通过CI->artifacts->CD的过程将数据发布到blob
@@ -114,37 +114,37 @@
 * 通过CI->artifacts->CD的过程， 发布数据库
 * 通过CD的过程， 将blob的数据发布到数据库
 
-#### [实验1-4 - [CICD] 了解ADF数据流水线](14lab.md)
+#### [实验1-4 - [CICD] 了解ADF数据流水线](../01Docs/14lab.md)
 
 * 创建2个环境ADF资源，第一个配置Git repo; 配置ADF访问存储账号和数据的权限
 * 创建ADF数据流水线, 实现将Blob数据复制到数据库
 * 通过publish->CI->artifacts->CD的过程， 将ADF发布到下一环境
 
-#### [实验1-5 - [CICD] 了解Databricks](15lab.md)
+#### [实验1-5 - [CICD] 了解Databricks](../01Docs/15lab.md)
 
 * 创建2个环境Databricks资源， 第一个配置Git repo
 * 第二个配置Databricks token
 * 通过CI->artifacts->CD的过程， 将Notebooks发布到下一环境
 
-#### [实验1-6 - [CICD] 了解Synapse](16lab.md)
+#### [实验1-6 - [CICD] 了解Synapse](../01Docs/16lab.md)
 
 * 创建Synapse资源， 并在KeyVault中保存连接串和ADLS key
 * 通过CI->artifacts->CD的过程， 发布数据仓库
 
-#### [实验1-7 - [CICD] 清理资源](17lab.md)
+#### [实验1-7 - [CICD] 清理资源](../01Docs/17lab.md)
 
 * 通过AZ CLI Deployment 清理资源
 * 了解增量模式和完整模式
 
 ### == Level 200 ==
 
-#### [实验2-1 - [CICD] 了解GIT FLow 和 GITHub Flow 分支协作模式](21lab.md) 
+#### [实验2-1 - [CICD] 了解GIT FLow 和 GITHub Flow 分支协作模式](../01Docs/21lab.md) 
 
 * 了解Git flow和Github flow
 * 了解Pull request 和分支策略(policy)
 * 了解代码合并和解决冲突
 
-#### [实验2-2 - [CICD] 深入了解GitHub的Workflow](22lab.md)
+#### [实验2-2 - [CICD] 深入了解GitHub的Workflow](../01Docs/22lab.md)
 
 * 了解常用的触发机制
 * 了解自定义Action
@@ -152,13 +152,13 @@
 * 了解环境变量和secrets
 * 了解“守门员” （Approver）
 
-#### [实验2-3 - [CICD] Bicep进阶](23lab.md)
+#### [实验2-3 - [CICD] Bicep进阶](../01Docs/23lab.md)
 
 * 了解模块引用机制
 * 了解依赖和引用已有资源
 * 了解循环和条件判断
 
-#### [实验2-4 - [CICD] ADF 进阶](24lab.md) 	
+#### [实验2-4 - [CICD] ADF 进阶](../01Docs/24lab.md) 	
 
 * 参数化LinkService, DataSet, Pipleline
 * FlagFeature Pipeline
@@ -166,21 +166,21 @@
 * Copy活动的并行优化
 * Pipeline组合调用
 
-#### [实验2-5 - [CQ] 持续质量（一）SoTa测试框架应用](25lab.md)
+#### [实验2-5 - [CQ] 持续质量（一）SoTa测试框架应用](../01Docs/25lab.md)
 
 *  部署ADF + Synapse + DB， 包括schema
 *  上传测试用例
 *  执行测试用例
 *  查看测试结果
 
-#### [实验2-6 - [CQ] 持续质量（二）开源框架或工具及流程](26lab.md)
+#### [实验2-6 - [CQ] 持续质量（二）开源框架或工具及流程](../01Docs/26lab.md)
 
 * 了解Unit Test 框架之一 （pytest, nunit, vstest)
 * 了解GreatExpection
 * 了解[PR-CI] + [QA-CI] + [Fast-CI]
 
 数据平台拓展内容：
-#### [实验2-7 - Synapse进阶 ](27lab.md) 
+#### [实验2-7 - Synapse进阶 ](../01Docs/27lab.md) 
 
 * 了解单库拆分
 * 了解Synapse的Polybase (External Table， Copy into)
@@ -188,12 +188,12 @@
 * 了解SKEW检查
 * 了解性能查询手段
 
-#### [实验2-8 - Databricks 进阶](28lab.md)
+#### [实验2-8 - Databricks 进阶](../01Docs/28lab.md)
 
 * 发布Libs
 * ...
 
-#### [实验2-9 - 混合云部署数据平台](29lab.md)
+#### [实验2-9 - 混合云部署数据平台](../01Docs/29lab.md)
 
 * 了解混合云部署架构
 * Github Enterprise
@@ -202,18 +202,18 @@
 
 ### == Level 300 ==
 
-#### [实验3-1 - [CO] 持续监控和反馈](31lab.md)
+#### [实验3-1 - [CO] 持续监控和反馈](../01Docs/31lab.md)
 
 * 了解ELK监控体系
 * 了解Azure Monitor体系
 
-#### [实验3-2 - [CG] Synapse的数据血缘分析](32lab.md)
+#### [实验3-2 - [CG] Synapse的数据血缘分析](../01Docs/32lab.md)
 
 * 了解DacFx 和 antlr， 了解抽象语法树（AST)
 * 了解图数据库，了解Neo4j
 * 了解血缘结果展示
 
-#### [实验3-3 - [CG] 数据治理进阶](33lab.md)
+#### [实验3-3 - [CG] 数据治理进阶](../01Docs/33lab.md)
 
 * 部署Purview
 * 了解数据资产， 管理数据资产
@@ -221,13 +221,13 @@
 * 了解数据分类 + 自定义规则
 * 了解数据洞察
 
-#### [实验3-4 - [CQ] 数据反哺流水线](34lab.md)
+#### [实验3-4 - [CQ] 数据反哺流水线](../01Docs/34lab.md)
 
 * 了解数据脱敏
 * 了解数据反哺流水线过程
 
 MLOps等拓展内容：
-#### [实验3-5 - ML数据及版本管理](35lab.md)
+#### [实验3-5 - ML数据及版本管理](../01Docs/35lab.md)
 
 * 了解Databricks的ML flow
 * Streaming Flow
