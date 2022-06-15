@@ -29,7 +29,7 @@ Git Flow 流程主要是围绕"发布"而设计的。而 GitHub 没有这种"发
 - 在其他人审阅并签署该功能后，您可以将其合并到 master/main 中
 - 一旦它被合并并推送到“master”，你可以且应该立即部署
 
-![GitHub Flow](./.image/21lab/github-flow.jpg)
+![GitHub Flow](./.image/21lab/github-flow.jpg)*Figure 1 - GitHub Flow*
 
 使用Git Flow的前提包括：团队规模最好控制在15-20人之内，且部署作业完全自动化，以满足高频部署。
 
@@ -60,13 +60,15 @@ Git Flow 流程主要是围绕"发布"而设计的。而 GitHub 没有这种"发
   用于必须立即解决生产版本中的关键错误。从 master/main 分支创建，必须合并回 develop 和 master/main。运用分支命名约定例如：hotfix-*
 
 
-![Git Flow](./.image/21lab/git-flow.png)
+![Git Flow](./.image/21lab/git-flow.png)*Figure 2 - Git Flow*
 
 
 ## 参考资料
 
 [[1]. GitHub flow - GitHub Docs](https://docs.github.com/en/get-started/quickstart/github-flow)
+
 [[2]. GitHub flow Image credit](https://www.nicoespeon.com/en/2013/08/which-git-workflow-for-my-project/#the-github-flow)
+
 [[3]. Git flow Image credit](https://nvie.com/posts/a-successful-git-branching-model)
 
 
