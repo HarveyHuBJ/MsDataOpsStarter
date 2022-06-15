@@ -23,21 +23,13 @@
 - 完成 Overview中的准备
 - 安装 VS Code & 插件 Bicep 
 - 安装 SSMS (SQL Server Management Studio 2019+)
+  ![vs code bicep extension](./13lab/vscode_bicep.png)
 - 安装 Visual Studio 2019 + & SSDT 组件
     ![SSDT](./13lab/ssdt.png)
 
+
+
 ## 实验一
-
-
-> VS CODE BICEP扩展
-
-![vs code bicep extension](./13lab/vscode_bicep.png)
-
-> Visual Studio 的SSDT组件安装
-
-![vs installer SSDT](./13lab/ssdt.png)
-
-## 3. 实验一
 
 > 目标： 
 >

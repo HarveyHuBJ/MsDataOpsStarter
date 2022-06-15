@@ -66,9 +66,6 @@
       | **ResourceGroup**  | rg-dataops-starter                   | 实验过程中的所有资源都放在这个ResourceGroup 中               |
 
 
-参考：
-
-[Quickstart - Use Azure Key Vault secrets in GitHub Actions workflows | Microsoft Docs](https://docs.microsoft.com/en-us/azure/developer/github/github-key-vault#define-a-service-principal)
 
 
 <br>
@@ -152,7 +149,7 @@
 
 ### == Level 200 ==
 
-#### [实验2-1 - [CICD] 了解GIT FLow 和 GITHub Flow 分支协作模式](21lab.md) 
+#### [实验2-1 - [CICD] 了解 Git Flow 和 GitHub Flow 分支协作模式](21lab.md) 
 
 * 了解Git flow和Github flow
 * 了解Pull request 和分支策略(policy)
